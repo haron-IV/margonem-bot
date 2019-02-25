@@ -1,34 +1,35 @@
-// document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
+setTimeout(() => {
+  // document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
 
-function goToMob(){
+  function goToMob(){
     if( document.querySelectorAll('.mmp-mob')[0] ){
         document.querySelectorAll('.mmp-mob')[0].click();
     } else {
         console.log('Here is not mob')
     }
-}
+  }
 
-function attackMob(){
+  function attackMob(){
     setTimeout(() => {
         document.querySelectorAll('.npc')[0].click();
     }, 1500);
-}
+  }
 
-function autoFight(){
+  function autoFight(){
     setInterval(() => {
         document.querySelector('#autobattleButton').click(); 
     }, 2000);
-}
+  }
 
-function closeFight(){
+  function closeFight(){
     setInterval(() => {
         if ( document.querySelector('#battleclose') ) {
             document.querySelector('#battleclose').click();
         }
     }, 2500);
-}
+  }
 
-function checkHeroPosition(){
+  function checkHeroPosition(){
     const MyHero = document.querySelector('.mmp-hero');
     const mob = document.querySelectorAll('.mmp-mob')[0];
     const stepLength = 20; // px
@@ -55,14 +56,14 @@ function checkHeroPosition(){
         }
         
     }, 2000);
-}
+  }
 
-function GoToMobAndAttack(){
+  function GoToMobAndAttack(){
     goToMob();
     checkHeroPosition();
-}
+  }
 
-function bot(){
+  function bot(){
     autoFight();
     closeFight();
     
@@ -70,4 +71,7 @@ function bot(){
     let interval = setInterval(() => {
         GoToMobAndAttack();
     }, 5000);
-}
+  }
+
+  bot();
+}, 1500);

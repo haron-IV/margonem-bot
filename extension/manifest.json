@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "Margonem Bot",
+    "version": "1.0",
+    "description": "Project for learn",
+    "icons": {
+        "128": "./icons/icon128.png",
+        "48": "./icons/icon48.png",
+        "16": "./icons/icon16.png"
+    },
+    "browser_action": {
+        "default_icon": "./icons/icon16.png",
+        "default_popup": "./popup/popup.html"
+    },
+    "permissions": [
+        "storage",
+        "notifications",
+        "contextMenus",
+        "tabs",
+        "activeTab",
+        "*"
+    ],
+    "options_page": "./options/options.html",
+    "background": {
+        "scripts": ["./eventPage/eventPage.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://nomada.margonem.pl/*"],
+            "js": ["./external/jQuery.js", "./content-scripts/index.js"],
+            "css": ["./content-scripts/content.css"]
+        }
+    ]
+}
