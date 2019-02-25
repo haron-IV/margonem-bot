@@ -28,7 +28,7 @@ function goToMob(){
 }
 
 function attackMob(){
-    document.querySelectorAll('.npc')[0];
+    document.querySelectorAll('.npc')[0].click();
 }
 
 function checkHeroPosition(){
@@ -36,20 +36,29 @@ function checkHeroPosition(){
     const mob = document.querySelectorAll('.mmp-mob')[0];
     const stepLength = 20; // px
 
-    if ( MyHero.style.top.split(/[px .]/)[0] >= mob.style.top.split(/[px .]/)[0] - stepLength // in top position
+    let interval = setInterval(() => {
+        if ( 
+            parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
             &&
-         MyHero.style.top.split(/[px .]/)[0] <= mob.style.top.split(/[px .]/)[0] + stepLength 
-            &&
-         MyHero.style.left.split(/[px .]/)[0] >= mob.style.left.split(/[px .]/)[0] - stepLength
-            &&
-         MyHero.style.left.split(/[px .]/)[0] <= mob.style.left.split(/[px .]/)[0] + stepLength
-        ){ console.log('atak')}
+            parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
+                &&
+            parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
+                &&
+           parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
+        ) {
+            console.log('attack')
 
-    
+            setTimeout(() => {
+                attackMob();
+            }, 500);
+
+            clearInterval(interval)
+            
+        }
+    }, 750);
 }
 
-
-&&
-MyHero.style.left.split('.')[0] >= mob.style.left.split('.')[0] + stepLength // in left position
-    ||
-MyHero.style.left.split('.')[0] >= mob.style.left.split('.')[0] - stepLength // in left position
+function GoToMobAndAttack(){
+    goToMob();
+    checkHeroPosition();
+}
