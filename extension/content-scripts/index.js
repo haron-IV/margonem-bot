@@ -3,28 +3,29 @@ setTimeout(() => {
 
   function goToMob(){
     if( document.querySelectorAll('.mmp-mob')[0] ){
-        document.querySelectorAll('.mmp-mob')[0].click();
+      document.querySelectorAll('.mmp-mob')[0].click();
     } else {
-        console.log('Here is not mob')
+      console.log('Here is not mob');
+      document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click();
     }
   }
 
   function attackMob(){
     setTimeout(() => {
-        document.querySelectorAll('.npc')[0].click();
+      document.querySelectorAll('.npc')[0].click();
     }, 1500);
   }
 
   function autoFight(){
     setInterval(() => {
-        document.querySelector('#autobattleButton').click(); 
+      document.querySelector('#autobattleButton').click(); 
     }, 2000);
   }
 
   function closeFight(){
     setInterval(() => {
         if ( document.querySelector('#battleclose') ) {
-            document.querySelector('#battleclose').click();
+          document.querySelector('#battleclose').click();
         }
     }, 2500);
   }
@@ -36,24 +37,24 @@ setTimeout(() => {
 
     let interval = setInterval(() => {
 
-        if( mob ){
+      if( mob ){
 
-            if ( 
-                parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
-                    &&
-                parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
-                    &&
-                parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
-                    &&
-                parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
-            ) {
-                console.log('attack')
-                clearInterval(interval);
+        if ( 
+          parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
+              &&
+          parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
+              &&
+          parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
+              &&
+          parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
+        ) {
+          console.log('attack')
+          clearInterval(interval);
 
-                attackMob();
-            }
-
+          attackMob();
         }
+
+      }
         
     }, 2000);
   }
@@ -69,7 +70,7 @@ setTimeout(() => {
     
 
     let interval = setInterval(() => {
-        GoToMobAndAttack();
+      GoToMobAndAttack();
     }, 5000);
   }
 
