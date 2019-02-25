@@ -28,7 +28,22 @@ function goToMob(){
 }
 
 function attackMob(){
-    document.querySelectorAll('.npc')[0].click();
+    setTimeout(() => {
+        document.querySelectorAll('.npc')[0].click();
+    }, 1500);
+}
+
+function autoFight(){
+    setTimeout(() => {
+        document.querySelector('#autobattleButton').click();
+        closeFight();  
+    }, 2500);
+}
+
+function closeFight(){
+    setTimeout(() => {
+        document.querySelector('#battleclose').click();
+    }, 2000);
 }
 
 function checkHeroPosition(){
@@ -47,15 +62,12 @@ function checkHeroPosition(){
            parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
         ) {
             console.log('attack')
+            clearInterval(interval);
 
-            setTimeout(() => {
-                attackMob();
-            }, 500);
-
-            clearInterval(interval)
-            
+            attackMob();
+            autoFight();
         }
-    }, 750);
+    }, 3500);
 }
 
 function GoToMobAndAttack(){
