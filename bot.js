@@ -1,15 +1,3 @@
-function close_and_get_loot(e) {
-	if(e.which === 81){
-		$('#loots_button').click();
-    	$('#battleclose').click();
-	}
-}
-
-document.querySelector('body').addEventListener('keyup', close_and_get_loot)
-
-
-
-
 document.querySelectorAll('.mmp-mob')[0]; // pobiera moba z minimapki
 document.querySelectorAll('.npc')[0]; // pobiera moba z mapy gry
 
@@ -24,7 +12,11 @@ document.querySelector('.mmp-hero'); // pobiera element naszego bohatera z minim
 
 
 function goToMob(){
-    document.querySelectorAll('.mmp-mob')[0].click();
+    if( document.querySelectorAll('.mmp-mob')[0] ){
+        document.querySelectorAll('.mmp-mob')[0].click();
+    } else {
+        console.log('Here is not mob')
+    }
 }
 
 function attackMob(){
@@ -54,7 +46,7 @@ function checkHeroPosition(){
     let interval = setInterval(() => {
         if ( 
             parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
-            &&
+                &&
             parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
                 &&
             parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
@@ -73,4 +65,10 @@ function checkHeroPosition(){
 function GoToMobAndAttack(){
     goToMob();
     checkHeroPosition();
+}
+
+function bot(){
+    let interval = setInterval(() => {
+        GoToMobAndAttack();
+    }, 7000);
 }
