@@ -74,7 +74,6 @@ setTimeout(() => {
     }, 5000);
   }
 
-
 // \/\/\/\/ start stop bot statement \/\/\/\/
   chrome.storage.sync.get(['botStatus'], (botStats)=> {
     console.log('bot status: ', botStats.botStatus)
