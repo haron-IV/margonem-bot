@@ -74,5 +74,41 @@ setTimeout(() => {
     }, 5000);
   }
 
-  bot();
+
+  let data = {
+    'botStatus': true
+  };
+
+  chrome.storage.sync.set(data, function (){
+    console.log('exp ')
+  });
+
+
+  document.querySelector('#nick').addEventListener('click', ()=>{
+
+    chrome.storage.sync.get(['botStatus'], (botStats) => {
+      console.log(botStats.botStatus)
+    })
+
+    chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
+      if ( botStats.botStatus === true ) {
+        console.log('Start Bot.')
+        bot();
+
+        let data = {
+          'botStatus': false
+        };
+    
+        chrome.storage.sync.set(data, function (){
+          console.log('next bot stop.')
+        });
+
+
+      } else {
+        console.log('Stop Bot.');
+        window.location.reload();
+      }
+    });
+    
+  });
 }, 1500);
