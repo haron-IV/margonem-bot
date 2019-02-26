@@ -81,36 +81,30 @@ setTimeout(() => {
       console.log('Bot run automaticly.')
     }
   });
-  
-  document.querySelector('#nick').addEventListener('click', ()=>{
+
+  document.querySelector('#start-bot').addEventListener('click', ()=>{
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
-      console.log('bot status: ', botStats.botStatus)
-    })
-
-    chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
-      if ( botStats.botStatus === true ) {
-        let data = {
-          'botStatus': true
-        };
-    
-        chrome.storage.sync.set(data, function (){});
-
-        console.log('Start Bot.')
-        bot();
-
-        data = {
-          'botStatus': false
-        };
-    
-        chrome.storage.sync.set(data, function (){});
+      let data = {
+        'botStatus': true
+      };
         
-
-      } else {
-        console.log('Stop Bot.');
-        window.location.reload();
-      }
+      chrome.storage.sync.set(data, function (){});
+      bot();
     });
     
   });
-}, 1500);
+
+  document.querySelector('#stop-bot').addEventListener('click', ()=> {
+
+    chrome.storage.sync.get(['botStatus'], (botStats) => {
+      let data = {
+        'botStatus': false
+      };
+        
+      chrome.storage.sync.set(data, function (){});
+      window.location.reload();
+    });
+
+  })
+}, 2000);
