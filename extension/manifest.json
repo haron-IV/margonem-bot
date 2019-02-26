@@ -28,7 +28,7 @@
     "content_scripts": [
         {
             "matches": ["http://nomada.margonem.pl/*"],
-            "js": ["./external/jQuery.js", "./content-scripts/index.js", "./content-scripts/stats.js", "./content-scripts/reloadIfStack.js"],
+            "js": ["./external/jQuery.js", "./content-scripts/index.js", "./content-scripts/stats.js", "./content-scripts/reloadIfStack.js", "./content-scripts/addBotInterface.js"],
             "css": ["./content-scripts/content.css"]
         }
     ]

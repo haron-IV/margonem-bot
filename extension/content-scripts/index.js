@@ -74,35 +74,37 @@ setTimeout(() => {
     }, 5000);
   }
 
-
-  let data = {
-    'botStatus': true
-  };
-
-  chrome.storage.sync.set(data, function (){
-    console.log('exp ')
+  chrome.storage.sync.get(['botStatus'], (botStats)=> {
+    console.log('bot status: ', botStats.botStatus)
+    if( botStats.botStatus == true ){
+      bot();
+      console.log('Bot run automaticly.')
+    }
   });
-
-
+  
   document.querySelector('#nick').addEventListener('click', ()=>{
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
-      console.log(botStats.botStatus)
+      console.log('bot status: ', botStats.botStatus)
     })
 
     chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
       if ( botStats.botStatus === true ) {
+        let data = {
+          'botStatus': true
+        };
+    
+        chrome.storage.sync.set(data, function (){});
+
         console.log('Start Bot.')
         bot();
 
-        let data = {
+        data = {
           'botStatus': false
         };
     
-        chrome.storage.sync.set(data, function (){
-          console.log('next bot stop.')
-        });
-
+        chrome.storage.sync.set(data, function (){});
+        
 
       } else {
         console.log('Stop Bot.');
