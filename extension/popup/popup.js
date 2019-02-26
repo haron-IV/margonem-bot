@@ -1,11 +1,13 @@
 const $need_exp = document.querySelector('#need-exp');
 const $actual_localization = document.querySelector('#actual-localization');
 const $actuallocalizationCoord = document.querySelector('#actual-localization-coord');
+const $gold = document.querySelector('#gold');
 
-chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
+chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord', 'gold'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
     $need_exp.innerHTML = botStats.needExp;
     $actual_localization.innerHTML = botStats.lastLocalization;
     $actuallocalizationCoord.innerHTML = botStats.lastLocalizationCoord;
+    $gold.innerHTML = botStats.gold;
 });
 
 // $enter_amount_button.addEventListener('click', () => {

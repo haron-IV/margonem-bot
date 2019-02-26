@@ -1,5 +1,5 @@
 setTimeout(() => {
-    
+
     const startBotButton = document.createElement('button');
     startBotButton.id = 'start-bot';
     startBotButton.innerHTML = 'start';

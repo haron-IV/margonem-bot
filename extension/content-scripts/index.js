@@ -74,6 +74,8 @@ setTimeout(() => {
     }, 5000);
   }
 
+
+// \/\/\/\/ start stop bot statement \/\/\/\/
   chrome.storage.sync.get(['botStatus'], (botStats)=> {
     console.log('bot status: ', botStats.botStatus)
     if( botStats.botStatus == true ){
@@ -83,6 +85,7 @@ setTimeout(() => {
   });
 
   document.querySelector('#start-bot').addEventListener('click', ()=>{
+    console.log('start bot');
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
       let data = {
@@ -96,7 +99,7 @@ setTimeout(() => {
   });
 
   document.querySelector('#stop-bot').addEventListener('click', ()=> {
-
+    console.log('stop bot');
     chrome.storage.sync.get(['botStatus'], (botStats) => {
       let data = {
         'botStatus': false
@@ -106,5 +109,6 @@ setTimeout(() => {
       window.location.reload();
     });
 
-  })
+  });
+  // ^^^^ start stop bot statement ^^^^
 }, 2000);
