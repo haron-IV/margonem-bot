@@ -17,13 +17,13 @@ setTimeout(() => {
     const $buttonstart = document.querySelector('#start-bot');
 
 
-    // $buttonstart.addEventListener('click', ()=>{
-    //     $buttonstart.style.backgroundColor = "green";
-    // });
+    
 
     chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
         if ( botStats.botStatus ===  true ) {
-            $buttonstart.style.backgroundColor = 'green';
+            startBotButton.classList.add('active');
+        } else {
+            stopBotButton.classList.add('active');
         }
     });
 
