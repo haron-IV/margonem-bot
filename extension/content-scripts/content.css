@@ -12,8 +12,10 @@
 .bot-interface-wrapper{
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50vw;
+    z-index: 999;
     display: flex;
     justify-content: space-between;
 

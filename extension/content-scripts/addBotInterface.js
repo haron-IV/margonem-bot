@@ -3,7 +3,7 @@ setTimeout(() => {
     const wrapper = document.createElement('div');
     wrapper.id = "bot-interface-wrapper";
     wrapper.classList.add('bot-interface-wrapper');
-    document.querySelector('#base').appendChild(wrapper);
+    document.querySelector('body').appendChild(wrapper);
     const $wrapper = document.querySelector('#bot-interface-wrapper');
 
     const startBotButton = document.createElement('button');
@@ -33,15 +33,14 @@ setTimeout(() => {
 
     const $buttonstart = document.querySelector('#start-bot');
     const $buttonStop = document.querySelector('#stop-bot');
-    const $buttonEliteStart = document.querySelector('#elite-bot-start');
 
 
     $buttonstart.addEventListener('click', () => {
         $buttonstart.classList.add('active');
         $buttonStop.classList.remove('active');
-    })
+    });
 
-    chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
+    chrome.storage.sync.get(['botStatus'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
             startBotButton.classList.add('active');
         } else {
