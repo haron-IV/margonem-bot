@@ -13,4 +13,12 @@ setTimeout(() => {
     stopBotButton.style.fontSize = '10px';
     document.querySelector('#nick').appendChild(stopBotButton)
 
+
+    const $buttonstart = document.querySelector('#start-bot');
+
+
+    $buttonstart.addEventListener('click', ()=>{
+        $buttonstart.style.backgroundColor = "green";
+    })
+
 }, 1500);
