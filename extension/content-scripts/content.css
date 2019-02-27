@@ -1,11 +1,10 @@
-.start-bot, .stop-bot, .elite-bot-start, .elite-bot-stop{
+.bot-button{
     background-color: black;
     color: gray;
     border: 1px solid gray;
     font-size: 12px;
-    /* position: absolute; */
     z-index: 999;
-    width: 65px;
+    padding: 5px 20px;
     transition: all ease-in-out 700ms;
     cursor: pointer;
 }
@@ -16,25 +15,9 @@
     left: 0;
     width: 100%;
     display: flex;
-    justify-content: space-around;
-}
-/* 
-.stop-bot{
-    margin-left: 75px;
-}
+    justify-content: space-between;
 
-.elite-bot{
-    margin-left: 150px;
 }
-
-
-.elite-bot-stop {
-    margin-left: 225px;
-} */
-/* 
-.elite-bot-stop {
-    margin-left: 225px;
-} */
 
 .active{
     color: aqua;
