@@ -15,9 +15,13 @@ setTimeout(() => {
 
 
     const $buttonstart = document.querySelector('#start-bot');
+    const $buttonStop = document.querySelector('#stop-bot');
 
 
-    
+    $buttonstart.addEventListener('click', () => {
+        $buttonstart.classList.add('active');
+        $buttonStop.classList.remove('active');
+    })
 
     chrome.storage.sync.get(['botStatus'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
         if ( botStats.botStatus ===  true ) {
