@@ -1,27 +1,48 @@
 setTimeout(() => {
 
+    const wrapper = document.createElement('div');
+    wrapper.id = "bot-interface-wrapper";
+    wrapper.classList.add('bot-interface-wrapper');
+    document.querySelector('#base').appendChild(wrapper);
+
+
     const startBotButton = document.createElement('button');
     startBotButton.id = 'start-bot';
     startBotButton.classList.add('start-bot');
     startBotButton.innerHTML = 'start';
-    document.querySelector('#centerbox2').appendChild(startBotButton)
+
+    const $wrapper = document.querySelector('#bot-interface-wrapper');
+
+
+    $wrapper.appendChild(startBotButton);
+
+
+
+
 
 
     const stopBotButton = document.createElement('button');
     stopBotButton.id = 'stop-bot';
     stopBotButton.classList.add('stop-bot');
     stopBotButton.innerHTML = 'stop';
-    document.querySelector('#centerbox2').appendChild(stopBotButton)
+    $wrapper.appendChild(stopBotButton)
 
-    const eliteBotButton = document.createElement('button');
-    eliteBotButton.id = 'elite-bot';
-    eliteBotButton.classList.add('elite-bot');
-    eliteBotButton.innerHTML = 'elite bot';
-    document.querySelector('#centerbox2').appendChild(eliteBotButton)
+    const eliteBotButtonStart = document.createElement('button');
+    eliteBotButtonStart.id = 'elite-bot-start';
+    eliteBotButtonStart.classList.add('elite-bot-start');
+    eliteBotButtonStart.innerHTML = 'elite bot start';
+    $wrapper.appendChild(eliteBotButtonStart);
+
+    const eliteBotButtonStop = document.createElement('button');
+    eliteBotButtonStop.id = 'elite-bot-stop';
+    eliteBotButtonStop.classList.add('elite-bot-stop');
+    eliteBotButtonStop.innerHTML = 'elite bot stop';
+    $wrapper.appendChild(eliteBotButtonStop);
 
 
     const $buttonstart = document.querySelector('#start-bot');
     const $buttonStop = document.querySelector('#stop-bot');
+    const $buttonEliteStart = document.querySelector('#elite-bot-start');
 
 
     $buttonstart.addEventListener('click', () => {

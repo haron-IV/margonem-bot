@@ -1,15 +1,24 @@
-.start-bot, .stop-bot, .elite-bot{
+.start-bot, .stop-bot, .elite-bot-start, .elite-bot-stop{
     background-color: black;
     color: gray;
     border: 1px solid gray;
     font-size: 12px;
-    position: absolute;
+    /* position: absolute; */
     z-index: 999;
     width: 65px;
     transition: all ease-in-out 700ms;
     cursor: pointer;
 }
 
+.bot-interface-wrapper{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+/* 
 .stop-bot{
     margin-left: 75px;
 }
@@ -17,6 +26,15 @@
 .elite-bot{
     margin-left: 150px;
 }
+
+
+.elite-bot-stop {
+    margin-left: 225px;
+} */
+/* 
+.elite-bot-stop {
+    margin-left: 225px;
+} */
 
 .active{
     color: aqua;
