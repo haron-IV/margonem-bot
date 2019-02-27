@@ -1,0 +1,13 @@
+.start-bot, .stop-bot{
+    background-color: black;
+    color: aqua;
+    border: 1px solid aqua;
+    font-size: 12px;
+    position: absolute;
+    z-index: 999;
+    width: 65px;
+}
+
+.stop-bot{
+    margin-left: 75px;
+}
