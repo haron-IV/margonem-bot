@@ -1,0 +1,21 @@
+html {
+    font-size: 10px;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+}
+
+header{
+    margin: 1.5rem 0;
+    font-weight: bold;
+}
+
+ol{
+    margin: 3rem 0;
+}
+
+li{
+    margin: 1rem 0;
+}
