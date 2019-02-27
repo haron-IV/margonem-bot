@@ -13,6 +13,12 @@ setTimeout(() => {
     stopBotButton.innerHTML = 'stop';
     document.querySelector('#centerbox2').appendChild(stopBotButton)
 
+    const eliteBotButton = document.createElement('button');
+    eliteBotButton.id = 'elite-bot';
+    eliteBotButton.classList.add('elite-bot');
+    eliteBotButton.innerHTML = 'elite bot';
+    document.querySelector('#centerbox2').appendChild(eliteBotButton)
+
 
     const $buttonstart = document.querySelector('#start-bot');
     const $buttonStop = document.querySelector('#stop-bot');

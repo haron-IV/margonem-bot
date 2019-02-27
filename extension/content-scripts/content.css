@@ -1,4 +1,4 @@
-.start-bot, .stop-bot{
+.start-bot, .stop-bot, .elite-bot{
     background-color: black;
     color: gray;
     border: 1px solid gray;
@@ -6,10 +6,16 @@
     position: absolute;
     z-index: 999;
     width: 65px;
+    transition: all ease-in-out 700ms;
+    cursor: pointer;
 }
 
 .stop-bot{
     margin-left: 75px;
+}
+
+.elite-bot{
+    margin-left: 150px;
 }
 
 .active{
