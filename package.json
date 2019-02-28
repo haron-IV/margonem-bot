@@ -1,0 +1,26 @@
+{
+  "name": "margonem-bot",
+  "version": "1.0.0",
+  "description": "Margonem Multi Bot.",
+  "main": "index",
+  "dependencies": {
+    "node-sass": "^4.11.0",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-css": "node-sass --include-path scss /extension/scss/main.scss /extension/css/index.css",
+    "watch-sass": "nodemon -e scss -x \"npm run build-css\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venglas/margonem-bot.git"
+  },
+  "author": "Venglas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/venglas/margonem-bot/issues"
+  },
+  "homepage": "https://github.com/venglas/margonem-bot#readme"
+}
