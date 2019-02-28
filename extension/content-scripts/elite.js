@@ -1,4 +1,5 @@
 setTimeout(() => {
+
     function eliteBot() {
         let interval = null;
 
@@ -36,11 +37,13 @@ setTimeout(() => {
 
     function updateEliteStats(){
         chrome.storage.sync.get(['killedElites'], (botStats) => {
+
             if(botStats.killedElites === undefined){
-                chrome.storage.sync.set({'killedElites': 1}, ()=>{});    
+                chrome.storage.sync.set({'killedElites': 1}, ()=>{});
             } else {
-                chrome.storage.sync.set({'killedElites': botStats.killedElites++}, ()=>{});    
+                chrome.storage.sync.set({'killedElites': botStats.killedElites+1}, ()=>{});
             }
+
         });
     }
 
