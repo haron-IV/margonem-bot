@@ -12,6 +12,7 @@ setTimeout(() => {
                     clearInterval(interval);
                     autoFight();
                     closeFight();
+                    updateEliteStats();
                     reload(7000);
                 }
             });
@@ -31,6 +32,16 @@ setTimeout(() => {
                 document.querySelector('#battleclose').click();
             }
         }, 5500);
+    }
+
+    function updateEliteStats(){
+        chrome.storage.sync.get(['killedElites'], (botStats) => {
+            if(botStats.killedElites === undefined){
+                chrome.storage.sync.set({'killedElites': 1}, ()=>{});    
+            } else {
+                chrome.storage.sync.set({'killedElites': botStats.killedElites++}, ()=>{});    
+            }
+        });
     }
 
     function reload(time){

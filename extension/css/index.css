@@ -4,12 +4,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 30px 10px; }
+  margin: 30px 10px;
+  background-image: url(../img/wood-texture.jpg);
+  background-size: cover;
+  padding: 0;
+  color: white; }
   .body-popup .header {
     font-size: 25px;
     font-weight: 700;
     display: flex;
-    align-items: center; }
+    align-items: center;
+    color: #ccac00;
+    letter-spacing: 2px; }
     .body-popup .header img {
       margin: 0 25px; }
   .body-popup .article {
@@ -18,4 +24,5 @@
       font-size: 13px;
       font-weight: 500; }
       .body-popup .article .section--stats span {
-        font-weight: 700; }
+        font-weight: 700;
+        margin-left: 5px; }

@@ -5,13 +5,18 @@
     justify-content: center;
     align-items: center;
     margin: 30px 10px;
-
+    background-image: url(../img/wood-texture.jpg);
+    background-size: cover;
+    padding: 0;
+    color: white;
     
     .header{
         font-size: 25px;
         font-weight: 700;
         display: flex;
         align-items: center;
+        color: darken(gold, 10%);
+        letter-spacing: 2px;
 
         img{
             margin: 0 25px;
@@ -27,6 +32,7 @@
                 font-weight: 500;
                 span{
                     font-weight: 700;
+                    margin-left: 5px;
                 }
             }
         }
