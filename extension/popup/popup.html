@@ -4,26 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700" rel="stylesheet">
     <title>Margonem Bot</title>
 </head>
-<body>
+<body class="body-popup">
 
-    <h1>
-        Margonem Multi Bot.
-    </h1>
+    <header class="header">
+        <img src="../icons/icon48.png"> Margonem Multi Bot. <img src="../icons/icon48.png">
+    </header>
 
-    <article>
-        <section class="section-stats">
-            <p>
+    <article class="article">
+        <section class="section section--stats">
+
+            <p class="paragraph">
                 Do następnego lvl: <span id="need-exp"></span> exp
             </p>
 
-            <p>
-                aktualna lokalizacja: <span id="actual-localization"></span>, (<span id="actual-localization-coord"></span>)
+            <p class="paragraph">
+                Aktualna lokalizacja: <span id="actual-localization"></span>, (<span id="actual-localization-coord"></span>)
             </p>
 
-            <p>
-                gold: <span id="gold"></span>
+            <p class="paragraph">
+                Złoto: <span id="gold"></span>
+            </p>
+
+            <p class="paragraph">
+                Zabite elity: <span id="killed-elite"></span>
             </p>
             
         </section>

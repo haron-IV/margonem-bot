@@ -10,7 +10,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-css": "node-sass --include-path scss /extension/scss/main.scss /extension/css/index.css",
+    "build-css": "node-sass --include-path scss ./extension/scss/main.scss ./extension/css/index.css",
     "watch-sass": "nodemon -e scss -x \"npm run build-css\""
   },
   "repository": {

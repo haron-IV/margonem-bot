@@ -1,0 +1,21 @@
+.body-popup {
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 10px; }
+  .body-popup .header {
+    font-size: 25px;
+    font-weight: 700;
+    display: flex;
+    align-items: center; }
+    .body-popup .header img {
+      margin: 0 25px; }
+  .body-popup .article {
+    margin: 30px 0; }
+    .body-popup .article .section--stats {
+      font-size: 13px;
+      font-weight: 500; }
+      .body-popup .article .section--stats span {
+        font-weight: 700; }
