@@ -2,19 +2,44 @@ setTimeout(() => {
   // document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
 
   function goToMob(){
-    if( document.querySelectorAll('.mmp-mob')[0] ){
-      document.querySelectorAll('.mmp-mob')[0].click();
+    let mobs = [];
+
+    const lvl_range = 22;
+
+    document.querySelectorAll('.mmp-mob').forEach(el => {
+      if ( parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) >= lvl_range ){
+        mobs.push(el);
+      }
+    });
+    //here is problem bot go to mob but not attack him
+
+    if( mobs[0] ){
+      mobs[0].click();
     } else {
       console.log('Here is not mob');
       document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click();
     }
   }
 
-  function attackMob(){
-    setTimeout(() => {
-      document.querySelectorAll('.npc')[0].click();
-    }, 1500);
+  function getMobs(){
+    return document.querySelectorAll('.npc');
   }
+
+  function getHeroCoord(){
+    const hero = {
+      x: parseInt( document.querySelector('#hero').style.left.split('px')[0].trim() ),
+      y: parseInt( document.querySelector('#hero').style.top.split('px')[0].trim() )
+    }
+    return	hero;
+  }
+
+  // function attackMob(){
+  //   setTimeout(() => {
+  //     console.log('attack mob')
+      
+
+  //   }, 1500);
+  // }
 
   function autoFight(){
     setInterval(() => {
@@ -31,33 +56,45 @@ setTimeout(() => {
   }
 
   function checkHeroPosition(){
-    const MyHero = document.querySelector('.mmp-hero');
-    const mob = document.querySelectorAll('.mmp-mob')[0];
-    const stepLength = 20; // px
-
-    let interval = setInterval(() => {
-
-      if( mob ){
-
-        if ( 
-          parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
-              &&
-          parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
-              &&
-          parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
-              &&
-          parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
-        ) {
-          console.log('attack')
-          clearInterval(interval);
-
-          attackMob();
-        }
-
+    getMobs().forEach(el => {
+      if (
+        getHeroCoord().x + 50 > parseInt( el.style.left.split('px')[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split('px')[0].trim() )
+        &&
+        getHeroCoord().y + 50 > parseInt( el.style.top.split('px')[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split('px')[0].trim() )
+          ) {
+        el.click();
       }
-        
-    }, 2000);
+    });
   }
+
+  // function checkHeroPosition(){
+  //   const MyHero = document.querySelector('.mmp-hero');
+  //   const mob = document.querySelectorAll('.mmp-mob')[0];
+  //   const stepLength = 20; // px
+
+  //   let interval = setInterval(() => {
+
+  //     if( mob ){
+
+  //       if ( 
+  //         parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
+  //             &&
+  //         parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
+  //             &&
+  //         parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
+  //             &&
+  //         parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
+  //       ) {
+  //         console.log('attack')
+  //         clearInterval(interval);
+
+  //         attackMob();
+  //       }
+
+  //     }
+        
+  //   }, 2000);
+  // }
 
   function GoToMobAndAttack(){
     goToMob();
