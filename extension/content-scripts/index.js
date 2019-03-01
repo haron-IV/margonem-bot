@@ -4,20 +4,25 @@ setTimeout(() => {
   function goToMob(){
     let mobs = [];
 
-    const lvl_range = 22;
+    const lvl_range_min = 12; // this variable should be set in popup
+    const lvl_range_max = 17; // this variable should be set in popup
 
-    document.querySelectorAll('.mmp-mob').forEach(el => {
-      if ( parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) >= lvl_range ){
-        mobs.push(el);
+    document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
+
+      if ( parseInt(el.getAttribute('tip').split(' >')[1]) ){
+        if ( parseInt( el.getAttribute('tip').split(' >')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split(' >')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
+          mobs.push(el);
+          console.log(el)
+        }
       }
+
     });
-    //here is problem bot go to mob but not attack him
 
     if( mobs[0] ){
       mobs[0].click();
     } else {
       console.log('Here is not mob');
-      document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click();
+      document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
     }
   }
 
@@ -33,14 +38,6 @@ setTimeout(() => {
     return	hero;
   }
 
-  // function attackMob(){
-  //   setTimeout(() => {
-  //     console.log('attack mob')
-      
-
-  //   }, 1500);
-  // }
-
   function autoFight(){
     setInterval(() => {
       document.querySelector('#autobattleButton').click(); 
@@ -52,10 +49,10 @@ setTimeout(() => {
         if ( document.querySelector('#battleclose') ) {
           document.querySelector('#battleclose').click();
         }
-    }, 2500);
+    }, 3000);
   }
 
-  function checkHeroPosition(){
+  function checkHeroPositionAndAttack(){
     getMobs().forEach(el => {
       if (
         getHeroCoord().x + 50 > parseInt( el.style.left.split('px')[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split('px')[0].trim() )
@@ -67,45 +64,15 @@ setTimeout(() => {
     });
   }
 
-  // function checkHeroPosition(){
-  //   const MyHero = document.querySelector('.mmp-hero');
-  //   const mob = document.querySelectorAll('.mmp-mob')[0];
-  //   const stepLength = 20; // px
-
-  //   let interval = setInterval(() => {
-
-  //     if( mob ){
-
-  //       if ( 
-  //         parseInt( MyHero.style.top.split(/[px .]/)[0] ) >= parseInt( mob.style.top.split(/[px .]/)[0] ) - stepLength 
-  //             &&
-  //         parseInt( MyHero.style.top.split(/[px .]/)[0] ) <= parseInt( mob.style.top.split(/[px .]/)[0] ) + stepLength
-  //             &&
-  //         parseInt( MyHero.style.left.split(/[px .]/)[0] ) >= parseInt( mob.style.left.split(/[px .]/)[0] ) - stepLength
-  //             &&
-  //         parseInt( MyHero.style.left.split(/[px .]/)[0] ) <= parseInt( mob.style.left.split(/[px .]/)[0] ) + stepLength
-  //       ) {
-  //         console.log('attack')
-  //         clearInterval(interval);
-
-  //         attackMob();
-  //       }
-
-  //     }
-        
-  //   }, 2000);
-  // }
-
   function GoToMobAndAttack(){
     goToMob();
-    checkHeroPosition();
+    checkHeroPositionAndAttack();
   }
 
   function bot(){
     autoFight();
     closeFight();
     
-
     let interval = setInterval(() => {
       GoToMobAndAttack();
     }, 5000);
