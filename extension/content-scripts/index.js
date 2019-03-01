@@ -9,10 +9,9 @@ setTimeout(() => {
 
     document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
 
-      if ( parseInt(el.getAttribute('tip').split(' >')[1]) ){
-        if ( parseInt( el.getAttribute('tip').split(' >')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split(' >')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
+      if ( parseInt(el.getAttribute('tip').split('">')[1]) ){
+        if ( parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
           mobs.push(el);
-          console.log(el)
         }
       }
 
