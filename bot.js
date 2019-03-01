@@ -72,3 +72,69 @@ function bot(){
         GoToMobAndAttack();
     }, 7000);
 }
+
+/////////////////////
+// Range for attacking neat mobs
+
+const miniMap = document.querySelector('.mmpMap');
+const myHero = document.querySelector('.mmp-hero');
+const mobs = document.querySelectorAll('.mmp-mob');
+
+function getMapInfo(){
+    const map = {
+        width: parseInt( miniMap.style.width.split('px')[0] ),
+        height: parseInt( miniMap.style.height.split('px')[0] ),
+    }
+
+    return map;
+}
+
+function getHeroInfo(){
+    const hero = {
+        position_left: parseInt( myHero.style.left.split('px')[0] ),
+        position_top: parseInt( myHero.style.top.split('px')[0] )
+    }
+
+    return hero;
+}
+
+function getMobs(){
+    const mobs = {
+        mobs_list: document.querySelectorAll('.mmp-mob'),
+        mobs_positions: []
+    }
+
+    mobs.mobs_list.forEach(el => {
+        const mob = [];
+        mob.push( parseInt( el.style.left.split('px')[0] ) );
+        mob.push( parseInt( el.style.top.split('px')[0] ) );
+
+        mobs.mobs_positions.push(mob)
+        
+    });
+
+    return mobs;
+}
+
+function checkMobsPosition() {
+    let positions = getMobs().mobs_positions;
+    let hero = getHeroInfo();
+    let map = getMapInfo();
+    let mobs = getMobs();
+    const range_x = map.width / 3;
+    const range_y = map.height / 3;
+    let mobs_in_range = [];
+
+    positions.forEach((el, i) => {
+        if ( 
+            hero.position_left + range_x >=  mobs.mobs_positions[i][0] && hero.position_left - range_x <=  mobs.mobs_positions[i][0]
+            &&
+            hero.position_top + range_y >=  mobs.mobs_positions[i][1] && hero.position_top - range_y <=  mobs.mobs_positions[i][1] 
+            )
+            {
+            mobs_in_range.push(mobs.mobs_list[i]);
+        }
+    });
+
+    return mobs_in_range;
+}
