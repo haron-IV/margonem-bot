@@ -4,8 +4,8 @@ setTimeout(() => {
   function goToMob(){
     let mobs = [];
 
-    const lvl_range_min = 40; // this variable should be set in popup
-    const lvl_range_max = 55; // this variable should be set in popup
+    const lvl_range_min = 7; // this variable should be set in popup
+    const lvl_range_max = 400; // this variable should be set in popup
 
     document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
 

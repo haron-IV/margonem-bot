@@ -36,7 +36,8 @@
                 "./content-scripts/addBotInterface.js",
                 "./content-scripts/elite.js",
                 "./content-scripts/quest.js",
-                "./content-scripts/fullMap.js"
+                "./content-scripts/fullMap.js",
+                "./content-scripts/friendsList.js"
             ],
             "css": ["./content-scripts/content.css"]
         }
