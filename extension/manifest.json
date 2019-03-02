@@ -27,14 +27,15 @@
     },
     "content_scripts": [
         {
-            "matches": ["http://nomada.margonem.pl/*"],
+            "matches": ["http://nomada.margonem.pl/*", "http://fobos.margonem.pl/"],
             "js": [
                 "./external/jQuery.js",
                 "./content-scripts/index.js",
                 "./content-scripts/stats.js",
                 "./content-scripts/reloadIfStack.js",
                 "./content-scripts/addBotInterface.js",
-                "./content-scripts/elite.js"
+                "./content-scripts/elite.js",
+                "./content-scripts/quest.js"
             ],
             "css": ["./content-scripts/content.css"]
         }
