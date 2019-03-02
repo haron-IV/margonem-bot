@@ -4,13 +4,13 @@ setTimeout(() => {
   function goToMob(){
     let mobs = [];
 
-    const lvl_range_min = 20; // this variable should be set in popup
-    const lvl_range_max = 25; // this variable should be set in popup
+    const lvl_range_min = 40; // this variable should be set in popup
+    const lvl_range_max = 55; // this variable should be set in popup
 
     document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
 
-      if ( parseInt(el.getAttribute('tip').split('">')[1]) ){
-        if ( parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split('">')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
+      if ( parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) ){
+        if ( parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
           mobs.push(el);
         }
       }
