@@ -35,7 +35,8 @@
                 "./content-scripts/reloadIfStack.js",
                 "./content-scripts/addBotInterface.js",
                 "./content-scripts/elite.js",
-                "./content-scripts/quest.js"
+                "./content-scripts/quest.js",
+                "./content-scripts/fullMap.js"
             ],
             "css": ["./content-scripts/content.css"]
         }
