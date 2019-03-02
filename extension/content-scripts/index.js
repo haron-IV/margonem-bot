@@ -4,8 +4,8 @@ setTimeout(() => {
   function goToMob(){
     let mobs = [];
 
-    const lvl_range_min = 12; // this variable should be set in popup
-    const lvl_range_max = 17; // this variable should be set in popup
+    const lvl_range_min = 20; // this variable should be set in popup
+    const lvl_range_max = 25; // this variable should be set in popup
 
     document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
 
@@ -18,7 +18,7 @@ setTimeout(() => {
     });
 
     if( mobs[0] ){
-      mobs[0].click();
+      mobs[0].click(); // go to mob
     } else {
       console.log('Here is not mob');
       document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
