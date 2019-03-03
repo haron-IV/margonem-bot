@@ -3,7 +3,9 @@ function heroPositon(){
     
     const coord = {
         x: parseInt( hero.style.left.split(/[. px]/)[0] ), // hero left on minimap
-        y: parseInt( hero.style.top.split(/[. px]/)[0] )
+        y: parseInt( hero.style.top.split(/[. px]/)[0] ),
+        width: parseInt( hero.style.width.split(/[. px]/)[0] ),
+        height: parseInt( hero.style.height.split(/[. px]/)[0] )
     }
     return coord;
 }
@@ -48,7 +50,9 @@ function _range() {
     const rangeEl = document.querySelector('#range');
     const range = {
         x: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
-        y: parseInt( rangeEl.style.top.split(/[. px]/)[0] )
+        y: parseInt( rangeEl.style.top.split(/[. px]/)[0] ),
+        width: parseInt( rangeEl.style.width.split(/[. px]/)[0] ),
+        height: parseInt( rangeEl.style.height.split(/[. px]/)[0] ),
     }
     return range;
 }
@@ -58,10 +62,21 @@ function updateRangePosition(){
     const map = mini_map();
     const range = _range();
 
-    range.x = hero.x;
-    range.y = hero.y;
+
+
+    range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) );
+    range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) );
+
+    console.log(hero.height)
+
+
+    // range.x = hero.x;
+    // range.y = hero.y;
 
     document.querySelector('#range').style.left = `${range.x}px`;
     document.querySelector('#range').style.top = `${range.y}px`;
 
 }
+
+addRangeToMap();
+updateRangePosition()
