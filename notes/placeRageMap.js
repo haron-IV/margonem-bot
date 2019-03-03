@@ -32,12 +32,36 @@ function createRange() {
 function addRangeToMap(){
     const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
-    const range = createRange();
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
+    rangeItem.style.position = "absolute";
     rangeItem.style.width = `${(map.width / 8 )* 2}px`;
     rangeItem.style.height = `${(map.heigh / 10 )* 2}px`;
+    rangeItem.style.left = `${0}px`;
+    rangeItem.style.top = `${0}px`;
     rangeItem.style.backgroundColor = "rgba(65, 150, 235, .6)"
     mapEl.appendChild(rangeItem);
+}
+
+function _range() {
+    const rangeEl = document.querySelector('#range');
+    const range = {
+        x: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
+        y: parseInt( rangeEl.style.top.split(/[. px]/)[0] )
+    }
+    return range;
+}
+
+function updateRangePosition(){
+    const hero = heroPositon();
+    const map = mini_map();
+    const range = _range();
+
+    range.x = hero.x;
+    range.y = hero.y;
+
+    document.querySelector('#range').style.left = `${range.x}px`;
+    document.querySelector('#range').style.top = `${range.y}px`;
+
 }
