@@ -80,16 +80,18 @@ setTimeout(() => {
 
   function autoFight(){
     setInterval(() => {
-      document.querySelector('#autobattleButton').click(); 
-    }, 2000);
+      if ( document.querySelector('#autobattleButton') ) {
+        document.querySelector('#autobattleButton').click(); 
+      } 
+    }, 1000);
   }
 
   function closeFight(){
     setInterval(() => {
-        if ( document.querySelector('#battleclose') ) {
-          document.querySelector('#battleclose').click();
-        }
-    }, 3000);
+      if ( document.querySelector('#battleclose') ) {
+        document.querySelector('#battleclose').click();
+      }
+    }, 2000);
   }
 
   function checkHeroPositionAndAttack(){
@@ -104,18 +106,22 @@ setTimeout(() => {
     });
   }
 
-  function GoToMobAndAttack(){
-    goToMob();
-    checkHeroPositionAndAttack();
-  }
+  // function GoToMobAndAttack(){
+  //   goToMob();
+  //   checkHeroPositionAndAttack();
+  // }
 
   function bot(){
     autoFight();
     closeFight();
     
     let interval = setInterval(() => {
-      GoToMobAndAttack();
+      goToMob();
     }, 5000);
+
+    let interval2 = setInterval(() => {
+      checkHeroPositionAndAttack();
+    }, 2000);
   }
 
 // \/\/\/\/ start stop bot statement \/\/\/\/
