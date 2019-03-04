@@ -1,27 +1,68 @@
 setTimeout(() => {
   // document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
+  function heroPositon(){ //
+    const hero = document.querySelector('.mmp-hero');
+    
+    const coord = {
+      x: parseInt( hero.style.left.split(/[. px]/)[0] ), // hero left on minimap
+      y: parseInt( hero.style.top.split(/[. px]/)[0] ),
+      width: parseInt( hero.style.width.split(/[. px]/)[0] ),
+      height: parseInt( hero.style.height.split(/[. px]/)[0] )
+    }
+    return coord;
+  }
+
+  function _range() {
+    const rangeEl = document.querySelector('#range');
+    const range = {
+      x: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
+      y: parseInt( rangeEl.style.top.split(/[. px]/)[0] ),
+      width: parseInt( rangeEl.style.width.split(/[. px]/)[0] ),
+      height: parseInt( rangeEl.style.height.split(/[. px]/)[0] ),
+      x_start: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
+      y_start: parseInt( rangeEl.style.top.split(/[. px]/)[0] )
+    }
+    return range;
+  }
+
+  function _mobs() {
+    return document.querySelectorAll('.mmp-mob');
+  }
+
+  function mobsInRange(){
+    const range = _range();
+    const mobs = _mobs();
+    let mobs_list = [];
+
+    range.x_start = parseInt( document.querySelector('#range').style.left.split(/[. px]/)[0] );
+    range.y_start = parseInt( document.querySelector('#range').style.top.split(/[. px]/)[0] );
+
+    mobs.forEach(el => {
+      const mob_left = parseInt( el.style.left.split(/[. px]/)[0] );
+      const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
+
+      if (
+        mob_left > range.x_start && 
+        mob_left < range.x_start + range.width && 
+        mob_top > range.y_start && 
+        mob_top < range.y_start + range.height
+      ){
+        mobs_list.push(el);
+      }
+    });
+    return mobs_list;
+  }
 
   function goToMob(){
     let mobs = [];
 
-    const lvl_range_min = 7; // this variable should be set in popup
-    const lvl_range_max = 400; // this variable should be set in popup
-
-    document.querySelectorAll('.mmp-mob').forEach(el => { //here can be add range if state
-
-      if ( parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) ){
-        if ( parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) >= lvl_range_min && parseInt( el.getAttribute('tip').split('<span')[1].split('>')[1].split('lvl')[0].trim() ) <= lvl_range_max ){
-          mobs.push(el);
-        }
-      }
-
-    });
+    mobs = mobsInRange();
 
     if( mobs[0] ){
       mobs[0].click(); // go to mob
     } else {
       console.log('Here is not mob');
-      document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
+      // document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
     }
   }
 
@@ -54,11 +95,11 @@ setTimeout(() => {
   function checkHeroPositionAndAttack(){
     getMobs().forEach(el => {
       if (
-        getHeroCoord().x + 50 > parseInt( el.style.left.split('px')[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split('px')[0].trim() )
+        getHeroCoord().x + 50 > parseInt( el.style.left.split(/[. px]/)[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split(/[. px]/)[0].trim() )
         &&
-        getHeroCoord().y + 50 > parseInt( el.style.top.split('px')[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split('px')[0].trim() )
-          ) {
-        el.click();
+        getHeroCoord().y + 50 > parseInt( el.style.top.split(/[. px]/)[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split(/[. px]/)[0].trim() )
+        ) {
+        el.click(); // attack
       }
     });
   }

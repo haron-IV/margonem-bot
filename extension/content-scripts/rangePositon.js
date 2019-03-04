@@ -1,4 +1,4 @@
-function heroPositon(){
+function heroPositon(){ //
     const hero = document.querySelector('.mmp-hero');
     
     const coord = {
@@ -18,31 +18,19 @@ function mini_map(){
     return map;
 }
 
-function createRange() {
-    const hero = heroPositon();
-    const map = mini_map();
-
-    const range = {
-        left: hero.x - map.width / 8,
-        top: hero.y - map.heigh / 10,
-        right: hero.x + map.width / 8,
-        bottom: hero.y + map.heigh / 10
-    }
-    return range;
-}
-
-function addRangeToMap(){
+function addRangeToMap(){ //
     const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
     rangeItem.style.position = "absolute";
-    rangeItem.style.width = `${(map.width / 8 )* 2}px`;
-    rangeItem.style.height = `${(map.heigh / 10 )* 2}px`;
+    rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
+    rangeItem.style.height = `${(map.heigh / 5 )* 2}px`; //range height
     rangeItem.style.left = `${0}px`;
     rangeItem.style.top = `${0}px`;
-    rangeItem.style.backgroundColor = "rgba(65, 150, 235, .6)"
+    rangeItem.style.backgroundColor = "rgba(65, 150, 235, .5)";
+    rangeItem.style.border = "1px solid rgba(65, 150, 235, 1)";
     mapEl.appendChild(rangeItem);
 }
 
@@ -53,23 +41,27 @@ function _range() {
         y: parseInt( rangeEl.style.top.split(/[. px]/)[0] ),
         width: parseInt( rangeEl.style.width.split(/[. px]/)[0] ),
         height: parseInt( rangeEl.style.height.split(/[. px]/)[0] ),
+        x_start: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
+        y_start: parseInt( rangeEl.style.top.split(/[. px]/)[0] )
     }
     return range;
 }
 
 function updateRangePosition(){
     const hero = heroPositon();
-    const map = mini_map();
     const range = _range();
 
     range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) );
     range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) );
 
-    console.log(hero.height)
-
     document.querySelector('#range').style.left = `${range.x}px`;
     document.querySelector('#range').style.top = `${range.y}px`;
 }
 
-addRangeToMap();
-updateRangePosition()
+setTimeout(() => {
+    addRangeToMap();
+
+    setInterval(() => {
+        updateRangePosition();
+    }, 500);
+}, 2500);

@@ -37,7 +37,8 @@
                 "./content-scripts/elite.js",
                 "./content-scripts/quest.js",
                 "./content-scripts/fullMap.js",
-                "./content-scripts/friendsList.js"
+                "./content-scripts/friendsList.js",
+                "./content-scripts/rangePositon.js"
             ],
             "css": ["./content-scripts/content.css"]
         }
