@@ -106,11 +106,6 @@ setTimeout(() => {
     });
   }
 
-  // function GoToMobAndAttack(){
-  //   goToMob();
-  //   checkHeroPositionAndAttack();
-  // }
-
   function bot(){
     autoFight();
     closeFight();
