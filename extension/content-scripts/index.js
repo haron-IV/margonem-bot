@@ -42,6 +42,7 @@ setTimeout(() => {
       const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
 
       if (
+        !el.classList.contains('hidden') &&
         mob_left > range.x_start && 
         mob_left < range.x_start + range.width && 
         mob_top > range.y_start && 
