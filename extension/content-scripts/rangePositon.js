@@ -27,6 +27,7 @@ function addRangeToMap(){ //
     rangeItem.style.position = "absolute";
     rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
     rangeItem.style.height = `${(map.heigh / 5 )* 2}px`; //range height
+    rangeItem.style.pointerEvents = "none";
     rangeItem.style.left = `${0}px`;
     rangeItem.style.top = `${0}px`;
     rangeItem.style.backgroundColor = "rgba(65, 150, 235, .5)";
