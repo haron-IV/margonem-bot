@@ -12,8 +12,8 @@ setTimeout(() => {
     return coord;
   }
 
-  function _range() {
-    const rangeEl = document.querySelector('#range');
+  function _range(el) {
+    const rangeEl = document.querySelector(el);
     const range = {
       x: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
       y: parseInt( rangeEl.style.top.split(/[. px]/)[0] ),
@@ -30,7 +30,7 @@ setTimeout(() => {
   }
 
   function mobsInRange(){
-    const range = _range();
+    const range = _range('#range');
     const mobs = _mobs();
     let mobs_list = [];
 
@@ -49,10 +49,40 @@ setTimeout(() => {
         mob_top < range.y_start + range.height
       ){
         mobs_list.push(el);
+        console.log(mobs_list)
       }
     });
     return mobs_list;
   }
+
+  function checkIfHeroIsNearMob(){
+    const range = _range('#smallRange');
+    const mobs = _mobs();
+    let isNear = false;
+
+
+    range.x_start = parseInt( document.querySelector('#smallRange').style.left.split(/[. px]/)[0] );
+    range.y_start = parseInt( document.querySelector('#smallRange').style.top.split(/[. px]/)[0] );
+
+    mobs.forEach(el => {
+      const mob_left = parseInt( el.style.left.split(/[. px]/)[0] );
+      const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
+
+      if (
+        !el.classList.contains('hidden') &&
+        mob_left > range.x_start && 
+        mob_left < range.x_start + range.width && 
+        mob_top > range.y_start && 
+        mob_top < range.y_start + range.height
+      ){
+        console.log('hero is near the mob!');
+        isNear = true;
+      }
+    });
+
+    return isNear;
+  }
+
 
   function goToMob(){
     let mobs = mobsInRange();
@@ -76,18 +106,6 @@ setTimeout(() => {
     }
     return	hero;
   }
-
-  // function checkIfHeroWalk(){
-  //   let hero;
-
-  //   setInterval(() => {
-  //     hero = getHeroCoord();
-
-  //     if (hero.x ) {}
-  //   }, 500);
-
-
-  // }
 
   function autoFight(){
     setInterval(() => {
@@ -129,11 +147,16 @@ setTimeout(() => {
     closeFight();
     
     let interval = setInterval(() => {
-      goToMob();
-    }, 2000);
+      if (checkIfHeroIsNearMob() == true){
+        goToMob();
+      }
+      
+    }, 5000);
 
     let interval2 = setInterval(() => {
+      
       checkHeroPositionAndAttack();
+       
     }, 700);
   }
 
