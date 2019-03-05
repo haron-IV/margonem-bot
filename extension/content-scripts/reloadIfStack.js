@@ -38,11 +38,20 @@ setTimeout(() => {
 
     updateCoordinates();
     setInterval(() => {
-        checkCoordinates();    
+        checkCoordinates();
+        if (isDead() === true){
+            document.querySelector('#logoutbut').click();
+        }
     }, 45000);
     
 }, 2000);
 
+// LOGOUT IF DEAD
 
-
-
+function isDead(){
+    if (document.querySelector('#dazed').style.display == "block"){
+        return true;
+    } else {
+        return false;
+    }
+}
