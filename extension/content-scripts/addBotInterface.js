@@ -33,15 +33,29 @@ setTimeout(() => {
     interface.wrapper.appendChild(interface.eliteBotButtonStop);
 
     interface.toggleButton.classList.add('toggle-button');
+
+    
+
     interface.toggleButton.addEventListener('click', () => {
-        if( interface.toggleState === false ){
-            interface.wrapper.style.top = "-50px";
-            interface.toggleState = true;
-        } else {
-            interface.wrapper.style.top = '0';
-            interface.toggleState = false;
-        }
+
+        chrome.storage.sync.get(['interface_state'], (botStats) =>{
+            if (botStats.interface_state === undefined){
+                chrome.storage.sync.set({'interface_state': false});
+
+            } else if (botStats.interface_state === true){
+                interface.wrapper.style.top = "-50px";
+                chrome.storage.sync.set({'interface_state': false});
+
+            } else if (botStats.interface_state === false){
+                interface.wrapper.style.top = "0";
+                chrome.storage.sync.set({'interface_state': true});
+
+            }
+
+        });
     });
+
+   
 
     document.querySelector('body').appendChild(interface.wrapper);
 
@@ -50,11 +64,19 @@ setTimeout(() => {
         interface.stopBotButton.classList.remove('active');
     });
 
-    chrome.storage.sync.get(['botStatus'], (botStats) => {
+    chrome.storage.sync.get(['botStatus', 'interface_state'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
             interface.startBotButton.classList.add('active');
         } else {
             interface.stopBotButton.classList.add('active');
+        }
+
+        console.log('state: ', botStats.interface_state)
+
+        if (botStats.interface_state === true){
+            interface.wrapper.style.top = "0px";
+        } else if (botStats.interface_state === false){
+            interface.wrapper.style.top = "-50px";
         }
     });
 
