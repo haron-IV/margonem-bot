@@ -26,3 +26,6 @@
       .body-popup .article .section--stats span {
         font-weight: 700;
         margin-left: 5px; }
+  .body-popup a {
+    color: #fff;
+    font-size: 500; }
