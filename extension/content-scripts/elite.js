@@ -1,4 +1,4 @@
-setTimeout(() => {
+setTimeout(() => { //REFACTORIZE
 
     function eliteBot() {
         let interval = null;

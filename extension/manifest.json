@@ -35,9 +35,7 @@
                 "./content-scripts/reloadIfStack.js",
                 "./content-scripts/addBotInterface.js",
                 "./content-scripts/elite.js",
-                "./content-scripts/quest.js",
-                "./content-scripts/fullMap.js",
-                "./content-scripts/friendsList.js",
+                "./content-scripts/hotkeys.js",
                 "./content-scripts/rangePositon.js"
             ],
             "css": ["./content-scripts/content.css"]
