@@ -31,15 +31,17 @@ setTimeout(() => {
     range.y_start = parseInt( document.querySelector('#range').style.top.split(/[. px]/)[0] );
 
     mobs.forEach(el => {
-      const mob_left = parseInt( el.style.left.split(/[. px]/)[0] );
-      const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
+      const mob_position = {
+        left: parseInt( el.style.left.split(/[. px]/)[0] ),
+        top: parseInt( el.style.top.split(/[. px]/)[0] )
+      }
 
       if (
         !el.classList.contains('hidden') &&
-        mob_left > range.x_start && 
-        mob_left < range.x_start + range.width && 
-        mob_top > range.y_start && 
-        mob_top < range.y_start + range.height
+        mob_position.left > range.x_start && 
+        mob_position.left < range.x_start + range.width && 
+        mob_position.top > range.y_start && 
+        mob_position.top < range.y_start + range.height
       ){
         mobs_list.push(el);
         // console.log(mobs_list)
@@ -58,15 +60,17 @@ setTimeout(() => {
     range.y_start = parseInt( document.querySelector('#smallRange').style.top.split(/[. px]/)[0] );
 
     portals.forEach(el => {
-      const mob_left = parseInt( el.style.left.split(/[. px]/)[0] );
-      const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
+      const portal_position = {
+        left: parseInt( el.style.left.split(/[. px]/)[0] ),
+        top: parseInt( el.style.top.split(/[. px]/)[0] )
+      }
 
       if (
         !el.classList.contains('hidden') &&
-        mob_left > range.x_start && 
-        mob_left < range.x_start + range.width && 
-        mob_top > range.y_start && 
-        mob_top < range.y_start + range.height
+        portal_position.left > range.x_start && 
+        portal_position.left < range.x_start + range.width && 
+        portal_position.top > range.y_start && 
+        portal_position.top < range.y_start + range.height
       ){
         console.log('hero is near the portal!');
         isNear = true;
@@ -78,25 +82,27 @@ setTimeout(() => {
 
 
   function goToMob(){
-    let mobs = mobsInRange();
-    let portals = _portals();
+    const data = {
+      mobs: mobsInRange(),
+      portals: _portals()
+    }
 
-    if( mobs[0] ){
-      mobs[0].click(); // go to mob
+    if( data.mobs[0] ){
+
+      data.mobs[0].click(); // go to mob
+
     } else {
       console.log('Here is not mob');
-      portals[0].click();
+      console.log('Go to portal: ', data.portals[0]);
 
-      console.log(portals[0]);
-
+      data.portals[0].click();
       setInterval(() => {
         if ( checkIfHeroIsNearPortal() === true ){
           goToMob();
           console.log('return to mob');
         }  
       }, 500);
-      
-      // document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
+
     }
   }
 
@@ -117,7 +123,7 @@ setTimeout(() => {
       if ( document.querySelector('#autobattleButton') ) {
         document.querySelector('#autobattleButton').click(); 
       } 
-    }, 1000);
+    }, 1200);
   }
 
   function checkFightStatus(){
@@ -139,16 +145,26 @@ setTimeout(() => {
   }
 
   function checkHeroPositionAndAttack(){
-    const battleState = document.querySelector('#battle').style.display;
+    const data = {
+      battleState: document.querySelector('#battle').style.display,
+      hero: getHeroCoord(),
+      mobs:  getMobs(),
+      offset: 50
+    }
+    
+    data.mobs.forEach(el => { 
+      const mob = {
+        x: parseInt( el.style.left.split(/[. px]/)[0].trim() ),
+        y: parseInt( el.style.top.split(/[. px]/)[0].trim() )
+      }
 
-    getMobs().forEach(el => {
       if (
-        getHeroCoord().x + 50 > parseInt( el.style.left.split(/[. px]/)[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split(/[. px]/)[0].trim() )
+        data.hero.x + data.offset > mob.x && data.hero.x - data.offset < mob.x
         &&
-        getHeroCoord().y + 50 > parseInt( el.style.top.split(/[. px]/)[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split(/[. px]/)[0].trim() )
+        data.hero.y + data.offset > mob.y && data.hero.y - data.offset < mob.y
         ) {
         
-        if(battleState === "none" || battleState === "" ){
+        if(data.battleState === "none" || data.battleState === "" ){
           el.click(); // attack
           console.log('attack')
         }
@@ -159,8 +175,6 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
-
-    // checkIfHeroIsStuck();
     
     let letHeroWalk = true;
 
@@ -178,11 +192,11 @@ setTimeout(() => {
         closeFight(); // if fight window is open bot close it.
       }
 
-    }, 1200);
+    }, 1700);
     
     let interval2 = setInterval(() => {
       checkHeroPositionAndAttack();
-    }, 1000);
+    }, 1300);
   }
 
   // \/\/\/\/ start stop bot statement \/\/\/\/
