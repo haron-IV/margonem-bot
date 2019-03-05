@@ -49,7 +49,7 @@ setTimeout(() => {
         mob_top < range.y_start + range.height
       ){
         mobs_list.push(el);
-        console.log(mobs_list)
+        // console.log(mobs_list)
       }
     });
     return mobs_list;
@@ -115,6 +115,17 @@ setTimeout(() => {
     }, 1000);
   }
 
+  function checkFightStatus(){
+    const battleStatus = document.querySelector('#battle').style.display;
+    if ( battleStatus === 'none' || battleStatus === '' ) {
+      console.log('battle window is closed');
+      return false;
+    } else {
+      console.log('Battle window is open');
+      return true;
+    }
+  }
+
   function closeFight(){
     setInterval(() => {
       if ( document.querySelector('#battleclose') ) {
@@ -135,7 +146,7 @@ setTimeout(() => {
         
         if(battleState === "none" || battleState === "" ){
           el.click(); // attack
-          console.log('attack')
+          // console.log('attack')
         }
         
       }
@@ -145,14 +156,19 @@ setTimeout(() => {
   function bot(){
     autoFight();
     closeFight();
-    
-    let interval = setInterval(() => {
-      if (checkIfHeroIsNearMob() == true){
-        goToMob();
-      }
-      
-    }, 5000);
+    let care = true;
 
+    let interval = setInterval(() => {
+      if (checkFightStatus() === false ) {
+        if ( care == true){
+          goToMob();
+          care = false;
+        }
+      }else {
+        care = true;
+      }
+    }, 1000);  
+    
     let interval2 = setInterval(() => {
       
       checkHeroPositionAndAttack();
@@ -160,7 +176,7 @@ setTimeout(() => {
     }, 700);
   }
 
-// \/\/\/\/ start stop bot statement \/\/\/\/
+  // \/\/\/\/ start stop bot statement \/\/\/\/
   chrome.storage.sync.get(['botStatus'], (botStats)=> {
     console.log('bot status: ', botStats.botStatus)
     if( botStats.botStatus == true ){
