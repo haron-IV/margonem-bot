@@ -118,10 +118,10 @@ setTimeout(() => {
   function checkFightStatus(){
     const battleStatus = document.querySelector('#battle').style.display;
     if ( battleStatus === 'none' || battleStatus === '' ) {
-      console.log('battle window is closed');
+      // console.log('battle window is closed');
       return false;
     } else {
-      console.log('Battle window is open');
+      // console.log('Battle window is open');
       return true;
     }
   }
@@ -156,23 +156,25 @@ setTimeout(() => {
   function bot(){
     autoFight();
     closeFight();
-    let care = true;
+    let letHeroWalk = true;
 
     let interval = setInterval(() => {
-      if (checkFightStatus() === false ) {
-        if ( care == true){
+      //if fight window is closed run goToMob();
+      //and if bot closed fight window after fight let the bot goToMob(); again
+      
+      if (checkFightStatus() === false ) { // if fight window is closed
+        if ( letHeroWalk === true){
           goToMob();
-          care = false;
+          letHeroWalk = false;
         }
       }else {
-        care = true;
+        letHeroWalk = true;
       }
+
     }, 1000);  
     
     let interval2 = setInterval(() => {
-      
       checkHeroPositionAndAttack();
-       
     }, 700);
   }
 
