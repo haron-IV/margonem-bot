@@ -4,7 +4,9 @@ setTimeout(() => {
         startBotButton: document.createElement('button'),
         stopBotButton: document.createElement('button'),
         eliteBotButtonStart: document.createElement('button'),
-        eliteBotButtonStop: document.createElement('button')
+        eliteBotButtonStop: document.createElement('button'),
+        toggleButton: document.querySelector('#nick'),
+        toggleState: false
     }
 
     interface.wrapper.id = "bot-interface-wrapper";
@@ -29,6 +31,17 @@ setTimeout(() => {
     interface.eliteBotButtonStop.classList.add('elite-bot-stop', 'bot-button');
     interface.eliteBotButtonStop.innerHTML = 'elite bot stop';
     interface.wrapper.appendChild(interface.eliteBotButtonStop);
+
+    interface.toggleButton.classList.add('toggle-button');
+    interface.toggleButton.addEventListener('click', () => {
+        if( interface.toggleState === false ){
+            interface.wrapper.style.top = "-50px";
+            interface.toggleState = true;
+        } else {
+            interface.wrapper.style.top = '0';
+            interface.toggleState = false;
+        }
+    });
 
     document.querySelector('body').appendChild(interface.wrapper);
 

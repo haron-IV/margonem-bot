@@ -1,3 +1,7 @@
+.bot-interface-wrapper{
+    transition: all ease-in-out 500ms;
+}
+
 .bot-button{
     background-color: black;
     color: gray;
@@ -6,6 +10,10 @@
     z-index: 999;
     padding: 5px 20px;
     transition: all ease-in-out 700ms;
+    cursor: pointer;
+}
+
+.toggle-button{
     cursor: pointer;
 }
 

@@ -1,4 +1,4 @@
-setInterval(() => { // better way
+setInterval(() => {
     const stats = {
         'needExp': document.querySelector('#exp1').getAttribute('tip').split('>')[6],
         'lastLocalization': document.querySelector('#botloc').getAttribute('tip'),
@@ -7,6 +7,6 @@ setInterval(() => { // better way
     };
 
     chrome.storage.sync.set(stats, function (){
-        console.log('exp updated')
+        console.log('stats updated')
     });
 }, 20000);

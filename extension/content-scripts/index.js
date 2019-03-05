@@ -70,7 +70,7 @@ setTimeout(() => {
         portal_position.top > range.y_start && 
         portal_position.top < range.y_start + range.height
       ){
-        console.log('hero is near the portal!');
+        // console.log('hero is near the portal!');
         isNear = true;
       }
     });
