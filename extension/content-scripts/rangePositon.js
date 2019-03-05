@@ -1,4 +1,4 @@
-function heroPositon(){ //
+function heroPositon(){
     const hero = document.querySelector('.mmp-hero');
     
     const coord = {
@@ -61,8 +61,7 @@ function updateRangePosition(){
 
 // small range for checking if hero is near clicked mob:
 
-function addSmallRangeToMap(){ //
-    const map = mini_map();
+function addSmallRangeToMap(){
     const mapEl = document.querySelector('.mmpMap');
     const hero = heroPositon();
 
@@ -79,7 +78,6 @@ function addSmallRangeToMap(){ //
     mapEl.appendChild(rangeItem);
 }
 
-
 function updateSmallRangePosition(){
     const hero = heroPositon();
     const range = _range('#smallRange');
@@ -91,17 +89,13 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.top = `${range.y}px`;
 }
 
-//
-
 setTimeout(() => {
     addRangeToMap();
     addSmallRangeToMap();
 
     setInterval(() => {
         updateRangePosition();
-    }, 500);
-
-    setInterval(() => {
         updateSmallRangePosition();
-    }, 100);
+    }, 400);
+
 }, 2500)

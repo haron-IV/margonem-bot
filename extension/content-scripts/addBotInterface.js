@@ -1,50 +1,47 @@
 setTimeout(() => {
+    const interface = {
+        wrapper: document.createElement('div'),
+        startBotButton: document.createElement('button'),
+        stopBotButton: document.createElement('button'),
+        eliteBotButtonStart: document.createElement('button'),
+        eliteBotButtonStop: document.createElement('button')
+    }
 
-    const wrapper = document.createElement('div');
-    wrapper.id = "bot-interface-wrapper";
-    wrapper.classList.add('bot-interface-wrapper');
-    document.querySelector('body').appendChild(wrapper);
-    const $wrapper = document.querySelector('#bot-interface-wrapper');
+    interface.wrapper.id = "bot-interface-wrapper";
+    interface.wrapper.classList.add('bot-interface-wrapper');
 
-    const startBotButton = document.createElement('button');
-    startBotButton.id = 'start-bot';
-    startBotButton.classList.add('start-bot', 'bot-button');
-    startBotButton.innerHTML = 'start';
-    $wrapper.appendChild(startBotButton);
+    interface.startBotButton.id = 'start-bot';
+    interface.startBotButton.classList.add('start-bot', 'bot-button');
+    interface.startBotButton.innerHTML = 'start';
+    interface.wrapper.appendChild(interface.startBotButton);
 
-    const stopBotButton = document.createElement('button');
-    stopBotButton.id = 'stop-bot';
-    stopBotButton.classList.add('stop-bot', 'bot-button');
-    stopBotButton.innerHTML = 'stop';
-    $wrapper.appendChild(stopBotButton)
+    interface.stopBotButton.id = 'stop-bot';
+    interface.stopBotButton.classList.add('stop-bot', 'bot-button');
+    interface.stopBotButton.innerHTML = 'stop';
+    interface.wrapper.appendChild(interface.stopBotButton)
 
-    const eliteBotButtonStart = document.createElement('button');
-    eliteBotButtonStart.id = 'elite-bot-start';
-    eliteBotButtonStart.classList.add('elite-bot-start', 'bot-button');
-    eliteBotButtonStart.innerHTML = 'elite bot start';
-    $wrapper.appendChild(eliteBotButtonStart);
+    interface.eliteBotButtonStart.id = 'elite-bot-start';
+    interface.eliteBotButtonStart.classList.add('elite-bot-start', 'bot-button');
+    interface.eliteBotButtonStart.innerHTML = 'elite bot start';
+    interface.wrapper.appendChild(interface.eliteBotButtonStart);
 
-    const eliteBotButtonStop = document.createElement('button');
-    eliteBotButtonStop.id = 'elite-bot-stop';
-    eliteBotButtonStop.classList.add('elite-bot-stop', 'bot-button');
-    eliteBotButtonStop.innerHTML = 'elite bot stop';
-    $wrapper.appendChild(eliteBotButtonStop);
+    interface.eliteBotButtonStop.id = 'elite-bot-stop';
+    interface.eliteBotButtonStop.classList.add('elite-bot-stop', 'bot-button');
+    interface.eliteBotButtonStop.innerHTML = 'elite bot stop';
+    interface.wrapper.appendChild(interface.eliteBotButtonStop);
 
+    document.querySelector('body').appendChild(interface.wrapper);
 
-    const $buttonstart = document.querySelector('#start-bot');
-    const $buttonStop = document.querySelector('#stop-bot');
-
-
-    $buttonstart.addEventListener('click', () => {
-        $buttonstart.classList.add('active');
-        $buttonStop.classList.remove('active');
+    interface.startBotButton.addEventListener('click', () => {
+        interface.startBotButton.classList.add('active');
+        interface.stopBotButton.classList.remove('active');
     });
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
-            startBotButton.classList.add('active');
+            interface.startBotButton.classList.add('active');
         } else {
-            stopBotButton.classList.add('active');
+            interface.stopBotButton.classList.add('active');
         }
     });
 
