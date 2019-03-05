@@ -12,6 +12,30 @@ setTimeout(() => {
     return coord;
   }
 
+  let stuckCounter = 0;
+  function checkIfHeroIsStuck() {
+    const hero = heroPositon();
+    localStorage.setItem('hero_x', hero.x);
+    localStorage.setItem('hero_y', hero.y);
+    let isStuck = false;
+    setTimeout(() => {
+      if ( localStorage.getItem('hero_x') == hero.x && localStorage.getItem('hero_y') == hero.y ) {
+        isStuck = true;
+        stuckCounter++;
+      } 
+
+      if (stuckCounter >= _mobs().length ) {
+        stuckCounter = 0;
+        console.log('reset sutck counter');
+      }
+
+      if (isStuck === true){
+        console.log('hero is stuck. Go to other mob');
+        _mobs()[stuckCounter].click();
+      }
+    }, 5000);
+  }
+
   function _range(el) {
     const rangeEl = document.querySelector(el);
     const range = {
@@ -97,6 +121,7 @@ setTimeout(() => {
     } else {
       console.log('Here is not mob');
       portals[0].click();
+
       console.log(portals[0])
 
       setInterval(() => {
@@ -176,6 +201,7 @@ setTimeout(() => {
       //and if bot closed fight window after fight let the bot goToMob(); again
 
       checkIfHeroIsNearPortal();
+      checkIfHeroIsStuck();
       
       if (checkFightStatus() === false ) { // if fight window is closed
         if ( letHeroWalk === true){
