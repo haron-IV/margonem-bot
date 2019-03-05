@@ -29,6 +29,10 @@ setTimeout(() => {
     return document.querySelectorAll('.mmp-mob');
   }
 
+  function _portals(){
+    return document.querySelectorAll('.mmp-gw');
+  }
+
   function mobsInRange(){
     const range = _range('#range');
     const mobs = _mobs();
@@ -55,16 +59,16 @@ setTimeout(() => {
     return mobs_list;
   }
 
-  function checkIfHeroIsNearMob(){
+  function checkIfHeroIsNearPortal(){
     const range = _range('#smallRange');
-    const mobs = _mobs();
+    const portals = _portals();
     let isNear = false;
 
 
     range.x_start = parseInt( document.querySelector('#smallRange').style.left.split(/[. px]/)[0] );
     range.y_start = parseInt( document.querySelector('#smallRange').style.top.split(/[. px]/)[0] );
 
-    mobs.forEach(el => {
+    portals.forEach(el => {
       const mob_left = parseInt( el.style.left.split(/[. px]/)[0] );
       const mob_top = parseInt( el.style.top.split(/[. px]/)[0] );
 
@@ -75,7 +79,7 @@ setTimeout(() => {
         mob_top > range.y_start && 
         mob_top < range.y_start + range.height
       ){
-        console.log('hero is near the mob!');
+        console.log('hero is near the portal!');
         isNear = true;
       }
     });
@@ -86,11 +90,22 @@ setTimeout(() => {
 
   function goToMob(){
     let mobs = mobsInRange();
+    let portals = _portals();
 
     if( mobs[0] ){
       mobs[0].click(); // go to mob
     } else {
       console.log('Here is not mob');
+      portals[0].click();
+      console.log(portals[0])
+
+      setInterval(() => {
+        if ( checkIfHeroIsNearPortal() === true ){
+          goToMob();
+          console.log('return to mob');
+        }  
+      }, 200);
+      
       // document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
     }
   }
@@ -159,6 +174,8 @@ setTimeout(() => {
     let interval = setInterval(() => {
       //if fight window is closed run goToMob();
       //and if bot closed fight window after fight let the bot goToMob(); again
+
+      checkIfHeroIsNearPortal();
       
       if (checkFightStatus() === false ) { // if fight window is closed
         if ( letHeroWalk === true){

@@ -69,8 +69,8 @@ function addSmallRangeToMap(){ //
     const rangeItem = document.createElement('div');
     rangeItem.id="smallRange";
     rangeItem.style.position = "absolute";
-    rangeItem.style.width = `${hero.width + hero.width*2}px`; // range width
-    rangeItem.style.height = `${hero.width+ hero.width*2}px`; // range width
+    rangeItem.style.width = `${hero.width + hero.width*6}px`; // range width
+    rangeItem.style.height = `${hero.width+ hero.width*6}px`; // range width
     rangeItem.style.left = `${0}px`;
     rangeItem.style.top = `${0}px`;
     rangeItem.style.backgroundColor = "rgba(255, 0, 0, .5)";
@@ -103,5 +103,5 @@ setTimeout(() => {
 
     setInterval(() => {
         updateSmallRangePosition();
-    }, 200);
-}, 2500);
+    }, 100);
+}, 2500)
