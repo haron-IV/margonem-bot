@@ -127,11 +127,10 @@ setTimeout(() => {
   }
 
   function closeFight(){
-    setInterval(() => {
-      if ( document.querySelector('#battleclose') ) {
-        document.querySelector('#battleclose').click();
-      }
-    }, 2000);
+    if ( document.querySelector('#battleclose') ) {
+      document.querySelector('#battleclose').click();
+      console.log('close fight window')
+    }
   }
 
   function checkHeroPositionAndAttack(){
@@ -146,7 +145,7 @@ setTimeout(() => {
         
         if(battleState === "none" || battleState === "" ){
           el.click(); // attack
-          // console.log('attack')
+          console.log('attack')
         }
         
       }
@@ -155,7 +154,6 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
-    closeFight();
     let letHeroWalk = true;
 
     let interval = setInterval(() => {
@@ -167,8 +165,9 @@ setTimeout(() => {
           goToMob();
           letHeroWalk = false;
         }
-      }else {
+      } else {
         letHeroWalk = true;
+        closeFight(); // if fight window is open bot close it.
       }
 
     }, 1000);  
