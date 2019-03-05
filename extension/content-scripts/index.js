@@ -55,9 +55,7 @@ setTimeout(() => {
   }
 
   function goToMob(){
-    let mobs = [];
-
-    mobs = mobsInRange();
+    let mobs = mobsInRange();
 
     if( mobs[0] ){
       mobs[0].click(); // go to mob
@@ -102,7 +100,12 @@ setTimeout(() => {
         &&
         getHeroCoord().y + 50 > parseInt( el.style.top.split(/[. px]/)[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split(/[. px]/)[0].trim() )
         ) {
-        el.click(); // attack
+        
+        if(document.querySelector('#battle').style.display === "none" || document.querySelector('#battle').style.display === ""  ){
+          console.log('attack')
+          el.click(); // attack
+        }
+        
       }
     });
   }
@@ -117,7 +120,7 @@ setTimeout(() => {
 
     let interval2 = setInterval(() => {
       checkHeroPositionAndAttack();
-    }, 2000);
+    }, 500);
   }
 
 // \/\/\/\/ start stop bot statement \/\/\/\/

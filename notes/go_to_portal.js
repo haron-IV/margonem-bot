@@ -63,10 +63,15 @@ function addSquareAfterPortal(){
     square.id = "squarePortal";
     square.style.width = portal.width + 'px';
     square.style.height = portal.height + 'px';
-    square.style.backgroundColor = "rgba(150, 107, 223, .9)";
+    square.style.pointerEvents = "none";
+    square.style.backgroundColor = "rgba(150, 107, 223, 1)";
     square.style.position = "absolute";
 
     map.appendChild(square);
 }
 
 addSquareAfterPortal();
+
+setTimeout(() => {
+    document.querySelector('#squarePortal').click()
+}, 2000);
