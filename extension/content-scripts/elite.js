@@ -1,9 +1,8 @@
 setTimeout(() => { //REFACTORIZE
 
     function eliteBot() {
-        let interval = null;
-
-        interval = setInterval(() => {
+        
+        let interval = setInterval(() => {
             const npcs = document.querySelectorAll('.npc');
 
             npcs.forEach(el => {
@@ -14,17 +13,19 @@ setTimeout(() => { //REFACTORIZE
                     autoFight();
                     closeFight();
                     updateEliteStats();
-                    reload(7000);
+                    reload(8000);
                 }
             });
-                
+
         }, 500);
     }
 
     function autoFight(){
         setInterval(() => {
-        document.querySelector('#autobattleButton').click(); 
-        }, 3000);
+            if (document.querySelector('#autobattleButton')){
+                document.querySelector('#autobattleButton').click(); 
+            }
+        }, 2000);
     }
 
     function closeFight(){
@@ -32,10 +33,10 @@ setTimeout(() => { //REFACTORIZE
             if ( document.querySelector('#battleclose') ) {
                 document.querySelector('#battleclose').click();
             }
-        }, 5500);
+        }, 3500);
     }
 
-    function updateEliteStats(){
+    function updateEliteStats(){ // here is if state which check thtat fight window was opened
         chrome.storage.sync.get(['killedElites'], (botStats) => {
 
             if(botStats.killedElites === undefined){
