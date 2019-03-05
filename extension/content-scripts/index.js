@@ -77,6 +77,18 @@ setTimeout(() => {
     return	hero;
   }
 
+  // function checkIfHeroWalk(){
+  //   let hero;
+
+  //   setInterval(() => {
+  //     hero = getHeroCoord();
+
+  //     if (hero.x ) {}
+  //   }, 500);
+
+
+  // }
+
   function autoFight(){
     setInterval(() => {
       if ( document.querySelector('#autobattleButton') ) {
@@ -94,6 +106,8 @@ setTimeout(() => {
   }
 
   function checkHeroPositionAndAttack(){
+    const battleState = document.querySelector('#battle').style.display;
+
     getMobs().forEach(el => {
       if (
         getHeroCoord().x + 50 > parseInt( el.style.left.split(/[. px]/)[0].trim() ) && getHeroCoord().x - 50 < parseInt( el.style.left.split(/[. px]/)[0].trim() )
@@ -101,9 +115,9 @@ setTimeout(() => {
         getHeroCoord().y + 50 > parseInt( el.style.top.split(/[. px]/)[0].trim() ) && getHeroCoord().y - 50 < parseInt( el.style.top.split(/[. px]/)[0].trim() )
         ) {
         
-        if(document.querySelector('#battle').style.display === "none" || document.querySelector('#battle').style.display === ""  ){
-          console.log('attack')
+        if(battleState === "none" || battleState === "" ){
           el.click(); // attack
+          console.log('attack')
         }
         
       }
@@ -116,11 +130,11 @@ setTimeout(() => {
     
     let interval = setInterval(() => {
       goToMob();
-    }, 5000);
+    }, 2000);
 
     let interval2 = setInterval(() => {
       checkHeroPositionAndAttack();
-    }, 500);
+    }, 700);
   }
 
 // \/\/\/\/ start stop bot statement \/\/\/\/
