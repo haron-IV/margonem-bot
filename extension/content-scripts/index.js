@@ -1,50 +1,5 @@
 setTimeout(() => {
   // document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
-  function heroPositon(){ //
-    const hero = document.querySelector('.mmp-hero');
-    
-    const coord = {
-      x: parseInt( hero.style.left.split(/[. px]/)[0] ), // hero left on minimap
-      y: parseInt( hero.style.top.split(/[. px]/)[0] ),
-      width: parseInt( hero.style.width.split(/[. px]/)[0] ),
-      height: parseInt( hero.style.height.split(/[. px]/)[0] )
-    }
-    return coord;
-  }
-
-  // function heroLastPosition(){
-  //   setInterval(() => {
-  //     const hero = heroPositon();
-  //     localStorage.setItem('hero_x', hero.x);
-  //     localStorage.setItem('hero_y', hero.y);  
-  //   }, 10000);
-  // }
-  // heroLastPosition();
-
-  // let stuckCounter = 0;
-  // function checkIfHeroIsStuck() {
-  //   let isStuck = false;
-
-  //   setInterval(() => {
-  //     const hero = heroPositon();
-
-  //     if ( localStorage.getItem('hero_x') == hero.x && localStorage.getItem('hero_y') == hero.y ) {
-  //       isStuck = true;
-  //       stuckCounter++;
-  //     } 
-
-  //     if (stuckCounter >= _mobs().length ) {
-  //       stuckCounter = 0;
-  //       console.log('reset sutck counter');
-  //     }
-
-  //     if (isStuck === true){
-  //       console.log('hero is stuck. Go to other mob');
-  //       _mobs()[stuckCounter].click();
-  //       isStuck = false;
-  //     }
-  //   }, 1500);
-  // }
 
   function _range(el) {
     const rangeEl = document.querySelector(el);
@@ -132,14 +87,14 @@ setTimeout(() => {
       console.log('Here is not mob');
       portals[0].click();
 
-      console.log(portals[0])
+      console.log(portals[0]);
 
       setInterval(() => {
         if ( checkIfHeroIsNearPortal() === true ){
           goToMob();
           console.log('return to mob');
         }  
-      }, 300);
+      }, 500);
       
       // document.querySelectorAll('.mmp-gw')[document.querySelectorAll('.mmp-gw').length-1].click(); // portal for next map
     }
@@ -213,8 +168,6 @@ setTimeout(() => {
       //if fight window is closed run goToMob();
       //and if bot closed fight window after fight let the bot goToMob(); again
 
-      checkIfHeroIsNearPortal();
-
       if (checkFightStatus() === false ) { // if fight window is closed
         if ( letHeroWalk === true){
           goToMob();
@@ -225,11 +178,11 @@ setTimeout(() => {
         closeFight(); // if fight window is open bot close it.
       }
 
-    }, 1000);
+    }, 1200);
     
     let interval2 = setInterval(() => {
       checkHeroPositionAndAttack();
-    }, 700);
+    }, 1000);
   }
 
   // \/\/\/\/ start stop bot statement \/\/\/\/
