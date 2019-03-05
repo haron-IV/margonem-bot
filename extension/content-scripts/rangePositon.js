@@ -18,7 +18,7 @@ function mini_map(){
     return map;
 }
 
-function addRangeToMap(){ //
+function addRangeToMap(){
     const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
@@ -26,7 +26,7 @@ function addRangeToMap(){ //
     rangeItem.id="range";
     rangeItem.style.position = "absolute";
     rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
-    rangeItem.style.height = `${(map.heigh / 5 )* 2}px`; //range height
+    rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
     rangeItem.style.left = `${0}px`;
     rangeItem.style.top = `${0}px`;
     rangeItem.style.backgroundColor = "rgba(65, 150, 235, .5)";

@@ -1,5 +1,4 @@
 setTimeout(() => {
-  // document.querySelectorAll('.mmp-gw'); przejscia. 0 element powinien byc wyjsciem (przejscia z minimapy)
 
   function _range(el) {
     const rangeEl = document.querySelector(el);
@@ -55,7 +54,6 @@ setTimeout(() => {
     const portals = _portals();
     let isNear = false;
 
-
     range.x_start = parseInt( document.querySelector('#smallRange').style.left.split(/[. px]/)[0] );
     range.y_start = parseInt( document.querySelector('#smallRange').style.top.split(/[. px]/)[0] );
 
@@ -79,7 +77,6 @@ setTimeout(() => {
 
     return isNear;
   }
-
 
   function goToMob(){
     const data = {
@@ -199,7 +196,7 @@ setTimeout(() => {
     }, 1300);
   }
 
-  // \/\/\/\/ start stop bot statement \/\/\/\/
+  // \/\/\/\/ start stop bot statement \/\/\/\/ this function should be refactorized in future
   chrome.storage.sync.get(['botStatus'], (botStats)=> {
     console.log('bot status: ', botStats.botStatus)
     if( botStats.botStatus == true ){

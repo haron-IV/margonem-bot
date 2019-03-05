@@ -1,4 +1,4 @@
-setInterval(() => {
+setInterval(() => { // better way
     const stats = {
         'needExp': document.querySelector('#exp1').getAttribute('tip').split('>')[6],
         'lastLocalization': document.querySelector('#botloc').getAttribute('tip'),
