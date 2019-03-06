@@ -3,6 +3,8 @@ const $actual_localization = document.querySelector('#actual-localization');
 const $actuallocalizationCoord = document.querySelector('#actual-localization-coord');
 const $gold = document.querySelector('#gold');
 const $killedElites = document.querySelector('#killed-elites');
+const $search_npc_inp = document.querySelector('#npc-search-inp');
+const $search_npc_btn = document.querySelector('#npc-search-btn');
 
 chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord', 'gold', 'killedElites'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
     $need_exp.innerHTML = botStats.needExp;
@@ -10,4 +12,10 @@ chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord',
     $actuallocalizationCoord.innerHTML = botStats.lastLocalizationCoord;
     $gold.innerHTML = botStats.gold;
     $killedElites.innerHTML = botStats.killedElites;
+});
+
+$search_npc_btn.addEventListener('click', ()=>{
+    const npc_name = $search_npc_inp.value;
+    const link = `http://emargo.pl/npc/szukaj?q=${npc_name}`;
+    window.open(link, '_blank');
 });
