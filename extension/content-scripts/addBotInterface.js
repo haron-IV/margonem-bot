@@ -49,13 +49,10 @@ setTimeout(() => {
             } else if (botStats.interface_state === false){
                 interface.wrapper.style.top = "0";
                 chrome.storage.sync.set({'interface_state': true});
-
             }
 
         });
     });
-
-   
 
     document.querySelector('body').appendChild(interface.wrapper);
 
