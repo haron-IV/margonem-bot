@@ -34,12 +34,24 @@ function checkCoordinates(){
     });
 }
 
+function checkBotStatus() {
+    chrome.storage.sync.get('botStatus', (bot) => {
+        if (bot.botStats === true){
+            return bot.botStats;
+        }
+    });
+}
+
+setInterval(() => {
+    checkBotStatus();
+}, 2000);
+
 setTimeout(() => {
 
     updateCoordinates();
     setInterval(() => {
         checkCoordinates();
-        if (isDead() === true){
+        if (isDead() === true && checkBotStatus() === true){
             document.querySelector('#logoutbut').click();
         }
     }, 45000);
