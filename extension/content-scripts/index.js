@@ -49,14 +49,11 @@ setTimeout(() => {
     return mobs_list;
   }
 
-
-
-
-
-  function getNearestMob () {
+  function getNearestMob() {
     const mobs_in_range = mobsInRange();
     const hero_coord = getMapHeroCoord();
     let distances = [];
+    let nearest;
 
     mobs_in_range.forEach(el => {
       const distance_x = Math.abs(hero_coord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
@@ -75,19 +72,12 @@ setTimeout(() => {
       const distance = Math.sqrt( (distance_x * distance_x) + (distance_y * distance_y) );
 
       if (distance === min_distance){ // check our nearest mob
-        console.log(el); 
+        console.log('nearest mob: ', el);
+        nearest = el;
       } 
     })
-
-
+    return nearest;
   }
-
-  setTimeout(() => {
-    getNearestMob();  
-  }, 2000);
-  
-  
-
 
   function checkIfHeroIsNearPortal(){
     const range = _range('#smallRange');
@@ -149,10 +139,13 @@ setTimeout(() => {
       mobs: mobsInRange()
     }
 
-    if( data.mobs[0] ){
+    const nearest = getNearestMob();
 
-      data.mobs[which].click(); // go to mob
-      console.log(data.mobs[which])
+    if( data.mobs[0] ){
+      nearest.click();
+
+      // data.mobs[which].click(); // go to mob
+      // console.log(data.mobs[which])
     } else {
       console.log('Here is not mob');
       goToPortal();
