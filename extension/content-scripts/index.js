@@ -89,9 +89,16 @@ setTimeout(() => {
 
     let interval = setInterval(() => {
       if ( checkIfHeroIsNearPortal() === true ){
-        goToMob(0);
+        if ( mobsInRange()[0] ){
+          goToMob(0);
+          console.log('return to mob');
+        } else {
+          goToPortal();
+          console.log('no more mob near you, go to next portal')
+        }
+        
         clearInterval(interval);
-        console.log('return to mob');
+        
       }
     }, 100);
     go_to_portal_counter++;
@@ -106,7 +113,6 @@ setTimeout(() => {
 
       data.mobs[which].click(); // go to mob
       console.log(data.mobs[which])
-
     } else {
       console.log('Here is not mob');
       goToPortal();
