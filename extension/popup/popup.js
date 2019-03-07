@@ -53,6 +53,7 @@ $search_mob_btn.addEventListener('click', () => {
 });
 search_on_enter($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
 
+// to refactorize
 $search_player_btn.addEventListener('click', () => {
     const searching_element = $search_player_inp.value;
     const link = `https://www.margonem.pl/?task=forum&show=found&kw=${searching_element}&playerinfo=Szukaj+gracza&cat=2`;

@@ -49,6 +49,32 @@ setTimeout(() => {
     return mobs_list;
   }
 
+  function test () {
+    setTimeout(() => {
+      const mobsinrange = mobsInRange();
+      const heroCoord = getMapHeroCoord();
+
+      let mobs_distance = [];
+  
+      mobsinrange.forEach(el => {
+        mobs_distance.push( Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] )) );
+      });
+
+      const min = Math.min(...mobs_distance);
+
+      mobsinrange.forEach(el => {
+        if (Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] )) === min){
+          console.log(el)
+        }
+      })
+
+    }, 2000);
+  }
+  
+  test();
+  
+
+
   function checkIfHeroIsNearPortal(){
     const range = _range('#smallRange');
     const portals = _portals();
@@ -127,6 +153,15 @@ setTimeout(() => {
     const hero = {
       x: parseInt( document.querySelector('#hero').style.left.split('px')[0].trim() ),
       y: parseInt( document.querySelector('#hero').style.top.split('px')[0].trim() )
+    }
+    return	hero;
+  }
+
+
+  function getMapHeroCoord(){
+    const hero = {
+      x: parseInt( document.querySelector('.mmp-hero').style.left.split('px')[0].trim() ),
+      y: parseInt( document.querySelector('.mmp-hero').style.top.split('px')[0].trim() )
     }
     return	hero;
   }
