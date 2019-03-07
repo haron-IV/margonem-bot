@@ -3,12 +3,12 @@ setTimeout(() => {
   function _range(el) {
     const rangeEl = document.querySelector(el);
     const range = {
-      x: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
-      y: parseInt( rangeEl.style.top.split(/[. px]/)[0] ),
+      x: parseInt( rangeEl.style.transform.replace(/[translate px ()]/g, '').split(',')[0] ),
+      y: parseInt( rangeEl.style.transform.replace(/[translate px ()]/g, '').split(',')[1] ),
       width: parseInt( rangeEl.style.width.split(/[. px]/)[0] ),
       height: parseInt( rangeEl.style.height.split(/[. px]/)[0] ),
-      x_start: parseInt( rangeEl.style.left.split(/[. px]/)[0] ),
-      y_start: parseInt( rangeEl.style.top.split(/[. px]/)[0] )
+      x_start: parseInt( rangeEl.style.transform.replace(/[translate px ()]/g, '').split(',')[0] ),
+      y_start: parseInt( rangeEl.style.transform.replace(/[translate px ()]/g, '').split(',')[1] )
     }
     return range;
   }
@@ -26,8 +26,8 @@ setTimeout(() => {
     const mobs = _mobs();
     let mobs_list = [];
 
-    range.x_start = parseInt( document.querySelector('#range').style.left.split(/[. px]/)[0] );
-    range.y_start = parseInt( document.querySelector('#range').style.top.split(/[. px]/)[0] );
+    range.x_start = parseInt( document.querySelector('#range').style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
+    range.y_start = parseInt( document.querySelector('#range').style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
 
     mobs.forEach(el => {
       const mob_position = {
@@ -54,8 +54,8 @@ setTimeout(() => {
     const portals = _portals();
     let isNear = false;
 
-    range.x_start = parseInt( document.querySelector('#smallRange').style.left.split(/[. px]/)[0] );
-    range.y_start = parseInt( document.querySelector('#smallRange').style.top.split(/[. px]/)[0] );
+    range.x_start = parseInt( document.querySelector('#smallRange').style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
+    range.y_start = parseInt( document.querySelector('#smallRange').style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
 
     portals.forEach(el => {
       const portal_position = {
@@ -180,11 +180,6 @@ setTimeout(() => {
     });
   }
 
-  function checkHeroIsStuck(){
-    
-  }
-
-  let hero_is_stucked = false;
   function bot(){
     autoFight();
     
