@@ -7,6 +7,9 @@ const $search_npc_inp = document.querySelector('#npc-search-inp');
 const $search_npc_btn = document.querySelector('#npc-search-btn');
 const $search_quest_btn = document.querySelector('#quest-search-btn');
 const $search_quest_inp = document.querySelector('#quest-search-inp');
+const $search_mob_inp = document.querySelector('#mob-search-inp');
+const $search_mob_btn = document.querySelector('#mob-search-btn');
+
 
 chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord', 'gold', 'killedElites'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
     $need_exp.innerHTML = botStats.needExp;
@@ -16,15 +19,35 @@ chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord',
     $killedElites.innerHTML = botStats.killedElites;
 });
 
-$search_npc_btn.addEventListener('click', ()=>{
-    const npc_name = $search_npc_inp.value;
-    const link = `http://emargo.pl/npc/szukaj?q=${npc_name}`;
+function search(input, searcher_link) {
+    const searching_element = input.value;
+    const link = `${searcher_link}${searching_element}`;
+
     window.open(link, '_blank');
+}
+
+function search_on_enter(input, searcher_link){
+    input.addEventListener('keydown', (e) => {
+        if ( e.key === "Enter" ){
+            const searching_element = input.value;
+            const link = `${searcher_link}${searching_element}`;
+            window.open(link, '_blank');
+        }
+    });
+}
+
+$search_npc_btn.addEventListener('click', ()=>{
+    search($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=', );
 });
+search_on_enter($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=');
 
 $search_quest_btn.addEventListener('click', () => {
-    const quest_name = $search_quest_inp.value;
-    const link = `http://emargo.pl/questy/szukaj?q=${quest_name}`;
-    window.open(link, '_blank');
+    search($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
 });
+search_on_enter($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
+
+$search_mob_btn.addEventListener('click', () => {
+    search($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
+});
+search_on_enter($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
 
