@@ -53,39 +53,39 @@ setTimeout(() => {
 
 
 
-  function test () {
-    setTimeout(() => {
-      const mobsinrange = mobsInRange();
-      const heroCoord = getMapHeroCoord();
+  function getNearestMob () {
+    const mobs_in_range = mobsInRange();
+    const hero_coord = getMapHeroCoord();
+    let distances = [];
 
-      let distance = [];
-  
-      mobsinrange.forEach(el => {
-        const dis_x = Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
-        const dis_y = Math.abs(heroCoord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
+    mobs_in_range.forEach(el => {
+      const distance_x = Math.abs(hero_coord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
+      const distance_y = Math.abs(hero_coord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
 
-        const dis = (dis_x * dis_x) + (dis_y * dis_y);
-        distance.push(Math.sqrt(dis));
-      });
+      const distance = (distance_x * distance_x) + (distance_y * distance_y); // Here is pitagoras (a*a) + (b*b) = c*c / we need c value - it's our distance from mob to hero
+      distances.push( Math.sqrt(distance) );
+    });
 
-      const min_distance = Math.min(...distance);
-      console.log(min_distance)
+    const min_distance = Math.min(...distances); // get minimal distance from mob to hero
 
-      mobsinrange.forEach(el => {
-        const dis_x = Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
-        const dis_y = Math.abs(heroCoord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
+    mobs_in_range.forEach(el => {
+      const distance_x = Math.abs(hero_coord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
+      const distance_y = Math.abs(hero_coord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
 
-        const dis = (dis_x * dis_x) + (dis_y * dis_y);
+      const distance = Math.sqrt( (distance_x * distance_x) + (distance_y * distance_y) );
 
-        if (Math.sqrt(dis) === min_distance){
-          console.log(el)
-        } 
-      })
+      if (distance === min_distance){ // check our nearest mob
+        console.log(el); 
+      } 
+    })
 
-    }, 2000);
+
   }
+
+  setTimeout(() => {
+    getNearestMob();  
+  }, 2000);
   
-  test();
   
 
 
