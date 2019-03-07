@@ -24,14 +24,9 @@ function addRangeToMap(){
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
-    rangeItem.style.position = "absolute";
+    rangeItem.classList.add('big-range', 'range');
     rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
     rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
-    rangeItem.style.left = `${0}px`;
-    rangeItem.style.top = `${0}px`;
-    rangeItem.style.backgroundColor = "rgba(65, 150, 235, .5)";
-    rangeItem.style.border = "1px solid rgba(65, 150, 235, 1)";
-    rangeItem.style.pointerEvents = "none";
     mapEl.appendChild(rangeItem);
 }
 
@@ -55,8 +50,7 @@ function updateRangePosition(){
     range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) );
     range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) );
 
-    document.querySelector('#range').style.left = `${range.x}px`;
-    document.querySelector('#range').style.top = `${range.y}px`;
+    document.querySelector('#range').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
 // small range for checking if hero is near clicked mob:
@@ -67,14 +61,9 @@ function addSmallRangeToMap(){
 
     const rangeItem = document.createElement('div');
     rangeItem.id="smallRange";
-    rangeItem.style.position = "absolute";
+    rangeItem.classList.add('small-range', 'range');
     rangeItem.style.width = `${hero.width + hero.width*3}px`; // range width
     rangeItem.style.height = `${hero.width+ hero.width*3}px`; // range width
-    rangeItem.style.left = `${0}px`;
-    rangeItem.style.top = `${0}px`;
-    rangeItem.style.backgroundColor = "rgba(255, 0, 0, .5)";
-    rangeItem.style.border = "1px solid rgba(255, 0, 0, 1)";
-    rangeItem.style.pointerEvents = "none";
     mapEl.appendChild(rangeItem);
 }
 
@@ -85,8 +74,7 @@ function updateSmallRangePosition(){
     range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) );
     range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) );
 
-    document.querySelector('#smallRange').style.left = `${range.x}px`;
-    document.querySelector('#smallRange').style.top = `${range.y}px`;
+    document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
 setTimeout(() => {
@@ -96,6 +84,6 @@ setTimeout(() => {
     setInterval(() => {
         updateRangePosition();
         updateSmallRangePosition();
-    }, 400);
+    }, 250);
 
 }, 2500)

@@ -29,7 +29,7 @@ function checkCoordinates(){
     chrome.storage.sync.get(['botStatus'], (botStats) => {
         if( botStats.botStatus === true && coordinates.old === coordinates.active ){
             console.log('Reload beacuse your hero is stuck.')
-            // window.location.reload();
+            window.location.reload();
         }
     });
 }
