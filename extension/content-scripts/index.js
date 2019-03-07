@@ -49,23 +49,37 @@ setTimeout(() => {
     return mobs_list;
   }
 
+
+
+
+
   function test () {
     setTimeout(() => {
       const mobsinrange = mobsInRange();
       const heroCoord = getMapHeroCoord();
 
-      let mobs_distance = [];
+      let distance = [];
   
       mobsinrange.forEach(el => {
-        mobs_distance.push( Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] )) );
+        const dis_x = Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
+        const dis_y = Math.abs(heroCoord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
+
+        const dis = (dis_x * dis_x) + (dis_y * dis_y);
+        distance.push(Math.sqrt(dis));
       });
 
-      const min = Math.min(...mobs_distance);
+      const min_distance = Math.min(...distance);
+      console.log(min_distance)
 
       mobsinrange.forEach(el => {
-        if (Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] )) === min){
+        const dis_x = Math.abs(heroCoord.x - parseInt( el.style.left.split(/[. px]/)[0] ));
+        const dis_y = Math.abs(heroCoord.y - parseInt( el.style.top.split(/[. px]/)[0] ));
+
+        const dis = (dis_x * dis_x) + (dis_y * dis_y);
+
+        if (Math.sqrt(dis) === min_distance){
           console.log(el)
-        }
+        } 
       })
 
     }, 2000);
