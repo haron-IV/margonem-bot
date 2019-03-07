@@ -78,28 +78,38 @@ setTimeout(() => {
     return isNear;
   }
 
-  function goToMob(){
+  let go_to_portal_counter = 0;
+  function goToPortal(){
     const data = {
-      mobs: mobsInRange(),
       portals: _portals()
+    }
+    
+    data.portals[go_to_portal_counter].click();
+    console.log('Go to portal: ', data.portals[go_to_portal_counter]);
+
+    let interval = setInterval(() => {
+      if ( checkIfHeroIsNearPortal() === true ){
+        goToMob(0);
+        clearInterval(interval);
+        console.log('return to mob');
+      }
+    }, 100);
+    go_to_portal_counter++;
+  }
+
+  function goToMob(which){
+    const data = {
+      mobs: mobsInRange()
     }
 
     if( data.mobs[0] ){
 
-      data.mobs[0].click(); // go to mob
+      data.mobs[which].click(); // go to mob
+      console.log(data.mobs[which])
 
     } else {
       console.log('Here is not mob');
-      console.log('Go to portal: ', data.portals[0]);
-
-      data.portals[0].click();
-      setInterval(() => {
-        if ( checkIfHeroIsNearPortal() === true ){
-          goToMob();
-          console.log('return to mob');
-        }  
-      }, 500);
-
+      goToPortal();
     }
   }
 
@@ -170,6 +180,11 @@ setTimeout(() => {
     });
   }
 
+  function checkHeroIsStuck(){
+    
+  }
+
+  let hero_is_stucked = false;
   function bot(){
     autoFight();
     
@@ -181,10 +196,27 @@ setTimeout(() => {
 
       if (checkFightStatus() === false ) { // if fight window is closed
         if ( letHeroWalk === true){
-          goToMob();
+          goToMob(0);
           letHeroWalk = false;
+
+          
+          const heroLast = getHeroCoord();
+
+          setTimeout(() => {
+            const heroActive = getHeroCoord();
+
+            if (heroLast.x === heroActive.x && heroLast.y === heroActive.y){
+              console.log('hero is stuck');
+              goToPortal();
+            }else {
+              letHeroWalk = true;
+            }
+            
+          }, 7000);
+         
         }
       } else {
+        hero_is_stucked = false;
         letHeroWalk = true;
         closeFight(); // if fight window is open bot close it.
       }

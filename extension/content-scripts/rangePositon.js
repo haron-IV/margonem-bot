@@ -68,8 +68,8 @@ function addSmallRangeToMap(){
     const rangeItem = document.createElement('div');
     rangeItem.id="smallRange";
     rangeItem.style.position = "absolute";
-    rangeItem.style.width = `${hero.width + hero.width*8}px`; // range width
-    rangeItem.style.height = `${hero.width+ hero.width*8}px`; // range width
+    rangeItem.style.width = `${hero.width + hero.width*3}px`; // range width
+    rangeItem.style.height = `${hero.width+ hero.width*3}px`; // range width
     rangeItem.style.left = `${0}px`;
     rangeItem.style.top = `${0}px`;
     rangeItem.style.backgroundColor = "rgba(255, 0, 0, .5)";
