@@ -13,11 +13,19 @@
     font-size: 25px;
     font-weight: 700;
     display: flex;
+    flex-direction: column;
     align-items: center;
     color: #ccac00;
     letter-spacing: 2px; }
-    .body-popup .header img {
+    .body-popup .header__heading .img {
       margin: 0 25px; }
+    .body-popup .header .navbar {
+      width: 100%; }
+      .body-popup .header .navbar .list {
+        list-style-type: none;
+        display: flex; }
+        .body-popup .header .navbar .list__item:hover {
+          background-color: rgba(0, 0, 0, 0.5); }
   .body-popup .article {
     margin: 30px 0; }
     .body-popup .article .section--stats {

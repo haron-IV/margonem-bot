@@ -14,13 +14,33 @@
         font-size: 25px;
         font-weight: 700;
         display: flex;
+        flex-direction: column;
         align-items: center;
         color: darken(gold, 10%);
         letter-spacing: 2px;
 
-        img{
-            margin: 0 25px;
+        &__heading {
+            .img{
+                margin: 0 25px;
+            }
         }
+
+        .navbar{
+            width: 100%;
+
+            .list{
+                list-style-type: none;
+                display: flex;
+                
+                &__item{
+                    &:hover{
+                        background-color: rgba($black, .5);
+                    }
+                }
+            }
+        }
+
+        
     }
 
     .article{
