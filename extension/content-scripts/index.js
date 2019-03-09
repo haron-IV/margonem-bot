@@ -43,7 +43,7 @@ setTimeout(() => {
         mob_position.top < range.y_start + range.height
       ){
         mobs_list.push(el);
-        console.log(mobs_list)
+        // console.log(mobs_list)
       }
     });
     return mobs_list;
@@ -52,15 +52,9 @@ setTimeout(() => {
   function getCoordNearestMob(mob){
     if(mob){
       const mob_coord = mob.getAttribute('tip').split(/[()]/)[1];
-      console.log(mob_coord)
+      console.log('Nearest mob coordinates: ', mob_coord);
+      return mob_coord;
     }
-    
-    
-  }
-
-  function checkIsMobInSmallRange(){
-    const mobs_in_small_range = mobsInRange('#smallRange');
-
   }
 
   function getNearestMob() {
@@ -86,11 +80,11 @@ setTimeout(() => {
       const distance = Math.sqrt( (distance_x * distance_x) + (distance_y * distance_y) );
 
       if (distance === min_distance){ // check our nearest mob
-        console.log('nearest mob: ', el);
+        // console.log('nearest mob: ', el);
         nearest = el;
       } 
     });
-    getCoordNearestMob(nearest);
+    // checkIsMobInSmallRange( getCoordNearestMob(nearest) );
     return nearest;
   }
 
@@ -149,6 +143,7 @@ setTimeout(() => {
     go_to_portal_counter++;
   }
 
+  let nearest_mob_coord;
   function goToMob(which){
     const data = {
       mobs: mobsInRange('#range')
@@ -158,9 +153,7 @@ setTimeout(() => {
 
     if( data.mobs[0] ){
       nearest.click();
-
-      // data.mobs[which].click(); // go to mob
-      // console.log(data.mobs[which])
+      nearest_mob_coord = getCoordNearestMob(nearest);
     } else {
       console.log('Here is not mob');
       goToPortal();
@@ -242,6 +235,7 @@ setTimeout(() => {
       }
     });
   }
+  
 
   function bot(){
     autoFight();
@@ -257,7 +251,6 @@ setTimeout(() => {
           goToMob(0);
           letHeroWalk = false;
 
-          
           const heroLast = getHeroCoord();
 
           setTimeout(() => {
@@ -265,6 +258,7 @@ setTimeout(() => {
 
             if (heroLast.x === heroActive.x && heroLast.y === heroActive.y){
               console.log('hero is stuck');
+              console.log('last nearest: ', nearest_mob_coord)
               goToPortal();
             }else {
               letHeroWalk = true;
