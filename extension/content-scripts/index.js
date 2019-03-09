@@ -235,7 +235,16 @@ setTimeout(() => {
       }
     });
   }
-  
+
+  function check_if_black_list_mob_is_created() {
+    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+      if (!mobs.black_list_mob){
+        chrome.storage.sync.set({'black_list_mob': []});
+      }
+    } );
+  }
+  check_if_black_list_mob_is_created();
+
 
   function bot(){
     autoFight();
@@ -258,7 +267,14 @@ setTimeout(() => {
 
             if (heroLast.x === heroActive.x && heroLast.y === heroActive.y){
               console.log('hero is stuck');
-              console.log('last nearest: ', nearest_mob_coord)
+              console.log('last nearest: ', nearest_mob_coord);
+
+              chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+                console.log('mobs.black_list_mob: ', mobs.black_list_mob)
+                mobs.black_list_mob.push(nearest_mob_coord);
+                chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
+              });
+
               goToPortal();
             }else {
               letHeroWalk = true;
