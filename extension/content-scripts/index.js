@@ -21,13 +21,13 @@ setTimeout(() => {
     return document.querySelectorAll('.mmp-gw');
   }
 
-  function mobsInRange(){
-    const range = _range('#range');
+  function mobsInRange(which_range){
+    const range = _range(which_range);
     const mobs = _mobs();
     let mobs_list = [];
 
-    range.x_start = parseInt( document.querySelector('#range').style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
-    range.y_start = parseInt( document.querySelector('#range').style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
+    range.x_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
+    range.y_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
 
     mobs.forEach(el => {
       const mob_position = {
@@ -55,7 +55,7 @@ setTimeout(() => {
   }
 
   function getNearestMob() {
-    const mobs_in_range = mobsInRange();
+    const mobs_in_range = mobsInRange('#range');
     const hero_coord = getMapHeroCoord();
     let distances = [];
     let nearest;
@@ -84,6 +84,56 @@ setTimeout(() => {
     getCoordNearestMob(nearest);
     return nearest;
   }
+
+  // function checkIsMobInSmallRange(){
+  //   const range = _range('#smallRange');
+  //   const mobs_in_range = mobsInRange();
+
+  //   mobs_in_range.forEach(el => {
+  //     if (
+  //       !el.classList.contains('hidden') &&
+  //       mob_position.left > range.x_start && 
+  //       mob_position.left < range.x_start + range.width && 
+  //       mob_position.top > range.y_start && 
+  //       mob_position.top < range.y_start + range.height
+  //     ){
+  //       console.log(el);
+  //     }
+  //   });
+  // }
+
+  // function mobsInRange2(){
+  //   const range = _range('#smallRange');
+  //   const mobs = _mobs();
+  //   let mobs_list = [];
+
+  //   range.x_start = parseInt( document.querySelector('#smallRange').style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
+  //   range.y_start = parseInt( document.querySelector('#smallRange').style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
+
+  //   mobs.forEach(el => {
+  //     const mob_position = {
+  //       left: parseInt( el.style.left.split(/[. px]/)[0] ),
+  //       top: parseInt( el.style.top.split(/[. px]/)[0] )
+  //     }
+
+  //     if (
+  //       !el.classList.contains('hidden') &&
+  //       mob_position.left > range.x_start && 
+  //       mob_position.left < range.x_start + range.width && 
+  //       mob_position.top > range.y_start && 
+  //       mob_position.top < range.y_start + range.height
+  //     ){
+  //       mobs_list.push(el);
+
+  //     }
+  //   });
+  //   console.log(mobs_list)
+  //   return mobs_list;
+  // }
+
+  // setInterval(() => {
+  //   mobsInRange2();
+  // }, 2000);
 
   function checkIfHeroIsNearPortal(){
     const range = _range('#smallRange');
@@ -125,7 +175,7 @@ setTimeout(() => {
 
     let interval = setInterval(() => {
       if ( checkIfHeroIsNearPortal() === true ){
-        if ( mobsInRange()[0] ){
+        if ( mobsInRange('#range')[0] ){
           goToMob(0);
           console.log('return to mob');
         } else {
@@ -142,7 +192,7 @@ setTimeout(() => {
 
   function goToMob(which){
     const data = {
-      mobs: mobsInRange()
+      mobs: mobsInRange('#range')
     }
 
     const nearest = getNearestMob();
