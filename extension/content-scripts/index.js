@@ -49,6 +49,11 @@ setTimeout(() => {
     return mobs_list;
   }
 
+  function getCoordNearestMob(mob){
+    const mob_coord = mob.getAttribute('tip').split(/[()]/)[1];
+    console.log(mob_coord)
+  }
+
   function getNearestMob() {
     const mobs_in_range = mobsInRange();
     const hero_coord = getMapHeroCoord();
@@ -75,7 +80,8 @@ setTimeout(() => {
         console.log('nearest mob: ', el);
         nearest = el;
       } 
-    })
+    });
+    getCoordNearestMob(nearest);
     return nearest;
   }
 
