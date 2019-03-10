@@ -272,6 +272,7 @@ setTimeout(() => {
               chrome.storage.sync.get(['black_list_mob'], (mobs) => {
                 console.log('mobs.black_list_mob: ', mobs.black_list_mob)
                 mobs.black_list_mob.push(nearest_mob_coord);
+                // const cleared = ; // clear array from doublem elements
                 chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
               });
 
