@@ -241,12 +241,7 @@ setTimeout(() => {
       if (!mobs.black_list_mob){
 
         const data = {
-          data: [
-            {
-              map_name: '',
-              mobs_list: []
-            }
-          ]
+          data: []
         }
         
         chrome.storage.sync.set({'black_list_mob': data });
@@ -255,30 +250,34 @@ setTimeout(() => {
   }
   check_if_black_list_mob_is_created();
 
-  function addMapToBlackListMobs (){
-    const map_name = document.querySelector('#botloc').getAttribute('tip');
+  // function addMapToBlackListMobs (){
+  //   const map_name = document.querySelector('#botloc').getAttribute('tip');
 
-    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-      console.log('mobs.black_list_mob: ', mobs.black_list_mob)
+  //   chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+  //     console.log('mobs.black_list_mob: ', mobs.black_list_mob)
 
-      const data_for_send = {
-        map_name: map_name,
-        black_list: []
-      }
+  //     const data_for_send = {
+  //       map_name: map_name,
+  //       black_list: []
+  //     }
 
-      mobs.black_list_mob.data.forEach( (el, i) => {
-        if ( map_name === mobs.black_list_mob.data[i].map_name ){
-          console.log('This map was added');
-        } else {
-          mobs.black_list_mob.data.push(data_for_send);
-          chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
-        }
-      });
 
-    });
-  }
+  //     for (let i = 0; i <= mobs.black_list_mob.data.length; i++){
+  //       if ( map_name === mobs.black_list_mob.data[i].map_name && 'test' === mobs.black_list_mob.data[i].map_name ){
+  //         console.log('This map was added');
+  //         return;
 
-  addMapToBlackListMobs();
+  //       } else {
+  //         mobs.black_list_mob.data.push(data_for_send);
+  //         chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
+  //         return;
+  //       }
+  //     }
+
+  //   });
+  // }
+
+  // addMapToBlackListMobs();
 
 
   function bot(){
@@ -308,19 +307,19 @@ setTimeout(() => {
               chrome.storage.sync.get(['black_list_mob'], (mobs) => {
                 console.log('mobs.black_list_mob: ', mobs.black_list_mob)
 
-                const data_for_send = {
-                  map_name: map_name,
-                  black_list: []
-                }
+                // const data_for_send = {
+                //   map_name: map_name,
+                //   black_list: []
+                // }
 
-                mobs.black_list_mob.data.push(data_for_send);
+                mobs.black_list_mob.data.push(nearest_mob_coord);
 
                 console.log('data for send: ', mobs.black_list_mob)
 
 
                 // mobs.black_list_mob.push(nearest_mob_coord);
-                // let cleared = [...new Set(mobs.black_list_mob)];
-                chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
+                let cleared = [...new Set(mobs.black_list_mob.data)];
+                chrome.storage.sync.set({'black_list_mob': cleared});
               });
 
               goToPortal();
