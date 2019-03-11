@@ -239,15 +239,51 @@ setTimeout(() => {
   function check_if_black_list_mob_is_created() {
     chrome.storage.sync.get(['black_list_mob'], (mobs) => {
       if (!mobs.black_list_mob){
-        chrome.storage.sync.set({'black_list_mob': []});
+
+        const data = {
+          data: [
+            {
+              map_name: '',
+              mobs_list: []
+            }
+          ]
+        }
+        
+        chrome.storage.sync.set({'black_list_mob': data });
       }
     } );
   }
   check_if_black_list_mob_is_created();
 
+  function addMapToBlackListMobs (){
+    const map_name = document.querySelector('#botloc').getAttribute('tip');
+
+    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+      console.log('mobs.black_list_mob: ', mobs.black_list_mob)
+
+      const data_for_send = {
+        map_name: map_name,
+        black_list: []
+      }
+
+      mobs.black_list_mob.data.forEach( (el, i) => {
+        if ( map_name === mobs.black_list_mob.data[i].map_name ){
+          console.log('This map was added');
+        } else {
+          mobs.black_list_mob.data.push(data_for_send);
+          chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
+        }
+      });
+
+    });
+  }
+
+  addMapToBlackListMobs();
+
 
   function bot(){
     autoFight();
+    const map_name = document.querySelector('#botloc').getAttribute('tip');
     
     let letHeroWalk = true;
 
@@ -271,8 +307,19 @@ setTimeout(() => {
 
               chrome.storage.sync.get(['black_list_mob'], (mobs) => {
                 console.log('mobs.black_list_mob: ', mobs.black_list_mob)
-                mobs.black_list_mob.push(nearest_mob_coord);
-                // const cleared = ; // clear array from doublem elements
+
+                const data_for_send = {
+                  map_name: map_name,
+                  black_list: []
+                }
+
+                mobs.black_list_mob.data.push(data_for_send);
+
+                console.log('data for send: ', mobs.black_list_mob)
+
+
+                // mobs.black_list_mob.push(nearest_mob_coord);
+                // let cleared = [...new Set(mobs.black_list_mob)];
                 chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
               });
 
