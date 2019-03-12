@@ -51,6 +51,8 @@
         cursor: pointer; }
         .body-popup .article .section--toolbar .toolbar-item .input:focus {
           border-bottom: 2px solid green; }
+      .body-popup .article .section--toolbar .toolbar-item .input-unvalid:focus {
+        border-bottom: 2px solid red; }
       .body-popup .article .section--toolbar .toolbar-item .button {
         cursor: pointer; }
     .body-popup .article .section--stats {

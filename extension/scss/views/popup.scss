@@ -76,6 +76,13 @@
                         }
                     }
 
+                    .input-unvalid{
+                        &:focus{
+                            border-bottom: 2px solid red;
+                        }
+                        
+                    }
+
                     .button{
                         cursor: pointer;
                     }

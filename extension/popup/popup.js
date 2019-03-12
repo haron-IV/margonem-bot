@@ -27,12 +27,22 @@ function search(input, searcher_link) {
 
     if (searching_element.length > 3) {
         window.open(link, '_blank');
+    } else {
+        input.classList.add('input-unvalid')
     }
     
 }
 
 function search_on_enter(input, searcher_link){
     input.addEventListener('keydown', (e) => {
+        const input_length = input.value.length;
+        
+        if ( input_length < 3 ){
+            input.classList.add('input-unvalid')
+        } else if( input_length > 2 ){
+            input.classList.remove('input-unvalid');
+        } 
+
         if ( e.key === "Enter" && input.value.length > 3){
             const searching_element = input.value;
             const link = `${searcher_link}${searching_element}`;
