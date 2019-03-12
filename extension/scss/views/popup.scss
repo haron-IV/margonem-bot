@@ -1,5 +1,5 @@
 .body-popup{
-    width: 550px;
+    width: 750px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,15 +26,20 @@
         }
 
         .navbar{
+            display: none;
+
             width: 100%;
 
             .list{
                 list-style-type: none;
                 display: flex;
+                justify-content: space-around;
                 
                 &__item{
+                    cursor: pointer;
+                    transition: text-shadow ease-in-out 250ms;
                     &:hover{
-                        background-color: rgba($black, .5);
+                        text-shadow: 4px 4px 2px $black;
                     }
                 }
             }
@@ -45,6 +50,7 @@
 
     .article{
         @include small-space;
+        display: flex;
 
         .section{
             &--stats{

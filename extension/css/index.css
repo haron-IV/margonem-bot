@@ -1,5 +1,5 @@
 .body-popup {
-  width: 550px;
+  width: 750px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,14 +20,20 @@
     .body-popup .header__heading .img {
       margin: 0 25px; }
     .body-popup .header .navbar {
+      display: none;
       width: 100%; }
       .body-popup .header .navbar .list {
         list-style-type: none;
-        display: flex; }
-        .body-popup .header .navbar .list__item:hover {
-          background-color: rgba(0, 0, 0, 0.5); }
+        display: flex;
+        justify-content: space-around; }
+        .body-popup .header .navbar .list__item {
+          cursor: pointer;
+          transition: text-shadow ease-in-out 250ms; }
+          .body-popup .header .navbar .list__item:hover {
+            text-shadow: 4px 4px 2px #000; }
   .body-popup .article {
-    margin: 30px 0; }
+    margin: 30px 0;
+    display: flex; }
     .body-popup .article .section--stats {
       font-size: 13px;
       font-weight: 500; }
