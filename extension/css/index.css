@@ -33,7 +33,26 @@
             text-shadow: 4px 4px 2px #000; }
   .body-popup .article {
     margin: 30px 0;
-    display: flex; }
+    width: 80%;
+    display: flex;
+    justify-content: space-between; }
+    .body-popup .article .section--toolbar .toolbar-item {
+      margin: 7px 0; }
+      .body-popup .article .section--toolbar .toolbar-item .input {
+        width: 100px;
+        height: 10px;
+        outline: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.5);
+        margin: 0 5px;
+        transition: border-bottom ease-in-out 250ms;
+        cursor: pointer; }
+        .body-popup .article .section--toolbar .toolbar-item .input:focus {
+          border-bottom: 2px solid green; }
+      .body-popup .article .section--toolbar .toolbar-item .button {
+        cursor: pointer; }
     .body-popup .article .section--stats {
       font-size: 13px;
       font-weight: 500; }

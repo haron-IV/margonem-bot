@@ -50,9 +50,38 @@
 
     .article{
         @include small-space;
+        width: 80%;
         display: flex;
+        justify-content: space-between;
 
         .section{
+            &--toolbar{
+                .toolbar-item{
+                    margin: 7px 0;
+
+                    .input{
+                        width: 100px;
+                        height: 10px;
+                        outline: none;
+                        border: none;
+                        border-bottom: 2px solid transparent;
+                        border-radius: 2px;
+                        background: rgba(255, 255, 255, .5);
+                        margin: 0 5px;
+                        transition: border-bottom ease-in-out 250ms;
+                        cursor: pointer;
+
+                        &:focus{
+                            border-bottom: 2px solid green;
+                        }
+                    }
+
+                    .button{
+                        cursor: pointer;
+                    }
+                }
+            }
+            
             &--stats{
                 font-size: 13px;
                 font-weight: 500;
