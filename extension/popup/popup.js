@@ -25,12 +25,15 @@ function search(input, searcher_link) {
     const searching_element = input.value;
     const link = `${searcher_link}${searching_element}`;
 
-    window.open(link, '_blank');
+    if (searching_element.length > 3) {
+        window.open(link, '_blank');
+    }
+    
 }
 
 function search_on_enter(input, searcher_link){
     input.addEventListener('keydown', (e) => {
-        if ( e.key === "Enter" ){
+        if ( e.key === "Enter" && input.value.length > 3){
             const searching_element = input.value;
             const link = `${searcher_link}${searching_element}`;
             window.open(link, '_blank');
@@ -57,10 +60,15 @@ search_on_enter($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
 $search_player_btn.addEventListener('click', () => {
     const searching_element = $search_player_inp.value;
     const link = `https://www.margonem.pl/?task=forum&show=found&kw=${searching_element}&playerinfo=Szukaj+gracza&cat=2`;
-    window.open(link, '_blank');
+    
+    if (searching_element.length > 3) {
+        window.open(link, '_blank');
+    }
+    
 });
+
 $search_player_inp.addEventListener('keydown', (e) => {
-    if ( e.key === "Enter" ){
+    if ( e.key === "Enter" && $search_player_inp.value.length > 3){
         const searching_element = $search_player_inp.value;
         const link = `https://www.margonem.pl/?task=forum&show=found&kw=${searching_element}&playerinfo=Szukaj+gracza&cat=2`;
         window.open(link, '_blank');
