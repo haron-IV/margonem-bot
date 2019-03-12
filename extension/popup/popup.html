@@ -26,30 +26,31 @@
 
     <article class="article">
         <section class="section section--toolbar">
-            <!-- <a href="https://www.margonem.pl/?task=forum&show=search" target="_blank">szukaj</a>
-
-            <a href="https://www.margonem.pl/?task=config" target="_blank">Konfiguracja</a> -->
         
-            <div class="toolbar-item">
-                szukaj gracza:
-                <input type="text" id="search-player-inp" class="input">
+            <div class="toolbar-item" >
+                <label for="search-player-inp">szukaj gracza:</label>
+
+                <input type="text" id="search-player-inp" name="search-player-inp" class="input">
                 <button id='search-player-btn' class="button">szukaj</button>
             </div>
         
             <div class="toolbar-item">
-                szukaj npc:
+                <label for="npc-search-inp">szukaj npc:</label>
+                
                 <input type="text" name="npc-search" id="npc-search-inp" class="input">
                 <button id="npc-search-btn" class="button">szukaj</button>
             </div>
         
             <div class="toolbar-item">
-                szukaj questa:
+                <label for="quest-search-inp">szukaj questa:</label>
+                
                 <input type="text" name="quest-search" id="quest-search-inp" class="input">
                 <button id="quest-search-btn" class="button">szukaj</button>
             </div>
         
             <div class="toolbar-item">
-                szukaj potwora:
+                <label for="mob-search-inp">szukaj potwora:</label>
+                
                 <input type="text" name="mob-search" id="mob-search-inp" class="input">
                 <button id="mob-search-btn" class="button">szukaj</button>
             </div>
@@ -76,6 +77,10 @@
             
         </section>
     </article>
+
+    <footer>
+        <a href="https://www.margonem.pl/?task=config" target="_blank" title="Zmiana wyglądu postaci, kupno waluty, profil.">Margonem - konto</a>
+    </footer>
 
     <script src="../external/jQuery.js"></script>
     <script src="./popup.js"></script>
