@@ -62,3 +62,15 @@
   .body-popup a {
     color: #fff;
     font-size: 500; }
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; }
+  .footer__link-section {
+    width: 90%;
+    display: flex; }
+    .footer__link-section .link {
+      margin: 0 10px; }
+  .footer__bot-version {
+    justify-self: flex-end; }

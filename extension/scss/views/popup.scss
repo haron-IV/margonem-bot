@@ -98,3 +98,19 @@
         font-size: 500;
     }
 }
+
+.footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    &__link-section{
+        width: 90%;
+        display: flex;
+        .link{
+            margin: 0 10px;
+        }
+    }
+    &__bot-version{
+        justify-self: flex-end;
+    }
+}
