@@ -149,6 +149,11 @@ setTimeout(() => {
     })
   }
 
+  function getAllMobsCoord(){
+    const mobs = _mobs();
+    console.log(mob);
+  }
+
   let nearest_mob_coord;
   function goToMob(which){ // here bot should check coordinates from black list.
     const data = {
@@ -160,7 +165,6 @@ setTimeout(() => {
     if( data.mobs[0] ){
       nearest.click();
       nearest_mob_coord = getCoordNearestMob(nearest);
-      getBlackList();
     } else {
       console.log('Here is not mob');
       goToPortal();
