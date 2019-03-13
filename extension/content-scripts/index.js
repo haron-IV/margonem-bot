@@ -143,8 +143,14 @@ setTimeout(() => {
     go_to_portal_counter++;
   }
 
+  function getBlackList(){
+    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+      console.log('black list: ', mobs.black_list_mob)
+    })
+  }
+
   let nearest_mob_coord;
-  function goToMob(which){
+  function goToMob(which){ // here bot should check coordinates from black list.
     const data = {
       mobs: mobsInRange('#range')
     }
@@ -154,6 +160,7 @@ setTimeout(() => {
     if( data.mobs[0] ){
       nearest.click();
       nearest_mob_coord = getCoordNearestMob(nearest);
+      getBlackList();
     } else {
       console.log('Here is not mob');
       goToPortal();
@@ -250,36 +257,6 @@ setTimeout(() => {
   }
   check_if_black_list_mob_is_created();
 
-  // function addMapToBlackListMobs (){
-  //   const map_name = document.querySelector('#botloc').getAttribute('tip');
-
-  //   chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-  //     console.log('mobs.black_list_mob: ', mobs.black_list_mob)
-
-  //     const data_for_send = {
-  //       map_name: map_name,
-  //       black_list: []
-  //     }
-
-
-  //     for (let i = 0; i <= mobs.black_list_mob.data.length; i++){
-  //       if ( map_name === mobs.black_list_mob.data[i].map_name && 'test' === mobs.black_list_mob.data[i].map_name ){
-  //         console.log('This map was added');
-  //         return;
-
-  //       } else {
-  //         mobs.black_list_mob.data.push(data_for_send);
-  //         chrome.storage.sync.set({'black_list_mob': mobs.black_list_mob});
-  //         return;
-  //       }
-  //     }
-
-  //   });
-  // }
-
-  // addMapToBlackListMobs();
-
-
   function bot(){
     autoFight();
     const map_name = document.querySelector('#botloc').getAttribute('tip');
@@ -323,7 +300,7 @@ setTimeout(() => {
               });
 
               goToPortal();
-            }else {
+            } else {
               letHeroWalk = true;
             }
             
