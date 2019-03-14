@@ -143,15 +143,34 @@ setTimeout(() => {
     go_to_portal_counter++;
   }
 
-  function getBlackList(){
-    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-      console.log('black list: ', mobs.black_list_mob)
-    })
+  function arrayContainsArray (superset, subset) {
+    if (0 === subset.length || superset.length < subset.length) {
+      return false;
+    }
+    for(var i = 0; i < subset.length; i++) {
+      if(superset.indexOf(subset[i]) === -1) return false;
+    }
+    return true;
   }
 
-  function getAllMobsCoord(){
-    const mobs = _mobs();
-    console.log(mob);
+  function getAllMobsWhichCantKill(){
+    const all_mobs = _mobs();
+
+    chrome.storage.sync.get(['black_list_mob'], (mobs) => {
+      console.log('black list: ', mobs.black_list_mob);
+
+      all_mobs.forEach( el => {
+        let mob_coords = [];
+        mob_coords.push( el.getAttribute('tip').split(/[()]/)[1] );
+
+        if ( arrayContainsArray(mobs.black_list_mob, mob_coords) === true ) {
+          console.log('bot hidden this mob cuz cant kill him. ', el)
+          el.classList.add('hidden', 'hiddenFromBot');
+        }
+        
+      });
+    });
+
   }
 
   let nearest_mob_coord;
@@ -244,14 +263,13 @@ setTimeout(() => {
           console.log('attacked el classlist: ', el.getAttribute('tip'))
   
           if(data.battleState === "none" || data.battleState === ""){
-            el.click(); // attack
+            el.click(); // attack mob
+            getAllMobsWhichCantKill(); // check black list and refresh black list
             console.log('attack')
           }
             
         }
       }
-
-
     });
   }
 
@@ -368,4 +386,4 @@ setTimeout(() => {
 
   });
   // ^^^^ start stop bot statement ^^^^
-}, 2000);
+}, 5000);

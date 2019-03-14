@@ -50,3 +50,9 @@
     background-color: rgba(65, 150, 235, .5);
     border: 1px solid rgb(65, 150, 235);
 }
+
+.hiddenFromBot{
+    display: block !important;
+    background-color: springgreen !important;
+    border: 1px solid red;
+}
