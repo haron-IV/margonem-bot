@@ -232,22 +232,26 @@ setTimeout(() => {
         y: parseInt( el.style.top.split(/[. px]/)[0].trim() )
       }
 
-      if (
-        data.hero.x + data.offset > mob.x && data.hero.x - data.offset < mob.x
-        &&
-        data.hero.y + data.offset > mob.y && data.hero.y - data.offset < mob.y
-        &&
-        el.getAttribute('tip').split('lvl').length > 1
-        ) {
-
-          console.log('attacked el classlist: ', el.classList.contains('mmp-npc'))
-        
-        if(data.battleState === "none" || data.battleState === ""){
-          el.click(); // attack
-          console.log('attack')
+      if (el.getAttribute('tip') != null) {
+        if (
+          data.hero.x + data.offset > mob.x && data.hero.x - data.offset < mob.x
+          &&
+          data.hero.y + data.offset > mob.y && data.hero.y - data.offset < mob.y
+          &&
+          el.getAttribute('tip').split('lvl').length > 1        
+          
+          ) {
+          console.log('attacked el classlist: ', el.getAttribute('tip'))
+  
+          if(data.battleState === "none" || data.battleState === ""){
+            el.click(); // attack
+            console.log('attack')
+          }
+            
         }
-        
       }
+
+
     });
   }
 
