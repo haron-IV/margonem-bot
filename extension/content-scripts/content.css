@@ -52,7 +52,6 @@
 
 .hiddenFromBot{ 
     display: block !important;
-    /* background-color: springgreen !important; */
     background-color: black !important;
     border: 2px solid red;
 }

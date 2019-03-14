@@ -379,4 +379,4 @@ setTimeout(() => {
 
   });
   // ^^^^ start stop bot statement ^^^^
-}, 5000);
+}, 2000);
