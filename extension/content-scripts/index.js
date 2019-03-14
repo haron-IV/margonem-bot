@@ -314,19 +314,14 @@ setTimeout(() => {
               chrome.storage.sync.get(['black_list_mob'], (mobs) => {
                 console.log('mobs.black_list_mob: ', mobs.black_list_mob)
 
-                // const data_for_send = {
-                //   map_name: map_name,
-                //   black_list: []
-                // }
+                console.log('----------------------------------')
 
                 mobs.black_list_mob.data.push(nearest_mob_coord);
 
-                console.log('data for send: ', mobs.black_list_mob)
+                // console.log('data for send: ', mobs.black_list_mob)
 
-
-                // mobs.black_list_mob.push(nearest_mob_coord);
                 let cleared = [...new Set(mobs.black_list_mob.data)];
-                chrome.storage.sync.set({'black_list_mob': cleared});
+                chrome.storage.sync.set({'black_list_mob': {data: cleared} });
               });
 
               goToPortal();
