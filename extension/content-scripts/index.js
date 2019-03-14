@@ -157,13 +157,13 @@ setTimeout(() => {
     const all_mobs = _mobs();
 
     chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-      console.log('black list: ', mobs.black_list_mob);
+      console.log('black list: ', mobs.black_list_mob.data);
 
       all_mobs.forEach( el => {
         let mob_coords = [];
         mob_coords.push( el.getAttribute('tip').split(/[()]/)[1] );
 
-        if ( arrayContainsArray(mobs.black_list_mob, mob_coords) === true ) {
+        if ( arrayContainsArray(mobs.black_list_mob.data, mob_coords) === true ) {
           console.log('bot hidden this mob cuz cant kill him. ', el)
           el.classList.add('hidden', 'hiddenFromBot');
         }
@@ -289,7 +289,7 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
-    const map_name = document.querySelector('#botloc').getAttribute('tip');
+    // const map_name = document.querySelector('#botloc').getAttribute('tip');
     
     let letHeroWalk = true;
 
@@ -317,8 +317,6 @@ setTimeout(() => {
                 console.log('----------------------------------')
 
                 mobs.black_list_mob.data.push(nearest_mob_coord);
-
-                // console.log('data for send: ', mobs.black_list_mob)
 
                 let cleared = [...new Set(mobs.black_list_mob.data)];
                 chrome.storage.sync.set({'black_list_mob': {data: cleared} });
