@@ -77,7 +77,13 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
-setTimeout(() => {
+// setTimeout(() => {
+   
+
+// }, 2500);
+
+function init () {
+    console.log('RangePosition.js included.')
     addRangeToMap();
     addSmallRangeToMap();
 
@@ -85,5 +91,20 @@ setTimeout(() => {
         updateRangePosition();
         updateSmallRangePosition();
     }, 250);
+}
 
-}, 2500)
+function checkIsGameLoaded() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+
+        } else if (loading_el.style.display === 'none') {
+            init();
+            clearInterval(interval);
+        }
+    }, 1000);
+    
+}
+
+checkIsGameLoaded();
