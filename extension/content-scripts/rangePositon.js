@@ -77,11 +77,6 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
-// setTimeout(() => {
-   
-
-// }, 2500);
-
 function init () {
     console.log('RangePosition.js included.')
     addRangeToMap();
@@ -98,8 +93,9 @@ function checkIsGameLoaded() {
         const loading_el = document.querySelector('#loading');
         
         if ( loading_el.style.display === '' ) {
-
+            // chrome.storage.sync.set({'gameLoadedStatus': false}, () => {});
         } else if (loading_el.style.display === 'none') {
+            // chrome.storage.sync.set({'gameLoadedStatus': true}, () => {});
             init();
             clearInterval(interval);
         }

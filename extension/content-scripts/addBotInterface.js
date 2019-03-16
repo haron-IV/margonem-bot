@@ -1,4 +1,4 @@
-// setTimeout(() => {
+setTimeout(() => {
     const interface = {
         wrapper: document.createElement('div'),
         startBotButton: document.createElement('button'),
@@ -77,4 +77,5 @@
         }
     });
 
-// }, 1500);
+}, 1500);
+

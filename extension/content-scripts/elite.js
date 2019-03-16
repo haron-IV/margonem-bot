@@ -1,5 +1,6 @@
 setTimeout(() => { //REFACTORIZE
 
+
     function eliteBot() {
         
         let interval = setInterval(() => {
@@ -88,4 +89,27 @@ setTimeout(() => { //REFACTORIZE
         });
     });
 
+
+    
+
 }, 2000);
+
+
+
+// function checkIsGameLoaded() {
+//     let interval = setInterval(() => {
+//       const loading_el = document.querySelector('#loading');
+      
+//       if ( loading_el.style.display === '' ) {
+//         // chrome.storage.sync.set({'gameLoadedStatus': false}, () => {});
+//       } else if (loading_el.style.display === 'none') {
+//         // chrome.storage.sync.set({'gameLoadedStatus': true}, () => {});
+//         // init();
+//         eliteBot();
+//         clearInterval(interval);
+//       }
+//     }, 1000);
+    
+//   }
+  
+//   checkIsGameLoaded();
