@@ -77,10 +77,49 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
+let mini_map_mouse_position;
+function getMousePositionOnMiniMap () {
+
+    document.querySelector('.mmpMap').addEventListener('click', e => {
+        const mouse_on_map = {
+            x: e.layerX,
+            y: e.layerY,
+        }
+
+        mini_map_mouse_position = mouse_on_map;
+        drowRangeOnMiniMap();
+    });
+
+}
+
+function addRangeToMap_bot_range() {
+    const mapEl = document.querySelector('.mmpMap');
+
+    const rangeItem = document.createElement('div');
+    rangeItem.id="botRange";
+    rangeItem.classList.add('test', 'botRangeTest');
+    rangeItem.style.width = `210px`; // range width
+    rangeItem.style.height = `210px`; // range width
+    mapEl.appendChild(rangeItem);
+}
+
+function drowRangeOnMiniMap() {
+    const range = document.querySelector('#botRange');
+
+    range.style.left = `${mini_map_mouse_position.x}px`;
+    range.style.top = `${mini_map_mouse_position.y}px`;
+
+    range.style.width = `${mini_map_mouse_position.x}`;
+}
+
+
 function init () {
     console.log('RangePosition.js included.')
     addRangeToMap();
     addSmallRangeToMap();
+
+    getMousePositionOnMiniMap();
+    addRangeToMap_bot_range();
 
     setInterval(() => {
         updateRangePosition();

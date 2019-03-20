@@ -55,3 +55,11 @@
     background-color: black !important;
     border: 2px solid red;
 }
+
+.test{
+    background-color: pink;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
