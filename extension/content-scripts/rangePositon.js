@@ -77,16 +77,40 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
-let mini_map_mouse_position;
+let mini_map_mouse_position = {
+    x_first: 0,
+    y_first: 0,
+    x_second: 0,
+    y_second: 0,
+    counter: 0
+};
 function getMousePositionOnMiniMap () {
 
     document.querySelector('.mmpMap').addEventListener('click', e => {
-        const mouse_on_map = {
-            x: e.layerX,
-            y: e.layerY,
+
+        
+        if (mini_map_mouse_position.counter === 0){
+
+            mini_map_mouse_position.x_first = e.layerX;
+            mini_map_mouse_position.y_first = e.layerY;
+            mini_map_mouse_position.counter++;
+
+        } else if (mini_map_mouse_position.counter >= 1 && mini_map_mouse_position.counter < 2){
+            
+            mini_map_mouse_position.x_second = e.layerX;
+            mini_map_mouse_position.y_second = e.layerY;
+            mini_map_mouse_position.counter++;
+
+        } else if (mini_map_mouse_position.counter >= 2){
+            mini_map_mouse_position.x_first = 0;
+            mini_map_mouse_position.y_first = 0;
+            mini_map_mouse_position.x_second = 0;
+            mini_map_mouse_position.y_second = 0;
+            mini_map_mouse_position.counter = 0;
+            console.log('mini: ', mini_map_mouse_position)
         }
 
-        mini_map_mouse_position = mouse_on_map;
+        
         drowRangeOnMiniMap();
     });
 
@@ -98,18 +122,29 @@ function addRangeToMap_bot_range() {
     const rangeItem = document.createElement('div');
     rangeItem.id="botRange";
     rangeItem.classList.add('test', 'botRangeTest');
-    rangeItem.style.width = `210px`; // range width
-    rangeItem.style.height = `210px`; // range width
+    rangeItem.style.width = `0`; // range width
+    rangeItem.style.height = `0`; // range width
     mapEl.appendChild(rangeItem);
 }
 
 function drowRangeOnMiniMap() {
     const range = document.querySelector('#botRange');
 
-    range.style.left = `${mini_map_mouse_position.x}px`;
-    range.style.top = `${mini_map_mouse_position.y}px`;
+    range.style.left = `${mini_map_mouse_position.x_first}px`;
+    range.style.top = `${mini_map_mouse_position.y_first}px`;
 
-    range.style.width = `${mini_map_mouse_position.x}`;
+    if (mini_map_mouse_position.counter >= 2 ){
+        
+        
+        
+        range.style.width = `${mini_map_mouse_position.x_second - mini_map_mouse_position.x_first}px`;
+        range.style.height = `${mini_map_mouse_position.y_second - mini_map_mouse_position.y_first}px`;
+
+
+        // range.style.width = `${mini_map_mouse_position.x}`;
+    }
+
+    
 }
 
 
