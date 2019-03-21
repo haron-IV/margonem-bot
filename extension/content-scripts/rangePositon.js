@@ -86,31 +86,16 @@ let mini_map_mouse_position = {
 };
 function getMousePositionOnMiniMap () {
 
-    document.querySelector('.mmpMap').addEventListener('click', e => {
+    document.querySelector('.mmpMap').addEventListener('mousedown', (e) => {
+        mini_map_mouse_position.x_first = e.layerX;
+        mini_map_mouse_position.y_first = e.layerY;
+        mini_map_mouse_position.counter++;
+    });
 
-        
-        if (mini_map_mouse_position.counter === 0){
-
-            mini_map_mouse_position.x_first = e.layerX;
-            mini_map_mouse_position.y_first = e.layerY;
-            mini_map_mouse_position.counter++;
-
-        } else if (mini_map_mouse_position.counter >= 1 && mini_map_mouse_position.counter < 2){
-            
-            mini_map_mouse_position.x_second = e.layerX;
-            mini_map_mouse_position.y_second = e.layerY;
-            mini_map_mouse_position.counter++;
-
-        } else if (mini_map_mouse_position.counter >= 2){
-            mini_map_mouse_position.x_first = 0;
-            mini_map_mouse_position.y_first = 0;
-            mini_map_mouse_position.x_second = 0;
-            mini_map_mouse_position.y_second = 0;
-            mini_map_mouse_position.counter = 0;
-            console.log('mini: ', mini_map_mouse_position)
-        }
-
-        
+    document.querySelector('.mmpMap').addEventListener('mouseup', (e) => {
+        mini_map_mouse_position.x_second = e.layerX;
+        mini_map_mouse_position.y_second = e.layerY;
+        mini_map_mouse_position.counter++;
         drowRangeOnMiniMap();
     });
 
