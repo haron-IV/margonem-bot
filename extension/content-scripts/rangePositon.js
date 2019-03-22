@@ -85,20 +85,53 @@ let mini_map_mouse_position = {
     counter: 0
 };
 function getMousePositionOnMiniMap () {
-
     document.querySelector('.mmpMap').addEventListener('mousedown', (e) => {
-        mini_map_mouse_position.x_first = e.layerX;
-        mini_map_mouse_position.y_first = e.layerY;
-        mini_map_mouse_position.counter++;
+        const range = document.querySelector('#botRange');
+
+        if (mini_map_mouse_position.counter === 0) {
+            mini_map_mouse_position.x_first = e.layerX;
+            mini_map_mouse_position.y_first = e.layerY;
+
+            range.style.left = `${mini_map_mouse_position.x_first}px`;
+            range.style.top = `${mini_map_mouse_position.y_first}px`;
+
+            mini_map_mouse_position.counter++;
+        }
+    });
+
+    document.querySelector('.mmpMap').addEventListener('mousemove', (e) => {
+        if (mini_map_mouse_position.counter === 1){
+            mini_map_mouse_position.x_second = e.layerX;
+            mini_map_mouse_position.y_second = e.layerY;
+            drowRangeOnMiniMap();
+        }
     });
 
     document.querySelector('.mmpMap').addEventListener('mouseup', (e) => {
-        mini_map_mouse_position.x_second = e.layerX;
-        mini_map_mouse_position.y_second = e.layerY;
         mini_map_mouse_position.counter++;
-        drowRangeOnMiniMap();
+        mini_map_mouse_position.counter = 0;
     });
 
+}
+
+function drowRangeOnMiniMap() {
+    const range = document.querySelector('#botRange');
+
+    if (mini_map_mouse_position.counter >= 1 && mini_map_mouse_position.counter <= 2){
+        if ( mini_map_mouse_position.x_first < mini_map_mouse_position.x_second ) {
+            range.style.width = `${mini_map_mouse_position.x_second - mini_map_mouse_position.x_first}px`;
+        } else {
+            range.style.width = `${mini_map_mouse_position.x_first - mini_map_mouse_position.x_second}px`;
+            range.style.transform = `translateX(${ - (mini_map_mouse_position.x_first - mini_map_mouse_position.x_second) }px`;
+        }
+
+        if ( mini_map_mouse_position.y_first < mini_map_mouse_position.y_second ) {
+            range.style.height = `${mini_map_mouse_position.y_second - mini_map_mouse_position.y_first}px`;
+        } else {
+            range.style.height = `${mini_map_mouse_position.y_first - mini_map_mouse_position.y_second}px`;
+            range.style.transform = `translateY(${ - (mini_map_mouse_position.y_first - mini_map_mouse_position.y_second) }px`;
+        }
+    }
 }
 
 function addRangeToMap_bot_range() {
@@ -111,27 +144,6 @@ function addRangeToMap_bot_range() {
     rangeItem.style.height = `0`; // range width
     mapEl.appendChild(rangeItem);
 }
-
-function drowRangeOnMiniMap() {
-    const range = document.querySelector('#botRange');
-
-    range.style.left = `${mini_map_mouse_position.x_first}px`;
-    range.style.top = `${mini_map_mouse_position.y_first}px`;
-
-    if (mini_map_mouse_position.counter >= 2 ){
-        
-        
-        
-        range.style.width = `${mini_map_mouse_position.x_second - mini_map_mouse_position.x_first}px`;
-        range.style.height = `${mini_map_mouse_position.y_second - mini_map_mouse_position.y_first}px`;
-
-
-        // range.style.width = `${mini_map_mouse_position.x}`;
-    }
-
-    
-}
-
 
 function init () {
     console.log('RangePosition.js included.')
