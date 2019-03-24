@@ -56,12 +56,16 @@
     border: 2px solid red;
 }
 
-.test{
+.bot-range{
     background-color: rgba(153, 255, 189, .5);
-    border: 1px solid rgba(153, 255, 189, 1);
-    pointer-events: none;
+    border: 2px dashed rgb(0, 128, 255);
+
     position: absolute;
     top: 0;
     left: 0;
+    pointer-events: none;
+}
+
+.test-hide{
     pointer-events: none;
 }

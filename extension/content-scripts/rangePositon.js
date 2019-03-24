@@ -85,6 +85,8 @@ let mini_map_mouse_position = {
     counter: 0
 };
 function getMousePositionOnMiniMap () {
+    const range = document.querySelector('#range'); // fix this
+
     document.querySelector('.mmpMap').addEventListener('mousedown', (e) => {
         const range = document.querySelector('#botRange');
 
@@ -96,6 +98,10 @@ function getMousePositionOnMiniMap () {
             range.style.top = `${mini_map_mouse_position.y_first}px`;
 
             mini_map_mouse_position.counter++;
+
+            for (let i = 0; i <= document.querySelector('.mmpMap').children.length-1; i++){
+                document.querySelector('.mmpMap').children[i].classList.add('test-hide')
+            } 
         }
     });
 
@@ -103,7 +109,7 @@ function getMousePositionOnMiniMap () {
         if (mini_map_mouse_position.counter === 1){
             mini_map_mouse_position.x_second = e.layerX;
             mini_map_mouse_position.y_second = e.layerY;
-            document.querySelector('#range').style.pointerEvents = "auto";
+            range.style.pointerEvents = "auto"; // and this
             drowRangeOnMiniMap();
         }
     });
@@ -111,7 +117,11 @@ function getMousePositionOnMiniMap () {
     document.querySelector('.mmpMap').addEventListener('mouseup', (e) => {
         mini_map_mouse_position.counter++;
         mini_map_mouse_position.counter = 0;
-        document.querySelector('#range').style.pointerEvents = "none";
+        range.style.pointerEvents = "none"; // and ...
+        
+        for (let i = 0; i <= document.querySelector('.mmpMap').children.length-1; i++){
+            document.querySelector('.mmpMap').children[i].classList.remove('test-hide')
+        } 
     });
 
 }
@@ -141,7 +151,7 @@ function addRangeToMap_bot_range() {
 
     const rangeItem = document.createElement('div');
     rangeItem.id="botRange";
-    rangeItem.classList.add('test', 'botRangeTest');
+    rangeItem.classList.add('bot-range');
     rangeItem.style.width = `0`; // range width
     rangeItem.style.height = `0`; // range width
     mapEl.appendChild(rangeItem);
