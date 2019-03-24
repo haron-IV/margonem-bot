@@ -53,8 +53,6 @@ function updateRangePosition(){
     document.querySelector('#range').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
-// small range for checking if hero is near clicked mob:
-
 function addSmallRangeToMap(){
     const mapEl = document.querySelector('.mmpMap');
     const hero = heroPositon();
@@ -85,22 +83,23 @@ let mini_map_mouse_position = {
     counter: 0
 };
 function getMousePositionOnMiniMap () {
-    const range = document.querySelector('#range'); // fix this
+    const range = document.querySelector('#range');
+    const allElementsOnMiniMap = document.querySelector('.mmpMap').children;
 
     document.querySelector('.mmpMap').addEventListener('mousedown', (e) => {
-        const range = document.querySelector('#botRange');
+        const botRange = document.querySelector('#botRange');
 
         if (mini_map_mouse_position.counter === 0) {
             mini_map_mouse_position.x_first = e.layerX;
             mini_map_mouse_position.y_first = e.layerY;
 
-            range.style.left = `${mini_map_mouse_position.x_first}px`;
-            range.style.top = `${mini_map_mouse_position.y_first}px`;
+            botRange.style.left = `${mini_map_mouse_position.x_first}px`;
+            botRange.style.top = `${mini_map_mouse_position.y_first}px`;
 
             mini_map_mouse_position.counter++;
 
-            for (let i = 0; i <= document.querySelector('.mmpMap').children.length-1; i++){
-                document.querySelector('.mmpMap').children[i].classList.add('test-hide')
+            for (let i = 0; i <= allElementsOnMiniMap.length-1; i++){
+                allElementsOnMiniMap[i].classList.add('off-pointer-events')
             } 
         }
     });
@@ -109,18 +108,17 @@ function getMousePositionOnMiniMap () {
         if (mini_map_mouse_position.counter === 1){
             mini_map_mouse_position.x_second = e.layerX;
             mini_map_mouse_position.y_second = e.layerY;
-            range.style.pointerEvents = "auto"; // and this
+            range.style.pointerEvents = "auto";
             drowRangeOnMiniMap();
         }
     });
 
     document.querySelector('.mmpMap').addEventListener('mouseup', (e) => {
-        mini_map_mouse_position.counter++;
         mini_map_mouse_position.counter = 0;
-        range.style.pointerEvents = "none"; // and ...
-        
-        for (let i = 0; i <= document.querySelector('.mmpMap').children.length-1; i++){
-            document.querySelector('.mmpMap').children[i].classList.remove('test-hide')
+        range.style.pointerEvents = "none";
+
+        for (let i = 0; i <= allElementsOnMiniMap.length-1; i++){
+            allElementsOnMiniMap[i].classList.remove('off-pointer-events')
         } 
     });
 
@@ -151,7 +149,7 @@ function addRangeToMap_bot_range() {
 
     const rangeItem = document.createElement('div');
     rangeItem.id="botRange";
-    rangeItem.classList.add('bot-range');
+    rangeItem.classList.add('bot-range', 'range');
     rangeItem.style.width = `0`; // range width
     rangeItem.style.height = `0`; // range width
     mapEl.appendChild(rangeItem);
@@ -176,9 +174,7 @@ function checkIsGameLoaded() {
         const loading_el = document.querySelector('#loading');
         
         if ( loading_el.style.display === '' ) {
-            // chrome.storage.sync.set({'gameLoadedStatus': false}, () => {});
         } else if (loading_el.style.display === 'none') {
-            // chrome.storage.sync.set({'gameLoadedStatus': true}, () => {});
             init();
             clearInterval(interval);
         }
