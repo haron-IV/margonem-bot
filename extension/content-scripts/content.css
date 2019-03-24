@@ -57,7 +57,9 @@
 }
 
 .test{
-    background-color: pink;
+    background-color: rgba(153, 255, 189, .5);
+    border: 1px solid rgba(153, 255, 189, 1);
+    pointer-events: none;
     position: absolute;
     top: 0;
     left: 0;

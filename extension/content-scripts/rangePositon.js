@@ -103,6 +103,7 @@ function getMousePositionOnMiniMap () {
         if (mini_map_mouse_position.counter === 1){
             mini_map_mouse_position.x_second = e.layerX;
             mini_map_mouse_position.y_second = e.layerY;
+            document.querySelector('#range').style.pointerEvents = "auto";
             drowRangeOnMiniMap();
         }
     });
@@ -110,6 +111,7 @@ function getMousePositionOnMiniMap () {
     document.querySelector('.mmpMap').addEventListener('mouseup', (e) => {
         mini_map_mouse_position.counter++;
         mini_map_mouse_position.counter = 0;
+        document.querySelector('#range').style.pointerEvents = "none";
     });
 
 }
