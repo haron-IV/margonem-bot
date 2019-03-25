@@ -1,8 +1,8 @@
 {
-    "manifest_version": 2,
-    "name": "Margonem Bot",
-    "version": "1.0",
-    "description": "Project for learn",
+    "manifest_version": 1,
+    "name": "Margonem Multi Bot",
+    "version": "alfa",
+    "description": "Margonem Multi Bot - Exp bot, elite bot and a few extension for better playing.",
     "icons": {
         "128": "./icons/icon128.png",
         "48": "./icons/icon48.png",
