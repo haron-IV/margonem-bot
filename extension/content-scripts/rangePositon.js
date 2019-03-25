@@ -90,6 +90,7 @@ function getMousePositionOnMiniMap () {
         const botRange = document.querySelector('#botRange');
 
         if (mini_map_mouse_position.counter === 0) {
+            
             mini_map_mouse_position.x_first = e.layerX;
             mini_map_mouse_position.y_first = e.layerY;
 
