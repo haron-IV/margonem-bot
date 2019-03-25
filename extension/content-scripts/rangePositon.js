@@ -161,8 +161,8 @@ function init () {
     addRangeToMap();
     addSmallRangeToMap();
 
-    getMousePositionOnMiniMap();
-    addRangeToMap_bot_range();
+    // getMousePositionOnMiniMap();
+    // addRangeToMap_bot_range();
 
     setInterval(() => {
         updateRangePosition();
