@@ -13,6 +13,19 @@ setTimeout(() => {
     return range;
   }
 
+  function _rangeBot(el) { // this function do the smae as _range but for other element which should be get via top, left not transform
+    const rangeEl = document.querySelector(el);
+    const range = {
+      x: parseInt( rangeEl.style.left.replace(/[translate px ()]/g, '') ),
+      y: parseInt( rangeEl.style.top.replace(/[translate px ()]/g, '') ),
+      width: parseInt( rangeEl.style.width.split(/[. px]/)[0] ),
+      height: parseInt( rangeEl.style.height.split(/[. px]/)[0] ),
+      x_start: parseInt( rangeEl.style.left.replace(/[translate px ()]/g, '')),
+      y_start: parseInt( rangeEl.style.top.replace(/[translate px ()]/g, '') )
+    }
+    return range;
+  }
+
   function _mobs() {
     return document.querySelectorAll('.mmp-mob');
   }
@@ -22,12 +35,25 @@ setTimeout(() => {
   }
 
   function mobsInRange(which_range){
-    const range = _range(which_range);
+    let range;
+
+    if (which_range === '#range' || which_range === '#smallRange') {
+      range = _range(which_range);
+
+      range.x_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
+      range.y_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
+
+    } else if (which_range === '#botRange'){
+      range = _rangeBot(which_range);
+      
+      range.x_start = parseInt( document.querySelector(which_range).style.left.replace(/[translate px ()]/g, '') );
+      range.y_start = parseInt( document.querySelector(which_range).style.top.replace(/[translate px ()]/g, '') );
+
+      console.log('bot range: ', range);
+    }
+
     const mobs = _mobs();
     let mobs_list = [];
-
-    range.x_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[0] );
-    range.y_start = parseInt( document.querySelector(which_range).style.transform.replace(/[translate px ()]/g, '').split(',')[1] );
 
     mobs.forEach(el => {
       const mob_position = {

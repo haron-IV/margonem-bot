@@ -90,15 +90,14 @@ function getMousePositionOnMiniMap () {
         const botRange = document.querySelector('#botRange');
 
         if (mini_map_mouse_position.counter === 0) {
+            botRange.style.width = 0;
+            botRange.style.height = 0; // reset area after click
             
             mini_map_mouse_position.x_first = e.layerX;
             mini_map_mouse_position.y_first = e.layerY;
 
             botRange.style.left = `${mini_map_mouse_position.x_first}px`;
             botRange.style.top = `${mini_map_mouse_position.y_first}px`;
-            
-            //Here shouldn't be a left and top, should be transform - translate
-            // botRange.style.transform = `translate(${mini_map_mouse_position.x_first}px, ${mini_map_mouse_position.y_first}px)`;
 
             mini_map_mouse_position.counter++;
 
@@ -134,9 +133,9 @@ function drowRangeOnMiniMap() {
     if (mini_map_mouse_position.counter >= 1 && mini_map_mouse_position.counter <= 2){
 
         if (mini_map_mouse_position.x_first > mini_map_mouse_position.x_second && mini_map_mouse_position.y_first > mini_map_mouse_position.y_second) {
-            console.log('od prawa do lewa, od dołu do góry')
             range.style.height = `${ Math.abs( mini_map_mouse_position.y_first ) - Math.abs( mini_map_mouse_position.y_second )}px`;
             range.style.width = `${ Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second )}px`;
+
             range.style.transform = `translate(${ - ( Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second ) ) }px, ${ ( Math.abs( mini_map_mouse_position.y_second ) - Math.abs( mini_map_mouse_position.y_first ))}px`;
             
         } else {
@@ -159,7 +158,7 @@ function drowRangeOnMiniMap() {
     }
 }
 
-function addRangeToMap_bot_range() {
+function addBotRangeToMiniMap() {
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
@@ -176,7 +175,7 @@ function init () {
     addSmallRangeToMap();
 
     getMousePositionOnMiniMap();
-    addRangeToMap_bot_range();
+    addBotRangeToMiniMap();
 
     setInterval(() => {
         updateRangePosition();
