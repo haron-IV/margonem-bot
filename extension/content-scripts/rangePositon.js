@@ -96,6 +96,9 @@ function getMousePositionOnMiniMap () {
 
             botRange.style.left = `${mini_map_mouse_position.x_first}px`;
             botRange.style.top = `${mini_map_mouse_position.y_first}px`;
+            
+            //Here shouldn't be a left and top, should be transform - translate
+            // botRange.style.transform = `translate(${mini_map_mouse_position.x_first}px, ${mini_map_mouse_position.y_first}px)`;
 
             mini_map_mouse_position.counter++;
 
@@ -129,19 +132,30 @@ function drowRangeOnMiniMap() {
     const range = document.querySelector('#botRange');
 
     if (mini_map_mouse_position.counter >= 1 && mini_map_mouse_position.counter <= 2){
-        if ( mini_map_mouse_position.x_first < mini_map_mouse_position.x_second ) {
-            range.style.width = `${mini_map_mouse_position.x_second - mini_map_mouse_position.x_first}px`;
-        } else {
-            range.style.width = `${mini_map_mouse_position.x_first - mini_map_mouse_position.x_second}px`;
-            range.style.transform = `translateX(${ - (mini_map_mouse_position.x_first - mini_map_mouse_position.x_second) }px`;
-        }
 
-        if ( mini_map_mouse_position.y_first < mini_map_mouse_position.y_second ) {
-            range.style.height = `${mini_map_mouse_position.y_second - mini_map_mouse_position.y_first}px`;
+        if (mini_map_mouse_position.x_first > mini_map_mouse_position.x_second && mini_map_mouse_position.y_first > mini_map_mouse_position.y_second) {
+            console.log('od prawa do lewa, od dołu do góry')
+            range.style.height = `${ Math.abs( mini_map_mouse_position.y_first ) - Math.abs( mini_map_mouse_position.y_second )}px`;
+            range.style.width = `${ Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second )}px`;
+            range.style.transform = `translate(${ - ( Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second ) ) }px, ${ ( Math.abs( mini_map_mouse_position.y_second ) - Math.abs( mini_map_mouse_position.y_first ))}px`;
+            
         } else {
-            range.style.height = `${mini_map_mouse_position.y_first - mini_map_mouse_position.y_second}px`;
-            range.style.transform = `translateY(${ - (mini_map_mouse_position.y_first - mini_map_mouse_position.y_second) }px`;
+
+            if ( mini_map_mouse_position.x_first < mini_map_mouse_position.x_second ) {
+                range.style.width = `${ Math.abs( mini_map_mouse_position.x_second ) - Math.abs( mini_map_mouse_position.x_first )}px`;
+            } else {
+                range.style.width = `${ Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second )}px`;
+                range.style.transform = `translateX(${ - ( Math.abs( mini_map_mouse_position.x_first ) - Math.abs( mini_map_mouse_position.x_second ) ) }px`;
+            }
+    
+            if ( mini_map_mouse_position.y_first < mini_map_mouse_position.y_second ) {
+                range.style.height = `${ Math.abs( mini_map_mouse_position.y_second ) - Math.abs( mini_map_mouse_position.y_first )}px`;
+            } else {
+                range.style.height = `${ Math.abs( mini_map_mouse_position.y_first ) - Math.abs( mini_map_mouse_position.y_second )}px`;
+                range.style.transform = `translateY(${ - (mini_map_mouse_position.y_first - mini_map_mouse_position.y_second) }px`;
+            }
         }
+        
     }
 }
 
@@ -161,8 +175,8 @@ function init () {
     addRangeToMap();
     addSmallRangeToMap();
 
-    // getMousePositionOnMiniMap();
-    // addRangeToMap_bot_range();
+    getMousePositionOnMiniMap();
+    addRangeToMap_bot_range();
 
     setInterval(() => {
         updateRangePosition();

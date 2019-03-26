@@ -57,6 +57,15 @@ setTimeout(() => {
     }
   }
 
+  function testBotRange(){
+    const mobInBotRange = mobsInRange('#botRange');
+    console.log('mobs in bot range: ', mobInBotRange);
+  }
+
+  setTimeout(() => {
+    testBotRange();
+  }, 5000);
+
   function getNearestMob() {
     const mobs_in_range = mobsInRange('#range');
     const hero_coord = getMapHeroCoord();
