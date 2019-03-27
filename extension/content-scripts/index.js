@@ -83,6 +83,25 @@ setTimeout(() => {
     }
   }
 
+  function getMapInfo(){
+    const map = {
+      width: parseInt( document.querySelector('.mmpMap').style.width.split(/[. px]/)[0] ),
+      heigh: parseInt( document.querySelector('.mmpMap').style.height.split(/[. px]/)[0] )
+    }
+    return map;
+  }
+
+  function checkIfBotRangeIsAvailable(){
+    const botRange = _rangeBot('#botRange');
+    const map = getMapInfo();
+
+    if ( botRange.width > map.width / 14 && botRange.height > map.heigh / 14 ){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function hideOutsideMobsFromBotRange(){
     const mobsInBotRange = mobsInRange('#botRange');
     const allMobs = document.querySelectorAll('.mmp-mob');
@@ -330,7 +349,14 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
-    hideOutsideMobsFromBotRange();
+
+    if (checkIfBotRangeIsAvailable() === true){
+      console.log('hide mobs which are out of bot range')
+      hideOutsideMobsFromBotRange();
+    } else {
+      console.log('bot cant hide mobs')
+    }
+    
     // const map_name = document.querySelector('#botloc').getAttribute('tip');
     
     let letHeroWalk = true;
