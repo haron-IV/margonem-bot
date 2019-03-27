@@ -114,19 +114,20 @@ setTimeout(() => {
   }
 
   function hideOutsideMobsFromBotRange(){
-    const mobsInBotRange = mobsInRange('#botRange');
-    const allMobs = document.querySelectorAll('.mmp-mob');
-    
-    mobsInBotRange.forEach(el => {
-      el.classList.add('bot-in-range');
-    });
+    setTimeout(() => {
+      const mobsInBotRange = mobsInRange('#botRange');
+      const allMobs = document.querySelectorAll('.mmp-mob');
+      
+      mobsInBotRange.forEach(el => {
+        el.classList.add('bot-in-range');
+      });
 
-    allMobs.forEach(el => {
-      if (el.classList.contains('bot-in-range') === false){
-        el.classList.add('hideOutsideRangeMobs');
-      }
-    });
-    
+      allMobs.forEach(el => {
+        if (el.classList.contains('bot-in-range') === false){
+          el.classList.add('hideOutsideRangeMobs');
+        }
+      });
+    }, 1000);
   }
 
   function getNearestMob() {
@@ -361,19 +362,23 @@ setTimeout(() => {
   function setBotRangeFromLastPosition(){
     chrome.storage.sync.get(['last_botRange_style'], (bot) => {
       document.querySelector('#botRange').setAttribute('style', bot.last_botRange_style);
+      hideOutsideMobsFromBotRange();
     });
+    
   }
 
   function bot(){
     autoFight();
-    setBotRangeFromLastPosition();
-
+  
     if (checkIfBotRangeIsAvailable() === true){
-      console.log('hide mobs which are out of bot range')
+      console.log('hide mobs which are out of bot range');
       hideOutsideMobsFromBotRange();
+
     } else {
       console.log('bot cant hide mobs')
+      setBotRangeFromLastPosition();      
     }
+    
     
     // const map_name = document.querySelector('#botloc').getAttribute('tip');
     
