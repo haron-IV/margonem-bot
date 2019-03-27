@@ -83,29 +83,21 @@ setTimeout(() => {
     }
   }
 
-  function testBotRange(){
+  function hideOutsideMobsFromBotRange(){
+    const mobsInBotRange = mobsInRange('#botRange');
+    const allMobs = document.querySelectorAll('.mmp-mob');
     
-    document.querySelector('#b_pvp').addEventListener('click', ()=>{
-      const mobsInBotRange = mobsInRange('#botRange');
-      const allMobs = document.querySelectorAll('.mmp-mob');
-      
-      mobsInBotRange.forEach(el => {
-        el.classList.add('bot');
-      });
+    mobsInBotRange.forEach(el => {
+      el.classList.add('bot-in-range');
+    });
 
-      allMobs.forEach(el => {
-        if (el.classList.contains('bot') === false){
-          el.classList.add('hideOutsideRangeMobs');
-        }
-      });
-
+    allMobs.forEach(el => {
+      if (el.classList.contains('bot-in-range') === false){
+        el.classList.add('hideOutsideRangeMobs');
+      }
     });
     
   }
-
-  setTimeout(() => {
-    testBotRange();
-  }, 1000);
 
   function getNearestMob() {
     const mobs_in_range = mobsInRange('#range');
@@ -252,7 +244,6 @@ setTimeout(() => {
     return	hero;
   }
 
-
   function getMapHeroCoord(){
     const hero = {
       x: parseInt( document.querySelector('.mmp-hero').style.left.split('px')[0].trim() ),
@@ -339,6 +330,7 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
+    hideOutsideMobsFromBotRange();
     // const map_name = document.querySelector('#botloc').getAttribute('tip');
     
     let letHeroWalk = true;
@@ -398,7 +390,7 @@ setTimeout(() => {
     console.log('bot status: ', botStats.botStatus)
     if( botStats.botStatus == true ){
       bot();
-      console.log('Bot run automaticly.')
+      console.log('Bot run automaticly.');
     }
   });
 
