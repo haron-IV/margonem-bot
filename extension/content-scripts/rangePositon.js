@@ -75,6 +75,7 @@ function updateSmallRangePosition(){
     document.querySelector('#smallRange').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
 
+/// bot range
 let mini_map_mouse_position = {
     x_first: 0,
     y_first: 0,
@@ -121,10 +122,22 @@ function getMousePositionOnMiniMap () {
         range.style.pointerEvents = "none";
 
         for (let i = 0; i <= allElementsOnMiniMap.length-1; i++){
-            allElementsOnMiniMap[i].classList.remove('off-pointer-events')
+            allElementsOnMiniMap[i].classList.remove('off-pointer-events');
+            saveBotRangePositionAndSize();
         } 
     });
 
+}
+
+function saveBotRangePositionAndSize(){
+    const range = document.querySelector('#botRange');
+    const last_range_styles = range.getAttribute('style');
+
+    const data = {
+        "last_botRange_style": last_range_styles
+    }
+
+    chrome.storage.sync.set(data, function (){});
 }
 
 function drowRangeOnMiniMap() {

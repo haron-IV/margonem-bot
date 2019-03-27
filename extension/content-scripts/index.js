@@ -111,7 +111,6 @@ setTimeout(() => {
       return false;
     }
     
-    
   }
 
   function hideOutsideMobsFromBotRange(){
@@ -359,8 +358,15 @@ setTimeout(() => {
   }
   check_if_black_list_mob_is_created();
 
+  function setBotRangeFromLastPosition(){
+    chrome.storage.sync.get(['last_botRange_style'], (bot) => {
+      document.querySelector('#botRange').setAttribute('style', bot.last_botRange_style);
+    });
+  }
+
   function bot(){
     autoFight();
+    setBotRangeFromLastPosition();
 
     if (checkIfBotRangeIsAvailable() === true){
       console.log('hide mobs which are out of bot range')
