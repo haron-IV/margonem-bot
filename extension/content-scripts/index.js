@@ -92,14 +92,26 @@ setTimeout(() => {
   }
 
   function checkIfBotRangeIsAvailable(){
-    const botRange = _rangeBot('#botRange');
-    const map = getMapInfo();
 
-    if ( botRange.width > map.width / 14 && botRange.height > map.heigh / 14 ){
-      return true;
+    if ( document.querySelector('#botRange') ){
+      console.log('bot range is available');
+
+      const botRange = _rangeBot('#botRange');
+      const map = getMapInfo();
+
+      if ( botRange.width > map.width / 14 && botRange.height > map.heigh / 14 ){
+        return true;
+        console.log('bot range have correct size');
+      } else {
+        console.log('bot range havent correct size');
+        return false;
+      }
     } else {
+      console.log('bot range isnt available');
       return false;
     }
+    
+    
   }
 
   function hideOutsideMobsFromBotRange(){
