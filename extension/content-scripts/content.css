@@ -51,9 +51,15 @@
 }
 
 .hiddenFromBot{ 
+    /* hiddenFromBot class it's helper class, bot get decisions on coordinates not this class */
     display: block !important;
     background-color: black !important;
     border: 2px solid red;
+}
+
+.hideOutsideRangeMobs{
+    /* This class hide mobs which are outside from bot range */
+    display: none;
 }
 
 .bot-range{

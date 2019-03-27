@@ -84,13 +84,28 @@ setTimeout(() => {
   }
 
   function testBotRange(){
-    const mobInBotRange = mobsInRange('#botRange');
-    console.log('mobs in bot range: ', mobInBotRange);
+    
+    document.querySelector('#b_pvp').addEventListener('click', ()=>{
+      const mobsInBotRange = mobsInRange('#botRange');
+      const allMobs = document.querySelectorAll('.mmp-mob');
+      
+      mobsInBotRange.forEach(el => {
+        el.classList.add('bot');
+      });
+
+      allMobs.forEach(el => {
+        if (el.classList.contains('bot') === false){
+          el.classList.add('hideOutsideRangeMobs');
+        }
+      });
+
+    });
+    
   }
 
   setTimeout(() => {
     testBotRange();
-  }, 5000);
+  }, 1000);
 
   function getNearestMob() {
     const mobs_in_range = mobsInRange('#range');
