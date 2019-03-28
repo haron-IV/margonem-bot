@@ -22,7 +22,8 @@ function updateCoordinates() {
 
     setInterval(() => {
         updateActiveCoordinates();
-    }, 700);
+        console.log(coordinates)
+    }, 3731);
 }
 
 function reload (message) {

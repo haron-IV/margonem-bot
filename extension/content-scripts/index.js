@@ -113,8 +113,7 @@ setTimeout(() => {
     
   }
 
-  function hideOutsideMobsFromBotRange(){
-    setInterval(() => {
+  function hideOutsideMobsFromBotRange () {
       const mobsInBotRange = mobsInRange('#botRange');
       const allMobs = document.querySelectorAll('.mmp-mob');
       
@@ -126,7 +125,16 @@ setTimeout(() => {
         if (el.classList.contains('bot-in-range') === false){
           el.classList.add('hidden');
         }
-      });
+    });
+  }
+
+  function refreshHiddenMobsFromBotRange(){
+    setTimeout(()=>{
+      hideOutsideMobsFromBotRange();
+    }, 2000);
+
+    setInterval(() => {
+      hideOutsideMobsFromBotRange();
     }, 10000);
   }
 
@@ -237,7 +245,7 @@ setTimeout(() => {
         mob_coords.push( el.getAttribute('tip').split(/[()]/)[1] );
 
         if ( arrayContainsArray(mobs.black_list_mob.data, mob_coords) === true ) {
-          console.log('bot hidden this mob cuz cant kill him. ', el)
+          // console.log('bot hidden this mob cuz cant kill him. ', el)
           el.classList.add('hidden', 'hiddenFromBot');
         }
         
@@ -363,7 +371,7 @@ setTimeout(() => {
     chrome.storage.sync.get(['last_botRange_style'], (bot) => {
       setTimeout(() => {
         document.querySelector('#botRange').setAttribute('style', bot.last_botRange_style);
-        hideOutsideMobsFromBotRange();
+        refreshHiddenMobsFromBotRange();
       }, 500);
     });
   }
@@ -373,7 +381,7 @@ setTimeout(() => {
   
     if (checkIfBotRangeIsAvailable() === true){
       console.log('hide mobs which are out of bot range');
-      hideOutsideMobsFromBotRange();
+      refreshHiddenMobsFromBotRange();
 
     } else {
       console.log('bot cant see botRange so added it from last data')
