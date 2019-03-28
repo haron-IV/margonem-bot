@@ -124,7 +124,7 @@ setTimeout(() => {
 
       allMobs.forEach(el => {
         if (el.classList.contains('bot-in-range') === false){
-          el.classList.add('hideOutsideRangeMobs');
+          el.classList.add('hidden');
         }
       });
     }, 1000);
@@ -361,10 +361,11 @@ setTimeout(() => {
 
   function setBotRangeFromLastPosition(){
     chrome.storage.sync.get(['last_botRange_style'], (bot) => {
-      document.querySelector('#botRange').setAttribute('style', bot.last_botRange_style);
-      hideOutsideMobsFromBotRange();
+      setTimeout(() => {
+        document.querySelector('#botRange').setAttribute('style', bot.last_botRange_style);
+        hideOutsideMobsFromBotRange();
+      }, 500);
     });
-    
   }
 
   function bot(){
@@ -376,7 +377,7 @@ setTimeout(() => {
 
     } else {
       console.log('bot cant hide mobs')
-      setBotRangeFromLastPosition();      
+      setBotRangeFromLastPosition();
     }
     
     
@@ -465,7 +466,10 @@ setTimeout(() => {
       };
         
       chrome.storage.sync.set(data, function (){});
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();  
+      }, 1000);
+      
     });
 
   });
