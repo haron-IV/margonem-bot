@@ -36,8 +36,8 @@ function checkCoordinates(){
 
 function checkBotStatus() {
     chrome.storage.sync.get('botStatus', (bot) => {
-        if (bot.botStats === true){
-            return bot.botStats;
+        if (bot.botStatus === true){
+            return bot.botStatus;
         }
     });
 }

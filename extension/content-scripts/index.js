@@ -448,11 +448,11 @@ setTimeout(() => {
     console.log('start bot');
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
-      let data = {
+      const data = {
         'botStatus': true
       };
         
-      chrome.storage.sync.set(data, function (){});
+      chrome.storage.sync.set(data, function (){ console.log('botStatus after set state: ', data )});
       bot();
     });
     
