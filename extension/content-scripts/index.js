@@ -376,7 +376,7 @@ setTimeout(() => {
       hideOutsideMobsFromBotRange();
 
     } else {
-      console.log('bot cant hide mobs')
+      console.log('bot cant see botRange so added it from last data')
       setBotRangeFromLastPosition();
     }
     
@@ -436,13 +436,30 @@ setTimeout(() => {
   }
 
   // \/\/\/\/ start stop bot statement \/\/\/\/ this function should be refactorized in future
-  chrome.storage.sync.get(['botStatus'], (botStats)=> {
-    console.log('bot status: ', botStats.botStatus)
-    if( botStats.botStatus == true ){
-      bot();
-      console.log('Bot run automaticly.');
-    }
-  });
+
+  function checkIsGameLoaded() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+        } else if (loading_el.style.display === 'none') {
+
+          chrome.storage.sync.get(['botStatus'], (botStats)=> {
+            console.log('bot status: ', botStats.botStatus);
+
+            if( botStats.botStatus == true ){
+              bot();
+              console.log('Bot run automaticly.');
+            }
+          });
+
+          clearInterval(interval);
+        }
+    }, 1000);
+  }
+
+  checkIsGameLoaded();
+
 
   document.querySelector('#start-bot').addEventListener('click', ()=>{
     console.log('start bot');

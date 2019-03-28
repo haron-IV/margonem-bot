@@ -1,10 +1,10 @@
-function getCoordinates(){
-    return document.querySelector('#botloc').innerHTML;
-}
-
 const coordinates = {
     old: getCoordinates(),
     active: getCoordinates()
+}
+
+function getCoordinates(){
+    return document.querySelector('#botloc').innerHTML;
 }
 
 function updateOldCoordinates(){
@@ -22,43 +22,21 @@ function updateCoordinates() {
 
     setInterval(() => {
         updateActiveCoordinates();
-    }, 1000);
+    }, 700);
+}
+
+function reload (message) {
+    console.log(message)
+    window.location.reload();
 }
 
 function checkCoordinates(){
     chrome.storage.sync.get(['botStatus'], (botStats) => {
         if( botStats.botStatus === true && coordinates.old === coordinates.active ){
-            console.log('Reload beacuse your hero is stuck.')
-            window.location.reload();
+            reload('Reload beacuse your hero is stuck.');
         }
     });
 }
-
-function checkBotStatus() {
-    chrome.storage.sync.get('botStatus', (bot) => {
-        if (bot.botStatus === true){
-            return bot.botStatus;
-        }
-    });
-}
-
-setInterval(() => {
-    checkBotStatus();
-}, 2000);
-
-setTimeout(() => {
-
-    updateCoordinates();
-    setInterval(() => {
-        checkCoordinates();
-        if (isDead() === true && checkBotStatus() === true){
-            document.querySelector('#logoutbut').click();
-        }
-    }, 45000);
-    
-}, 2000);
-
-// LOGOUT IF DEAD
 
 function isDead(){
     if (document.querySelector('#dazed').style.display == "block"){
@@ -67,3 +45,38 @@ function isDead(){
         return false;
     }
 }
+
+function init_reloading() {
+    updateCoordinates();
+
+
+    setInterval(() => {
+        checkCoordinates();
+    }, 15000);
+
+    setInterval(() => {
+        
+        chrome.storage.sync.get(['botStatus'], (bot) => {
+            if (isDead() === true && bot.botStatus === true){
+                document.querySelector('#logoutbut').click();
+            }
+        });
+        
+    }, 45000);
+
+}
+
+function checkLoading() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+            console.log('loading')
+        } else if (loading_el.style.display === 'none') {
+            init_reloading();
+            clearInterval(interval);
+        }
+    }, 1500);
+}
+
+checkLoading();

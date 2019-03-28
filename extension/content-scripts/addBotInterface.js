@@ -61,6 +61,11 @@ setTimeout(() => {
         interface.stopBotButton.classList.remove('active');
     });
 
+    interface.stopBotButton.addEventListener('click', () => {
+        interface.startBotButton.classList.remove('active');
+        interface.stopBotButton.classList.add('active');
+    });
+
     chrome.storage.sync.get(['botStatus', 'interface_state'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
             interface.startBotButton.classList.add('active');
@@ -68,7 +73,7 @@ setTimeout(() => {
             interface.stopBotButton.classList.add('active');
         }
 
-        console.log('state: ', botStats.interface_state)
+        console.log('interface state: ', botStats.interface_state)
 
         if (botStats.interface_state === true){
             interface.wrapper.style.top = "0px";
