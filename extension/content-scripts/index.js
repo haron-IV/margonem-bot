@@ -114,7 +114,7 @@ setTimeout(() => {
   }
 
   function hideOutsideMobsFromBotRange(){
-    setTimeout(() => {
+    setInterval(() => {
       const mobsInBotRange = mobsInRange('#botRange');
       const allMobs = document.querySelectorAll('.mmp-mob');
       
@@ -127,7 +127,7 @@ setTimeout(() => {
           el.classList.add('hidden');
         }
       });
-    }, 1000);
+    }, 10000);
   }
 
   function getNearestMob() {
@@ -379,7 +379,6 @@ setTimeout(() => {
       console.log('bot cant see botRange so added it from last data')
       setBotRangeFromLastPosition();
     }
-    
     
     // const map_name = document.querySelector('#botloc').getAttribute('tip');
     
