@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Margonem Multi Bot",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Margonem Multi Bot - Exp bot, elite bot and a few extension for better playing.",
     "icons": {
         "128": "./icons/icon128.png",
