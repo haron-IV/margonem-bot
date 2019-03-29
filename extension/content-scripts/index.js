@@ -378,6 +378,7 @@ setTimeout(() => {
 
   function bot(){
     autoFight();
+    getAllMobsWhichCantKill();
   
     if (checkIfBotRangeIsAvailable() === true){
       console.log('hide mobs which are out of bot range');
