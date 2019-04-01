@@ -27,7 +27,7 @@ setTimeout(() => {
   }
 
   function _mobs() {
-    return document.querySelectorAll('.mmp-mob');
+    return document.querySelectorAll('.mmp-mob, .mmp-elite');
   }
 
   function _portals(){

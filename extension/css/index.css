@@ -70,7 +70,7 @@
   display: flex;
   justify-content: space-between; }
   .footer__link-section {
-    width: 90%;
+    width: 85%;
     display: flex; }
     .footer__link-section .link {
       margin: 0 10px; }
