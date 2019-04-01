@@ -114,9 +114,10 @@ setTimeout(() => {
   }
 
   function hideOutsideMobsFromBotRange () {
-      const mobsInBotRange = mobsInRange('#botRange');
-      const allMobs = document.querySelectorAll('.mmp-mob');
-      
+    const mobsInBotRange = mobsInRange('#botRange');
+    const allMobs = document.querySelectorAll('.mmp-mob');
+    
+    if (checkIfBotRangeIsAvailable() === true) {
       mobsInBotRange.forEach(el => {
         el.classList.add('bot-in-range');
       });
@@ -124,8 +125,10 @@ setTimeout(() => {
       allMobs.forEach(el => {
         if (el.classList.contains('bot-in-range') === false){
           el.classList.add('hidden');
-        }
-    });
+        } 
+      });
+    }
+
   }
 
   function refreshHiddenMobsFromBotRange(){
