@@ -115,7 +115,7 @@ setTimeout(() => {
 
   function hideOutsideMobsFromBotRange () {
     const mobsInBotRange = mobsInRange('#botRange');
-    const allMobs = document.querySelectorAll('.mmp-mob');
+    const allMobs = document.querySelectorAll('.mmp-mob, .mmp-elite');
     
     if (checkIfBotRangeIsAvailable() === true) {
       mobsInBotRange.forEach(el => {
@@ -328,7 +328,7 @@ setTimeout(() => {
       offset: 50
     }
     
-    data.mobs.forEach(el => { 
+    data.mobs.forEach(el => {
       const mob = {
         x: parseInt( el.style.left.split(/[. px]/)[0].trim() ),
         y: parseInt( el.style.top.split(/[. px]/)[0].trim() )
@@ -443,7 +443,7 @@ setTimeout(() => {
     
     let interval2 = setInterval(() => {
       checkHeroPositionAndAttack();
-    }, 1300);
+    }, 1000);
   }
 
   // \/\/\/\/ start stop bot statement \/\/\/\/ this function should be refactorized in future
