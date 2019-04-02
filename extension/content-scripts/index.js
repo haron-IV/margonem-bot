@@ -329,7 +329,9 @@ setTimeout(() => {
       battleState: document.querySelector('#battle').style.display,
       hero: getHeroCoord(),
       mobs:  getMobs(),
-      offset: 50
+      offset: 50,
+      dialogWindow: document.querySelector('#dialog'),
+      dialogLineExit: document.querySelector('.LINE_EXIT')
     }
     
     data.mobs.forEach(el => {
@@ -350,9 +352,16 @@ setTimeout(() => {
           console.log('attacked el classlist: ', el.getAttribute('tip'))
   
           if(data.battleState === "none" || data.battleState === ""){
-            el.click(); // attack mob
-            getAllMobsWhichCantKill(); // check black list and refresh black list
-            console.log('attack')
+           
+
+            if (data.dialogWindow.style.display != 'none') {
+              data.dialogLineExit.click();
+              console.log('-EXIT DIALOG-')
+            } else if (data.dialogWindow.style.display === 'none'){
+              getAllMobsWhichCantKill(); // check black list and refresh black list
+              el.click(); // attack mob
+              console.log('attack')
+            }
           }
             
         }
