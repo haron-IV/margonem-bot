@@ -225,6 +225,10 @@ setTimeout(() => {
       }
     }, 100);
     go_to_portal_counter++;
+
+    if ( go_to_portal_counter >= data.portals.length-1 ) {
+      go_to_portal_counter = 0;
+    }
   }
 
   function arrayContainsArray (superset, subset) {
