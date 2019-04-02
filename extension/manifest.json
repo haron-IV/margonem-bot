@@ -36,7 +36,8 @@
                 "./content-scripts/addBotInterface.js",
                 "./content-scripts/elite.js",
                 "./content-scripts/hotkeys.js",
-                "./content-scripts/rangePositon.js"
+                "./content-scripts/rangePositon.js",
+                "./content-scripts/checkConfiguration.js"
             ],
             "run_at": "document_end"
         }

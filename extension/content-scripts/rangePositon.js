@@ -206,7 +206,6 @@ function checkIsGameLoaded() {
             clearInterval(interval);
         }
     }, 1000);
-    
 }
 
 checkIsGameLoaded();
