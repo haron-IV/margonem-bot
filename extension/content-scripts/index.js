@@ -354,10 +354,10 @@ setTimeout(() => {
           if(data.battleState === "none" || data.battleState === ""){
            
 
-            if (data.dialogWindow.style.display != 'none') {
+            if (data.dialogWindow.style.display === 'block') {
               data.dialogLineExit.click();
               console.log('-EXIT DIALOG-')
-            } else if (data.dialogWindow.style.display === 'none'){
+            } else {
               getAllMobsWhichCantKill(); // check black list and refresh black list
               el.click(); // attack mob
               console.log('attack')
