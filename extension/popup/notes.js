@@ -42,6 +42,11 @@ function createNote(text){
     note.innerHTML = text;
     
     $notes_list.appendChild(note);
+
+    const deleteNote = document.createElement('img');
+    deleteNote.src = '../img/delete-button.png';
+    deleteNote.classList.add('delete-note');
+    note.appendChild(deleteNote);
 }
 
 $button_save_notes.addEventListener('click', () => {
