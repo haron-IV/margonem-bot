@@ -7,11 +7,10 @@ const $notes_list = document.querySelector('#notes-list');
 let allNotes = [];
 //
 
-
-
 function init_notes(){
     checkIfNotesWasCreated();
     loadNotes();
+    showNotes();
 }
 init_notes();
 
@@ -29,25 +28,35 @@ function loadNotes(){
     });
 }
 
+function showNotes(){
+    chrome.storage.sync.get(['notes'], (bot) => {
+        bot.notes.forEach(el => {
+           createNote(el); 
+        });
+    });
+}
+
+function createNote(text){
+    const note = document.createElement('p');
+    note.classList.add('single-note');
+    note.innerHTML = text;
+    
+    $notes_list.appendChild(note);
+}
+
 $button_save_notes.addEventListener('click', () => {
     const activeNote = $textarea.value;
 
-    chrome.storage.sync.get(['notes'], (bot) => {
-        let data = bot.notes;
-
-        data.push(activeNote);
-
-        chrome.storage.sync.set({'notes': data});
-    });
-});
-
-// $changed_fight_window.addEventListener('change', () => {
-
-//     if ($changed_fight_window.checked === true){
-//         settings.changed_fight_window = true
-//     } else {
-//         settings.changed_fight_window = false
-//     }
+    if (activeNote != '') {
+        chrome.storage.sync.get(['notes'], (bot) => {
+            let data = bot.notes;
     
-//     chrome.storage.sync.set({'settingsData': settings});
-// });
+            data.push(activeNote);
+    
+            chrome.storage.sync.set({'notes': data});
+    
+            $textarea.value = '';
+        });
+    }
+    
+});

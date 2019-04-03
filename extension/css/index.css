@@ -70,25 +70,38 @@
         font-weight: 700;
         margin-left: 5px; }
     .body-popup .article--notes {
-      display: flex;
-      justify-content: center; }
-      .body-popup .article--notes .textarea {
-        width: 80%;
-        height: 65px;
-        font-size: 12px;
-        padding: 4px;
-        border: none;
-        border-bottom: transparent;
-        border-radius: 2px;
-        background: rgba(255, 255, 255, 0.5);
-        outline: none;
-        resize: none;
-        transition: border-bottom ease-in-out 250ms; }
-        .body-popup .article--notes .textarea:focus {
-          border-bottom: 2px solid rgba(173, 255, 47, 0.5); }
-      .body-popup .article--notes .button {
-        cursor: pointer;
-        font-weight: bold; }
+      display: block; }
+      .body-popup .article--notes .notes-interface {
+        display: flex;
+        justify-content: center; }
+        .body-popup .article--notes .notes-interface .textarea {
+          width: 80%;
+          height: 65px;
+          font-size: 12px;
+          padding: 4px;
+          border: none;
+          border-bottom: transparent;
+          border-radius: 2px;
+          background: rgba(255, 255, 255, 0.5);
+          outline: none;
+          resize: none;
+          transition: border-bottom ease-in-out 250ms; }
+          .body-popup .article--notes .notes-interface .textarea:focus {
+            border-bottom: 2px solid rgba(173, 255, 47, 0.5); }
+        .body-popup .article--notes .notes-interface .button--save {
+          cursor: pointer;
+          font-weight: bold; }
+      .body-popup .article--notes .notes-list {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column; }
+        .body-popup .article--notes .notes-list .single-note {
+          color: #000;
+          background: rgba(255, 255, 255, 0.5);
+          padding: 5px 10px;
+          border: none;
+          border-radius: 2px; }
 
 .footer {
   width: 100%;

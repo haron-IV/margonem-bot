@@ -109,34 +109,52 @@
         }
 
         &--notes{
-            display: flex;
-            justify-content: center;
+            display: block;
 
-            .textarea{
-                width: 80%;
-                height: 65px;
-                font-size: 12px;
-                padding: 4px;
-                border: none;
-                border-bottom: transparent;
-                border-radius: 2px;
-                background: rgba(255, 255, 255, .5);
-                outline: none;
-                resize: none;
-                transition: border-bottom ease-in-out 250ms;
+            .notes-interface{
+                display: flex;
+                justify-content: center;
 
-                &:focus{
-                    border-bottom: 2px solid rgba(greenyellow, .5);
+
+                .textarea{
+                    width: 80%;
+                    height: 65px;
+                    font-size: 12px;
+                    padding: 4px;
+                    border: none;
+                    border-bottom: transparent;
+                    border-radius: 2px;
+                    background: rgba(255, 255, 255, .5);
+                    outline: none;
+                    resize: none;
+                    transition: border-bottom ease-in-out 250ms;
+
+                    &:focus{
+                        border-bottom: 2px solid rgba(greenyellow, .5);
+                    }
+                }
+
+                .button--save{
+                    cursor: pointer;
+                    font-weight: bold;
                 }
             }
-
-            .button{
-                cursor: pointer;
-                font-weight: bold;
-            }
+            
 
             .notes-list{
+                width: 90%;
+                margin: 0 auto;
 
+                display: flex;
+                flex-direction: column;
+
+                .single-note{
+                    color: $black;
+                    background: rgba(255, 255, 255, .5);
+                    padding: 5px 10px;
+                    border: none;
+                    border-radius: 2px;
+                }
             }
         }
         
