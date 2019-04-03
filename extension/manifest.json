@@ -27,7 +27,7 @@
     "content_scripts": [
         {
             "matches": ["http://nomada.margonem.pl/*", "http://fobos.margonem.pl/"],
-            "css": ["./content-scripts/content.css"],
+            "css": ["./content-scripts/content.css", "./content-scripts/appearanceLifting.css"],
             "js": [
                 "./external/jQuery.js",
                 "./content-scripts/index.js",

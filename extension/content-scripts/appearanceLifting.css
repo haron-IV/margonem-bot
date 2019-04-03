@@ -1,0 +1,12 @@
+#battlelog{
+    /* Lifting appeariance for battle log view, move to right and enlarge size of window */
+    left: 75% !important;
+    top: -25% !important;
+    height: 90% !important;
+    background-color: rgba(0, 0, 0, .6) !important;
+}
+
+#battlelog > .attack {
+    /* Increase font size in battlelog attack info */
+    font-size: 11px;
+}
