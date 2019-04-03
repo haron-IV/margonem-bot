@@ -103,7 +103,10 @@
           border: none;
           border-radius: 2px;
           word-wrap: break-word;
-          position: relative; }
+          position: relative;
+          animation-name: fadeInNote;
+          animation-duration: 1200ms;
+          animation-fill-mode: forwards; }
           .body-popup .article--notes .notes-list .single-note .delete-note {
             position: absolute;
             right: 5px;
@@ -114,6 +117,23 @@
             transition: transform ease-in-out 250ms; }
             .body-popup .article--notes .notes-list .single-note .delete-note:hover {
               transform: rotateZ(90deg) scale(1.1); }
+        .body-popup .article--notes .notes-list .single-note-fade-out {
+          animation-name: fadeOutNote;
+          animation-duration: 1200ms;
+          animation-fill-mode: forwards; }
+
+@keyframes fadeInNote {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeOutNote {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0;
+    transform: scale(0); } }
 
 .footer {
   width: 100%;

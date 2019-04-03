@@ -55,7 +55,12 @@ function deleteNote(){
     setTimeout(() => {
         document.querySelectorAll('.delete-note').forEach(el => {
             el.addEventListener('click', (e) => {
-                e.target.parentNode.style.display = 'none';
+                e.target.parentNode.classList.add('single-note-fade-out');
+                const noteHeight = e.target.parentNode.offsetHeight;
+                setTimeout(() => {
+                    e.target.parentNode.style.display = 'none';
+                }, 1100);
+                
 
                 chrome.storage.sync.get(['notes'], (bot) => {
                     let data = bot.notes;
