@@ -11,6 +11,7 @@ function init_notes(){
     checkIfNotesWasCreated();
     loadNotes();
     showNotes();
+    deleteNote();
 }
 init_notes();
 
@@ -30,15 +31,16 @@ function loadNotes(){
 
 function showNotes(){
     chrome.storage.sync.get(['notes'], (bot) => {
-        bot.notes.forEach(el => {
-           createNote(el); 
+        bot.notes.forEach( (el, i) => {
+           createNote(el, i); 
         });
     });
 }
 
-function createNote(text){
+function createNote(text, id){
     const note = document.createElement('p');
     note.classList.add('single-note');
+    note.id = `note${id}`;
     note.innerHTML = text;
     
     $notes_list.appendChild(note);
@@ -47,6 +49,14 @@ function createNote(text){
     deleteNote.src = '../img/delete-button.png';
     deleteNote.classList.add('delete-note');
     note.appendChild(deleteNote);
+}
+
+function deleteNote(){
+    setTimeout(() => {
+        document.querySelector('.delete-note').addEventListener('click', (e) => {
+            e.target.parentNode.style.display = 'none';
+        });    
+    }, 250);
 }
 
 $button_save_notes.addEventListener('click', () => {
