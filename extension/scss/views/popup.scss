@@ -107,6 +107,30 @@
                 }
             }
         }
+
+        &--notes{
+            display: flex;
+            justify-content: center;
+
+            .textarea{
+                width: 80%;
+                height: 65px;
+                font-size: 12px;
+                padding: 4px;
+                border: none;
+                border-bottom: transparent;
+                border-radius: 2px;
+                background: rgba(255, 255, 255, .5);
+                outline: none;
+                resize: none;
+                transition: border-bottom ease-in-out 250ms;
+
+                &:focus{
+                    border-bottom: 2px solid rgba(greenyellow, .5);
+                }
+            }
+        }
+        
     }
 }
 
