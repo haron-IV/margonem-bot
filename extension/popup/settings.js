@@ -8,13 +8,26 @@ let settings = {
 };
 //
 
+function init_settings(){
+    loadSettings();
+    setInterfaceStatus();
+}
+init_settings();
+
 function loadSettings(){
     chrome.storage.sync.get(['settingsData'], (bot) => {
         settings = bot.settingsData;
         console.log('data: ', settings);
     });
 }
-// loadSettings();
+
+function setInterfaceStatus(){
+    setTimeout(() => {
+        if (settings.changed_fight_window === true) {
+            $changed_fight_window.checked = true;
+        }
+    }, 100);
+}
 
 
 $reset_black_list_btn.addEventListener('click', () => {
