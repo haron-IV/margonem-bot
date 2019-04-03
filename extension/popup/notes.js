@@ -40,7 +40,7 @@ function showNotes(){
 function createNote(text, id){
     const note = document.createElement('p');
     note.classList.add('single-note');
-    note.id = `note${id}`;
+    note.id = id;
     note.innerHTML = text;
     
     $notes_list.appendChild(note);
@@ -53,8 +53,18 @@ function createNote(text, id){
 
 function deleteNote(){
     setTimeout(() => {
-        document.querySelector('.delete-note').addEventListener('click', (e) => {
-            e.target.parentNode.style.display = 'none';
+        document.querySelectorAll('.delete-note').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.target.parentNode.style.display = 'none';
+
+                chrome.storage.sync.get(['notes'], (bot) => {
+                    let data = bot.notes;
+        
+                    data.splice(parseInt( e.target.parentNode.id ), 1);
+        
+                    chrome.storage.sync.set({'notes': data});
+                });
+            })
         });    
     }, 250);
 }
