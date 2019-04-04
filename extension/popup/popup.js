@@ -18,7 +18,7 @@ chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord',
     $actual_localization.innerHTML = botStats.lastLocalization;
     $actuallocalizationCoord.innerHTML = botStats.lastLocalizationCoord;
     $gold.innerHTML = botStats.gold;
-    $killedElites.innerHTML = botStats.killedElites;
+    // $killedElites.innerHTML = botStats.killedElites;
 });
 
 function search(input, searcher_link) {

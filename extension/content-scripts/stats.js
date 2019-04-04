@@ -10,3 +10,20 @@ setInterval(() => {
         console.log('stats updated')
     });
 }, 20000);
+
+function checkIsGameLoaded() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+        } else if (loading_el.style.display === 'none') {
+            getPlayerNickname();
+            clearInterval(interval);
+        }
+    }, 1000);
+} checkIsGameLoaded();
+
+function getPlayerNickname(){
+    const nickname = {nickname: document.querySelector('#nick').innerHTML.split('·')[0].trim()};
+    chrome.storage.sync.set(nickname, () => {});
+}

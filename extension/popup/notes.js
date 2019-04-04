@@ -2,9 +2,8 @@ const $textarea = document.querySelector('#notes-textarea');
 const $button_save_notes = document.querySelector('#button-save-notes');
 const $notes_list = document.querySelector('#notes-list');
 
-
 //
-let allNotes = [];
+let wholeNotes = [];
 //
 
 function init_notes(){
@@ -18,14 +17,14 @@ init_notes();
 function checkIfNotesWasCreated(){
     chrome.storage.sync.get(['notes'], (bot) => {
         if (!bot.notes){
-            chrome.storage.sync.set({'notes': allNotes});
+            chrome.storage.sync.set({'notes': wholeNotes});
         }
     });
 }
 
 function loadNotes(){
     chrome.storage.sync.get(['notes'], (bot) => {
-        allNotes = bot.notes;
+        wholeNotes = bot.notes;
     });
 }
 
@@ -59,9 +58,8 @@ function deleteNote(){
                 const noteHeight = e.target.parentNode.offsetHeight;
                 setTimeout(() => {
                     e.target.parentNode.style.display = 'none';
-                }, 1100);
+                }, 900);
                 
-
                 chrome.storage.sync.get(['notes'], (bot) => {
                     let data = bot.notes;
         
