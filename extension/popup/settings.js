@@ -16,8 +16,10 @@ init_settings();
 
 function loadSettings(){
     chrome.storage.sync.get(['settingsData'], (bot) => {
-        settings = bot.settingsData;
-        console.log('data: ', settings);
+        if(bot.settingsData){
+            settings = bot.settingsData;
+            console.log('data: ', settings);
+        }
     });
 }
 
