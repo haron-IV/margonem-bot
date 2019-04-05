@@ -36,16 +36,6 @@ function checkIfNotesWasCreated(){
     });
 }
 
-function checkUser(){
-    chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
-        bot.notes.forEach(el => {
-            if (el.nickname === bot.nickname){
-                checkNotes = true;
-            }
-        });
-    });
-}
-
 function loadNotes(){
     chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
         if(bot.notes){
@@ -123,9 +113,23 @@ function deleteNote(){
     }, 250);
 }
 
-$button_save_notes.addEventListener('click', () => {
-    const activeNote = $textarea.value;
 
+let activeNote = '';
+$textarea.addEventListener('keyup', e => {
+    if (e.key != 'Backspace' && e.key != 'Enter' && e.key != 'Tab' && e.key != 'CapsLock' && e.key != 'Shift' && e.key != 'Control' && e.key != 'Alt' && e.key != 'Meta' && e.key != 'ArrowLeft' && e.key != 'ArrowUp' && e.key != 'ArrowRight' && e.key != 'ArrowDown' && e.key != 'Escape' && e.key != 'F1' && e.key != 'F2' && e.key != 'F3' && e.key != 'F4' && e.key != 'F5' && e.key != 'F6' && e.key != 'F7' && e.key != 'F8' && e.key != 'F9' && e.key != 'F10' && e.key != 'F11' && e.key != 'F12'){
+        activeNote += e.key;
+    }
+
+    if (e.which === 13){
+        activeNote = activeNote + '<br />';
+    } else if (e.which === 8){
+        activeNote = activeNote.slice(0, -1);
+    }
+
+    
+});
+
+$button_save_notes.addEventListener('click', () => {
     if (activeNote != '') {
         chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
             let data;
@@ -145,6 +149,7 @@ $button_save_notes.addEventListener('click', () => {
     
             chrome.storage.sync.set({'notes': bot.notes});
             $textarea.value = '';
+            activeNote = '';
 
             createNote(activeNote, data.length-1);
         });
