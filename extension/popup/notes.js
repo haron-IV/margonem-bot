@@ -4,6 +4,7 @@ const $notes_list = document.querySelector('#notes-list');
 
 //
 let wholeNotes = [];
+let checkNotes;
 //
 
 function init_notes(){
@@ -15,24 +16,55 @@ function init_notes(){
 init_notes();
 
 function checkIfNotesWasCreated(){
-    chrome.storage.sync.get(['notes'], (bot) => {
+    chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
         if (!bot.notes){
             chrome.storage.sync.set({'notes': wholeNotes});
+        } else {
+            bot.notes.forEach(el => {
+                if (el.nickname === bot.nickname){
+                    checkNotes = true;
+                }
+            });
         }
+
+        setTimeout(() => {
+            if (checkNotes === undefined && bot.notes) {
+                bot.notes.push({nickname: bot.nickname, notes: []});
+                chrome.storage.sync.set({'notes': bot.notes});
+            }
+        }, 200);
+    });
+}
+
+function checkUser(){
+    chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
+        bot.notes.forEach(el => {
+            if (el.nickname === bot.nickname){
+                checkNotes = true;
+            }
+        });
     });
 }
 
 function loadNotes(){
-    chrome.storage.sync.get(['notes'], (bot) => {
-        wholeNotes = bot.notes;
+    chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
+        if(bot.notes){
+            bot.notes.forEach( (el, i) => {
+                if (el.nickname === bot.nickname){
+                    wholeNotes = el;
+                }
+            });
+        }
     });
 }
 
 function showNotes(){
     chrome.storage.sync.get(['notes'], (bot) => {
-        bot.notes.forEach( (el, i) => {
-           createNote(el, i); 
-        });
+        if (bot.notes) {
+            bot.notes.forEach( (el, i) => {
+                createNote(el, i); 
+            });
+        }
     });
 }
 
@@ -76,13 +108,25 @@ $button_save_notes.addEventListener('click', () => {
     const activeNote = $textarea.value;
 
     if (activeNote != '') {
-        chrome.storage.sync.get(['notes'], (bot) => {
-            let data = bot.notes;
+        chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
+            let data;
+            let whichPlayer;
+
+            bot.notes.forEach( (el, i) => {
+                if (el.nickname === bot.nickname){
+                    data = el.notes;
+                    whichPlayer = i;
+                }
+            });
+            
+            // let data = bot.notes;
     
             data.push(activeNote);
+
+            bot.notes[whichPlayer].notes = data;
+
     
-            chrome.storage.sync.set({'notes': data});
-    
+            chrome.storage.sync.set({'notes': bot.notes});
             $textarea.value = '';
 
             createNote(activeNote, data.length-1);
