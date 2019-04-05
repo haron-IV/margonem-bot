@@ -60,7 +60,7 @@ function showNotes(){
             });
 
             setTimeout(() => {
-                console.log(bot.notes[whichNotes])
+                // console.log(bot.notes[whichNotes])
                 bot.notes[whichNotes].notes.forEach( (el, i) => {
                     createNote(el, i); 
                 });
@@ -115,6 +115,7 @@ function deleteNote(){
                     $notes_list.innerHTML = '';
 
                     showNotes(); // not working
+                    deleteNote();
                 });
             })
         });    
