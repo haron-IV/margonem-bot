@@ -146,12 +146,12 @@ $button_save_notes.addEventListener('click', () => {
 
             bot.notes[whichCharacter].notes = data;
 
-    
             chrome.storage.sync.set({'notes': bot.notes});
-            $textarea.value = '';
-            activeNote = '';
 
             createNote(activeNote, data.length-1);
+            
+            $textarea.value = '';
+            activeNote = '';
         });
     }
     
