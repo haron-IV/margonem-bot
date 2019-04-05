@@ -107,6 +107,14 @@ function deleteNote(){
                     data[whichCharacter].notes.splice(parseInt( e.target.parentNode.id ), 1);
 
                     chrome.storage.sync.set({'notes': data});
+
+
+                    // now after delete more than 2 note, id is mixing and after reload extension we deleted note which we dont want to delete
+                    // solution is: remowe all elements from notes and display all of them (this give every note new id)
+                    //Solution under not working - buttont 'x' cant delete note
+                    $notes_list.innerHTML = '';
+
+                    showNotes(); // not working
                 });
             })
         });    
@@ -125,8 +133,6 @@ $textarea.addEventListener('keyup', e => {
     } else if (e.which === 8){
         activeNote = activeNote.slice(0, -1);
     }
-
-    
 });
 
 $button_save_notes.addEventListener('click', () => {
