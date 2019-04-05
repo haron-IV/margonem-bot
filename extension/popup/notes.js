@@ -60,12 +60,21 @@ function loadNotes(){
 
 function showNotes(){
     chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
+        let whichNotes;
+
         if (bot.notes) {
             bot.notes.forEach( (el, i) => {
                 if (el.nickname === bot.nickname) {
-                    createNote(el.notes, i); 
+                    whichNotes = i;
                 }
             });
+
+            setTimeout(() => {
+                console.log(bot.notes[whichNotes])
+                bot.notes[whichNotes].notes.forEach( (el, i) => {
+                    createNote(el, i); 
+                });
+            }, 100);
         }
     });
 }
@@ -89,7 +98,7 @@ function deleteNote(){
         document.querySelectorAll('.delete-note').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.target.parentNode.classList.add('single-note-fade-out');
-                const noteHeight = e.target.parentNode.offsetHeight;
+                // const noteHeight = e.target.parentNode.offsetHeight;
                 setTimeout(() => {
                     e.target.parentNode.style.display = 'none';
                 }, 900);
