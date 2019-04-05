@@ -69,6 +69,16 @@ function showNotes(){
     });
 }
 
+function testRefreshId(){
+    const allNote = $notes_list.children;
+
+
+    for (let i = 0; i <= allNote.length; i ++){
+        allNote[i].id = i;
+    }
+    
+}
+
 function createNote(text, id){
     const note = document.createElement('p');
     note.classList.add('single-note');
@@ -91,6 +101,7 @@ function deleteNote(){
                 // const noteHeight = e.target.parentNode.offsetHeight;
                 setTimeout(() => {
                     e.target.parentNode.style.display = 'none';
+                    e.target.parentNode.remove();
                 }, 900);
                 
                 chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
@@ -108,14 +119,10 @@ function deleteNote(){
 
                     chrome.storage.sync.set({'notes': data});
 
-
-                    // now after delete more than 2 note, id is mixing and after reload extension we deleted note which we dont want to delete
-                    // solution is: remowe all elements from notes and display all of them (this give every note new id)
-                    //Solution under not working - buttont 'x' cant delete note
-                    $notes_list.innerHTML = '';
-
-                    showNotes(); // not working
-                    deleteNote();
+                    setTimeout(() => {
+                        testRefreshId();    
+                    }, 950);
+                    
                 });
             })
         });    
