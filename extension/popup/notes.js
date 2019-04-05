@@ -59,10 +59,12 @@ function loadNotes(){
 }
 
 function showNotes(){
-    chrome.storage.sync.get(['notes'], (bot) => {
+    chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
         if (bot.notes) {
             bot.notes.forEach( (el, i) => {
-                createNote(el, i); 
+                if (el.nickname === bot.nickname) {
+                    createNote(el.notes, i); 
+                }
             });
         }
     });
@@ -110,20 +112,18 @@ $button_save_notes.addEventListener('click', () => {
     if (activeNote != '') {
         chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
             let data;
-            let whichPlayer;
+            let whichCharacter;
 
             bot.notes.forEach( (el, i) => {
                 if (el.nickname === bot.nickname){
                     data = el.notes;
-                    whichPlayer = i;
+                    whichCharacter = i;
                 }
             });
-            
-            // let data = bot.notes;
     
             data.push(activeNote);
 
-            bot.notes[whichPlayer].notes = data;
+            bot.notes[whichCharacter].notes = data;
 
     
             chrome.storage.sync.set({'notes': bot.notes});
