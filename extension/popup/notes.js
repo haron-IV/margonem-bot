@@ -103,11 +103,19 @@ function deleteNote(){
                     e.target.parentNode.style.display = 'none';
                 }, 900);
                 
-                chrome.storage.sync.get(['notes'], (bot) => {
+                chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
+                    let whichCharacter;
+
+                    bot.notes.forEach( (el, i) => {
+                        if (el.nickname === bot.nickname){
+                            whichCharacter = i;
+                        }
+                    });
+
                     let data = bot.notes;
-        
-                    data.splice(parseInt( e.target.parentNode.id ), 1);
-        
+
+                    data[whichCharacter].notes.splice(parseInt( e.target.parentNode.id ), 1);
+
                     chrome.storage.sync.set({'notes': data});
                 });
             })
