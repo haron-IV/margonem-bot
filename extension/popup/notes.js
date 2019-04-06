@@ -66,7 +66,7 @@ function showNotes(){
     });
 }
 
-function testRefreshId(){
+function testRefreshId(){ // change name of this function
     const allNote = $notes_list.children;
 
     for (let i = 0; i <= allNote.length; i ++){
