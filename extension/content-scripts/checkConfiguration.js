@@ -86,8 +86,8 @@ function showMiniMapConfig(){
     document.querySelector('.ns-lpanel-entry[data-name="Inne"]').click();
 }
 
-function setMinMobLvl(){
-    document.querySelector('input[data-key="/minlvl"]').value = 55;
+function setMinMobLvl(lvl){
+    document.querySelector('input[data-key="/minlvl"]').value = lvl;
 }
 
 function saveMiniMapConfig(){
@@ -95,8 +95,8 @@ function saveMiniMapConfig(){
     toggleMiniMapConfig('none')
 }
 
-function iii(){
+function setMiniMapConfig(lvl){
     showMiniMapConfig();
-    setMinMobLvl();
+    setMinMobLvl(lvl);
     saveMiniMapConfig();
 }
