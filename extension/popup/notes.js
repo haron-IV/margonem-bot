@@ -59,7 +59,7 @@ function showNotes(){
                 }
             });
 
-            setTimeout(() => {
+            setTimeout(() => { // check this, I think thsi shouldnt be theree
                 // console.log(bot.notes[whichNotes])
                 bot.notes[whichNotes].notes.forEach( (el, i) => {
                     createNote(el, i); 
@@ -72,11 +72,9 @@ function showNotes(){
 function testRefreshId(){
     const allNote = $notes_list.children;
 
-
     for (let i = 0; i <= allNote.length; i ++){
         allNote[i].id = i;
     }
-    
 }
 
 function createNote(text, id){

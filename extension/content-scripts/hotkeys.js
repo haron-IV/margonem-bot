@@ -3,7 +3,12 @@ const data = {
     mapActive: false,
     questListActive: false,
     chatEl: document.querySelector('#inpchat'),
-    chatIsUse: false
+    chatIsUse: false,
+    equipmentAndAbilitySwitcher: [
+        document.querySelector('.MM-battleset-switch-button-1'),
+        document.querySelector('.MM-battleset-switch-button-2'),
+        document.querySelector('.MM-battleset-switch-button-3')
+    ]
 }
 
 function friendsList(){
@@ -39,8 +44,25 @@ function quest(){
     }   
 }
 
-setTimeout(() => {
-    
+function switchEquipmentAndAbilities(){
+    window.addEventListener('keydown', e => {
+        switch (e.key){
+            case '1':
+                data.equipmentAndAbilitySwitcher[0].click();
+            break;
+
+            case '2':
+                data.equipmentAndAbilitySwitcher[1].click();
+            break;
+
+            case '3':
+                data.equipmentAndAbilitySwitcher[2].click();
+            break;
+        }
+    });
+}
+
+function init_hotkeys(){
     data.chatEl.addEventListener('keydown', (e) => {
         if (e.key == 'Enter'){
             data.chatIsUse = false;
@@ -64,5 +86,18 @@ setTimeout(() => {
                 quest();
             break;
         }
-    })
-}, 2500);
+    });
+    switchEquipmentAndAbilities();
+}
+
+function checkIsGameLoaded() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+        } else if (loading_el.style.display === 'none') {
+            init_hotkeys();
+            clearInterval(interval);
+        }
+    }, 1000);
+} checkIsGameLoaded();
