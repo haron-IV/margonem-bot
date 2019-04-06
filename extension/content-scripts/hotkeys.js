@@ -46,18 +46,22 @@ function quest(){
 
 function switchEquipmentAndAbilities(){
     window.addEventListener('keydown', e => {
-        switch (e.key){
-            case '1':
-                data.equipmentAndAbilitySwitcher[0].click();
-            break;
+        if (data.chatIsUse === false) {
+            switch (e.key){
+                case '1':
+                    data.equipmentAndAbilitySwitcher[0].click();
+                break;
+    
+                case '2':
+                    data.equipmentAndAbilitySwitcher[1].click();
+                break;
+    
+                case '3':
+                    data.equipmentAndAbilitySwitcher[2].click();
+                break;
+            }
 
-            case '2':
-                data.equipmentAndAbilitySwitcher[1].click();
-            break;
-
-            case '3':
-                data.equipmentAndAbilitySwitcher[2].click();
-            break;
+            data.questListActive = false;
         }
     });
 }
