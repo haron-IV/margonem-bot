@@ -76,3 +76,27 @@ function getBotStatus() {
         }
     });
 }
+
+// minimap config:
+function toggleMiniMapConfig(display){
+    document.querySelector('.ns-wrapper').style.display = display;
+}
+function showMiniMapConfig(){
+    toggleMiniMapConfig('block');
+    document.querySelector('.ns-lpanel-entry[data-name="Inne"]').click();
+}
+
+function setMinMobLvl(){
+    document.querySelector('input[data-key="/minlvl"]').value = 55;
+}
+
+function saveMiniMapConfig(){
+    document.querySelector('.ns-save-button').click();
+    toggleMiniMapConfig('none')
+}
+
+function iii(){
+    showMiniMapConfig();
+    setMinMobLvl();
+    saveMiniMapConfig();
+}

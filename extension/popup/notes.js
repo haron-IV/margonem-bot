@@ -59,12 +59,9 @@ function showNotes(){
                 }
             });
 
-            setTimeout(() => { // check this, I think thsi shouldnt be theree
-                // console.log(bot.notes[whichNotes])
-                bot.notes[whichNotes].notes.forEach( (el, i) => {
-                    createNote(el, i); 
-                });
-            }, 100);
+            bot.notes[whichNotes].notes.forEach( (el, i) => {
+                createNote(el, i); 
+            });
         }
     });
 }
@@ -96,11 +93,11 @@ function deleteNote(){
         document.querySelectorAll('.delete-note').forEach(el => {
             el.addEventListener('click', (e) => {
                 e.target.parentNode.classList.add('single-note-fade-out');
-                // const noteHeight = e.target.parentNode.offsetHeight;
+
                 setTimeout(() => {
                     e.target.parentNode.style.display = 'none';
                     e.target.parentNode.remove();
-                }, 900);
+                }, 700);
                 
                 chrome.storage.sync.get(['notes', 'nickname'], (bot) => {
                     let whichCharacter;
@@ -119,12 +116,12 @@ function deleteNote(){
 
                     setTimeout(() => {
                         testRefreshId();    
-                    }, 950);
+                    }, 750);
                     
                 });
             })
         });    
-    }, 250);
+    }, 100);
 }
 
 

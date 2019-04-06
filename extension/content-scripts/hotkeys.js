@@ -91,6 +91,7 @@ function init_hotkeys(){
             break;
         }
     });
+    
     switchEquipmentAndAbilities();
 }
 
