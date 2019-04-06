@@ -15,6 +15,7 @@ function checkIsGameLoaded() {
 function init_config () {
     getBotStatus();
     openConfiguration();
+    setMiniMapConfig(10);
 
     setTimeout(() => {
         if (bot_status == true){
@@ -81,12 +82,15 @@ function getBotStatus() {
 function toggleMiniMapConfig(display){
     document.querySelector('.ns-wrapper').style.display = display;
 }
+
 function showMiniMapConfig(){
     toggleMiniMapConfig('block');
     document.querySelector('.ns-lpanel-entry[data-name="Inne"]').click();
 }
 
 function setMinMobLvl(lvl){
+    //here should be loading specyfic data based on player nickname and set lvl of mobs
+    //min lvl of mobs should be get from minimap or popup ('better way')
     document.querySelector('input[data-key="/minlvl"]').value = lvl;
 }
 
