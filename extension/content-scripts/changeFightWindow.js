@@ -23,7 +23,9 @@ let settings = {};
 
 function getSettings(){
     chrome.storage.sync.get(['settingsData'], (bot) => {
-        settings = bot.settingsData;
+        if (bot.settingsData){
+            settings = bot.settingsData;
+        }
     });
 }
 

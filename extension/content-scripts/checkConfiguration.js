@@ -100,8 +100,13 @@ function setMinMobLvl(){
                     whichSettings = i;
                 }
             });
-
-            const lvl = bot.miniMap[whichSettings].miniMapSettings.minMobLvl;
+            let lvl;
+            if (bot.miniMap[whichSettings].miniMapSettings.minMobLvl) {
+                lvl = bot.miniMap[whichSettings].miniMapSettings.minMobLvl; // check this :)
+            } else {
+                lvl = 70;
+            }
+            
 
             document.querySelector('input[data-key="/minlvl"]').value = lvl;
         }
