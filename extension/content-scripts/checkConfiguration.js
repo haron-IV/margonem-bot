@@ -190,21 +190,29 @@ function setMiniMapSize(size){
 function hotkey(){
     let toggle = false;
     window.addEventListener('keydown', e => {
-        if(e.key = "r" && toggle === false){
-            addClass('enlargeMiniMap');
-            removeClass('autoShowMiniMap');
-            toggle = true;
-        } else if (toggle === true){
-            console.log('toggle')
-            removeClass('enlargeMiniMap');
-            addClass('autoShowMiniMap');
-            toggle = false;
+        if (e.key === 'r'){
+            if(toggle === false){
+                addClass('enlargeMiniMap');
+                removeClass('autoShowMiniMap');
+                toggle = true;
+            } else {
+                console.log('toggle')
+                removeClass('enlargeMiniMap');
+                addClass('autoShowMiniMap');
+                toggle = false;
+            }
         }
     });
 }
 
 function activeMiniMap() {
-    addClass('autoShowMiniMap');
-    setMiniMapSize(60); //60 is the minimum size of the map
-    hotkey();
+    chrome.storage.sync.get(['settingsData'], (settings) => {
+        if ( settings.settingsData.active_minimap === true) {
+            addClass('autoShowMiniMap');
+            setMiniMapSize(60); //60 is the minimum size of the map
+            hotkey();
+        } else {
+            setMiniMapSize(130)
+        }
+    });
 }
