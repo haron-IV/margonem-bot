@@ -19,6 +19,9 @@ function init_config () {
     checkIfMiniMapDataWasCreated();
     getMiniMapMinMobLvl();
 
+
+    test();
+
     setTimeout(() => {
         if (bot_status == true){
             if (checkIfAutoPassingPortalsIsOn() === false) {
@@ -84,9 +87,9 @@ function toggleMiniMapConfig(display){
     document.querySelector('.ns-wrapper').style.display = display;
 }
 
-function showMiniMapConfig(){
+function showMiniMapConfig(which){
     toggleMiniMapConfig('block');
-    document.querySelector('.ns-lpanel-entry[data-name="Inne"]').click();
+    document.querySelector(`.ns-lpanel-entry[data-name="${which}"]`).click();
 }
 
 function setMinMobLvl(){
@@ -165,8 +168,44 @@ function checkIfMiniMapDataWasCreated(){
     });
 }
 
-function setMiniMapConfig(lvl){
-    showMiniMapConfig();
-    setMinMobLvl(lvl);
+function setMiniMapConfig(){
+    showMiniMapConfig('Inne');
+    setMinMobLvl();
     saveMiniMapConfig();
+}
+
+// active minimap config:
+function addClass(){
+    document.querySelector('.mmpWrapper').classList.add('autoShowMiniMap');
+}
+
+function removeClass(){
+    document.querySelector('.mmpWrapper').classList.add('enlargeMiniMap');
+}
+
+function setMiniMapSize(size){
+    showMiniMapConfig('Wygląd mapy');
+    document.querySelector('input[data-key="/mapsize"]').value = size;
+    saveMiniMapConfig();
+}
+
+function hotkey(){
+    let toggle = false;
+    window.addEventListener('keydown', e => {
+        if(e.key = "r" && toggle === false){
+            document.querySelector('.mmpWrapper').classList.remove('autoShowMiniMap');
+            toggle = true;
+            removeClass();
+        } else {
+            addClass();
+            document.querySelector('.mmpWrapper').classList.remove('enlargeMiniMap');
+            toggle = false;
+        }
+    });
+}
+
+function test() {
+    addClass();
+    setMiniMapSize(60); //60 is the minimum size of the map
+    hotkey();
 }

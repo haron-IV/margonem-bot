@@ -22,3 +22,14 @@
     /* this should be place in popup settings */
     display: none;
 }
+
+.autoShowMiniMap{
+    left: 0 !important;
+    bottom: 30px !important;
+    top: unset !important;
+    display: block !important;
+}
+
+.enlargeMiniMap{
+    transform: scale(2)
+}
