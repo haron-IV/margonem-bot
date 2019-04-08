@@ -18,9 +18,7 @@ function init_config () {
     setMiniMapConfig();
     checkIfMiniMapDataWasCreated();
     getMiniMapMinMobLvl();
-
-
-    test();
+    activeMiniMap();
 
     setTimeout(() => {
         if (bot_status == true){
@@ -185,7 +183,7 @@ function removeClass(className){
 
 function setMiniMapSize(size){
     showMiniMapConfig('Wygląd mapy');
-    // document.querySelector('input[data-key="/mapsize"]').value = size;
+    document.querySelector('input[data-key="/mapsize"]').value = size;
     saveMiniMapConfig();
 }
 
@@ -205,7 +203,7 @@ function hotkey(){
     });
 }
 
-function test() {
+function activeMiniMap() {
     addClass('autoShowMiniMap');
     setMiniMapSize(60); //60 is the minimum size of the map
     hotkey();

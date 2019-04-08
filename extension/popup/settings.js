@@ -1,5 +1,6 @@
 const $reset_black_list_btn = document.querySelector('#reset-black-list-btn');
 const $changed_fight_window = document.querySelector('#changed-fight-window');
+const $active_minimap = document.querySelector('#active-minimap');
 
 
 // 
@@ -28,6 +29,10 @@ function setInterfaceStatus(){
         if (settings.changed_fight_window === true) {
             $changed_fight_window.checked = true;
         }
+
+        if (settings.active_minimap === true) {
+            $active_minimap.checked = true;
+        }
     }, 100);
 }
 
@@ -49,6 +54,17 @@ $changed_fight_window.addEventListener('change', () => {
         settings.changed_fight_window = true
     } else {
         settings.changed_fight_window = false
+    }
+    
+    chrome.storage.sync.set({'settingsData': settings});
+});
+
+$active_minimap.addEventListener('change', () => {
+
+    if ($active_minimap.checked === true){
+        settings.active_minimap = true
+    } else {
+        settings.active_minimap = false
     }
     
     chrome.storage.sync.set({'settingsData': settings});
