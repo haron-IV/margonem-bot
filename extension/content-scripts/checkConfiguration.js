@@ -111,7 +111,7 @@ function setMinMobLvl(){
             }
             
 
-            document.querySelector('input[data-key="/minlvl"]').value = lvl;
+            // document.querySelector('input[data-key="/minlvl"]').value = lvl;
             saveMiniMapConfig(); // here must be saving from gui cuz bot only set this value but not save this
 
         }
@@ -175,17 +175,17 @@ function setMiniMapConfig(){
 }
 
 // active minimap config:
-function addClass(){
-    document.querySelector('.mmpWrapper').classList.add('autoShowMiniMap');
+function addClass(className){
+    document.querySelector('.mmpWrapper').classList.add(className);
 }
 
-function removeClass(){
-    document.querySelector('.mmpWrapper').classList.add('enlargeMiniMap');
+function removeClass(className){
+    document.querySelector('.mmpWrapper').classList.remove(className);
 }
 
 function setMiniMapSize(size){
     showMiniMapConfig('Wygląd mapy');
-    document.querySelector('input[data-key="/mapsize"]').value = size;
+    // document.querySelector('input[data-key="/mapsize"]').value = size;
     saveMiniMapConfig();
 }
 
@@ -193,19 +193,20 @@ function hotkey(){
     let toggle = false;
     window.addEventListener('keydown', e => {
         if(e.key = "r" && toggle === false){
-            document.querySelector('.mmpWrapper').classList.remove('autoShowMiniMap');
+            addClass('enlargeMiniMap');
+            removeClass('autoShowMiniMap');
             toggle = true;
-            removeClass();
-        } else {
-            addClass();
-            document.querySelector('.mmpWrapper').classList.remove('enlargeMiniMap');
+        } else if (toggle === true){
+            console.log('toggle')
+            removeClass('enlargeMiniMap');
+            addClass('autoShowMiniMap');
             toggle = false;
         }
     });
 }
 
 function test() {
-    addClass();
+    addClass('autoShowMiniMap');
     setMiniMapSize(60); //60 is the minimum size of the map
     hotkey();
 }
