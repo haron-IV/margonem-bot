@@ -109,6 +109,8 @@ function setMinMobLvl(){
             
 
             document.querySelector('input[data-key="/minlvl"]').value = lvl;
+            saveMiniMapConfig(); // here must be saving from gui cuz bot only set this value but not save this
+
         }
     });
 }

@@ -28,7 +28,7 @@
     justify-content: space-between;
 }
 
-.active{
+.active-button{
     color: aqua;
     border: 1px solid aqua;
 }

@@ -57,20 +57,20 @@ setTimeout(() => {
     document.querySelector('body').appendChild(interface.wrapper);
 
     interface.startBotButton.addEventListener('click', () => {
-        interface.startBotButton.classList.add('active');
-        interface.stopBotButton.classList.remove('active');
+        interface.startBotButton.classList.add('active-button');
+        interface.stopBotButton.classList.remove('active-button');
     });
 
     interface.stopBotButton.addEventListener('click', () => {
-        interface.startBotButton.classList.remove('active');
-        interface.stopBotButton.classList.add('active');
+        interface.startBotButton.classList.remove('active-button');
+        interface.stopBotButton.classList.add('active-button');
     });
 
     chrome.storage.sync.get(['botStatus', 'interface_state'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
-            interface.startBotButton.classList.add('active');
+            interface.startBotButton.classList.add('active-button');
         } else {
-            interface.stopBotButton.classList.add('active');
+            interface.stopBotButton.classList.add('active-button');
         }
 
         console.log('interface state: ', botStats.interface_state)
