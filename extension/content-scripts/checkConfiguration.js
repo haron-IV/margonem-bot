@@ -93,6 +93,7 @@ function showMiniMapConfig(which){
 function setMinMobLvl(){
     chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
         let whichSettings;
+        let lvl;
 
         if(bot.miniMap){
             bot.miniMap.forEach( (el, i) => {
@@ -101,7 +102,7 @@ function setMinMobLvl(){
                     whichSettings = i;
                 }
             });
-            let lvl;
+            
             if (bot.miniMap[whichSettings].miniMapSettings.minMobLvl) {
                 lvl = bot.miniMap[whichSettings].miniMapSettings.minMobLvl; // check this :)
             } else {
@@ -109,9 +110,8 @@ function setMinMobLvl(){
             }
             
 
-            // document.querySelector('input[data-key="/minlvl"]').value = lvl;
+            document.querySelector('input[data-key="/minlvl"]').value = lvl;
             saveMiniMapConfig(); // here must be saving from gui cuz bot only set this value but not save this
-
         }
     });
 }
@@ -234,8 +234,7 @@ function activeMiniMap() {
             setMiniMapSize(60); //60 is the minimum size of the map
             hotkey();
             setHorizontalPosiTionOfMiniMap();
-
-            addOpacitySliderForMiniMap(); // test
+            addOpacitySliderForMiniMap(); // for refactorize and better look
         } else {
             setMiniMapSize(130)
         }
