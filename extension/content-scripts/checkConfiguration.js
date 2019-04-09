@@ -130,9 +130,7 @@ function getMiniMapMinMobLvl(){
             });
     
             data = document.querySelector('input[data-key="/minlvl"]').value;
-
             bot.miniMap[whichCharacter].miniMapSettings = {minMobLvl:data};
-
             chrome.storage.sync.set({'miniMap': bot.miniMap});
         });
     });
