@@ -1,3 +1,7 @@
+const expBot = {
+  search_mobs_counter: 0
+};
+
 setTimeout(() => {
 
   function _range(el) {
@@ -262,7 +266,7 @@ setTimeout(() => {
   }
 
   let nearest_mob_coord;
-  function goToMob(which){ // here bot should check coordinates from black list.
+  function goToMob(){ // here bot should check coordinates from black list.
     const data = {
       mobs: mobsInRange('#range')
     }
@@ -274,8 +278,75 @@ setTimeout(() => {
       nearest_mob_coord = getCoordNearestMob(nearest);
     } else {
       console.log('Here is not mob');
-      goToPortal();
+      // goToPortal();
+      searchMobs();
     }
+  }
+
+  function goToCoord (x, y) {
+    document.querySelector('#coord-x').value = x;
+    document.querySelector('#coord-y').value = y;
+    setTimeout(() => {
+      document.querySelector('#go-to-btn').click();    
+    }, 500);
+  }
+
+  function getMapMaxCoord(){
+    const map = {
+      max_x: (document.querySelector('#ground').offsetWidth / 32 ) - 1,
+      max_y: (document.querySelector('#ground').offsetHeight / 32 ) - 1,
+    }
+
+    return map;
+  }
+
+  function searchMobs(){
+    const map = getMapMaxCoord();
+
+    const corners = [
+      {x: 0, y: 0},//left top
+      {x: map.max_x, y: 0},//right top
+      {x: map.max_x, y: map.max_y},//right bottom
+      {x: 0, y: map.max_y}//left bottom
+      //here is place for center coordinates
+    ];
+
+    switch(expBot.search_mobs_counter){
+      case 0:
+        goToCoord(corners[0].x, corners[0].y);
+      break;
+
+      case 1:
+        goToCoord(corners[1].x, corners[1].y);
+      break;
+
+      case 2:
+        goToCoord(corners[2].x, corners[2].y);
+      break;
+
+      case 3:
+        goToCoord(corners[3].x, corners[3].y);
+      break;
+    }
+
+    console.log('counter corners: ', expBot.search_mobs_counter)
+
+    expBot.search_mobs_counter++;
+  }
+
+  // function checkIfHeroIsNearCoords(x, y){
+  //   const heroCoord = getHeroCoordinatesOnMap();
+  //   if (heroCoord.x >= x - 2 && heroCoord.x <= x + 2 && heroCoord.y >= y - 2 && heroCoord.y <= x + 2) {
+  //     return true;
+  //   }
+  // }
+
+  function getHeroCoordinatesOnMap(){
+    const coords = {
+      x: parseInt( document.querySelector('#botloc').innerHTML.split(',')[0] ),
+      y: parseInt( document.querySelector('#botloc').innerHTML.split(',')[1] )
+    }
+    return coords;
   }
 
   function getMobs(){
@@ -415,7 +486,7 @@ setTimeout(() => {
 
       if (checkFightStatus() === false ) { // if fight window is closed
         if ( letHeroWalk === true){
-          goToMob(0);
+          goToMob();
           letHeroWalk = false;
 
           const heroLast = getHeroCoord();
@@ -438,7 +509,7 @@ setTimeout(() => {
                 chrome.storage.sync.set({'black_list_mob': {data: cleared} });
               });
 
-              goToPortal();
+              // goToPortal();
             } else {
               letHeroWalk = true;
             }
