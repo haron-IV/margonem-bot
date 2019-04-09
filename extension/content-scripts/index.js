@@ -307,7 +307,8 @@ setTimeout(() => {
       {x: 0, y: 0},//left top
       {x: map.max_x, y: 0},//right top
       {x: map.max_x, y: map.max_y},//right bottom
-      {x: 0, y: map.max_y}//left bottom
+      {x: 0, y: map.max_y},//left bottom
+      {x: Math.floor( map.max_x / 2 ), y: Math.floor( map.max_y / 2 ) }// middle of the map
       //here is place for center coordinates
     ];
 
@@ -326,6 +327,11 @@ setTimeout(() => {
 
       case 3:
         goToCoord(corners[3].x, corners[3].y);
+      break;
+
+      case 4:
+        goToCoord(corners[4].x, corners[4].y);
+        expBot.search_mobs_counter = 0;
       break;
     }
 
@@ -510,6 +516,7 @@ setTimeout(() => {
               });
 
               // goToPortal();
+              searchMobs();
             } else {
               letHeroWalk = true;
             }
