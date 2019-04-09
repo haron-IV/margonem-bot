@@ -191,6 +191,24 @@ function setHorizontalPosiTionOfMiniMap(){
     document.querySelector('.mmpWrapper').style.right = `${document.querySelector('#panel').offsetWidth+5}px`;
 }
 
+function addOpacitySliderForMiniMap(){
+    const slider = document.createElement('input');
+    slider.type = 'range';
+    slider.classList.add('minimap-opacity-slider');
+    document.querySelector('.mmpWrapper').appendChild(slider);
+
+    slider.addEventListener('change', () => {
+        if (slider.value <= 30 && slider.value < 99){
+            slider.value = 30;
+            document.querySelector('.mmpWrapper').style.opacity = `0.${slider.value}`;
+        } else if (slider.value <= 99){
+            document.querySelector('.mmpWrapper').style.opacity = `0.${slider.value}`;    
+        } else if (slider.value === 100){
+            document.querySelector('.mmpWrapper').style.opacity = '1';
+        }
+    });
+}
+
 function hotkey(){
     let toggle = false;
     window.addEventListener('keydown', e => {
@@ -216,6 +234,8 @@ function activeMiniMap() {
             setMiniMapSize(60); //60 is the minimum size of the map
             hotkey();
             setHorizontalPosiTionOfMiniMap();
+
+            addOpacitySliderForMiniMap(); // test
         } else {
             setMiniMapSize(130)
         }
