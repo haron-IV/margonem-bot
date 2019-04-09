@@ -24,7 +24,7 @@
 }
 
 .autoShowMiniMap{
-    left: 0 !important;
+    left: unset !important;
     bottom: 30px !important;
     top: unset !important;
     display: block !important;

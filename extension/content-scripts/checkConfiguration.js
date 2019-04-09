@@ -187,6 +187,10 @@ function setMiniMapSize(size){
     saveMiniMapConfig();
 }
 
+function setHorizontalPosiTionOfMiniMap(){
+    document.querySelector('.mmpWrapper').style.right = `${document.querySelector('#panel').offsetWidth+5}px`;
+}
+
 function hotkey(){
     let toggle = false;
     window.addEventListener('keydown', e => {
@@ -211,6 +215,7 @@ function activeMiniMap() {
             addClass('autoShowMiniMap');
             setMiniMapSize(60); //60 is the minimum size of the map
             hotkey();
+            setHorizontalPosiTionOfMiniMap();
         } else {
             setMiniMapSize(130)
         }
