@@ -203,7 +203,7 @@ function addOpacitySliderForMiniMap(){
             document.querySelector('.mmpWrapper').style.opacity = `0.${slider.value}`;
         } else if (slider.value <= 99){
             document.querySelector('.mmpWrapper').style.opacity = `0.${slider.value}`;    
-        } else if (slider.value === 100){
+        } else if (slider.value > 99){
             document.querySelector('.mmpWrapper').style.opacity = '1';
         }
     });
