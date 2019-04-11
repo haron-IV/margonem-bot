@@ -1,30 +1,6 @@
-function checkIsGameLoaded() {
-    let interval = setInterval(() => {
-        const loading_el = document.querySelector('#loading');
-        
-        if ( loading_el.style.display === '' ) {
-        } else if (loading_el.style.display === 'none') {
-            init_clanchat();
-            emoji();
-            clearInterval(interval);
-        }
-    }, 1000);
-} checkIsGameLoaded();
-
-function init_clanchat() {
-    document.querySelectorAll('.chnick').forEach(el => {
-        if ( el.innerText.includes('Łid') ){
-            if(el.innerText.split('«Łid»').length > 1 || el.innerText.split('«Łid ->').length > 0){
-                el.style.color ="#2090FE"
-            } else if (el.innerText.includes('-> Łid')){
-                el.style.color = "#2070FE"
-            }
-        }
-    });
-}
-
 const emoji_config = {
     size: 13,
+    nickname: '',
     all_emojis: [
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Slightly_Smiling_Face_Emoji_Icon_60x60.png?16228697460559734940',
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Smiling_Face_Emoji_Icon.png?16228697460559734940',
@@ -70,6 +46,33 @@ const emoticons = [
     {text: '<3',
     emoji_img: `<img src="${emoji_config.all_emojis[9]}" width="${emoji_config.size}">`},
 ];
+
+function checkIsGameLoaded() {
+    let interval = setInterval(() => {
+        const loading_el = document.querySelector('#loading');
+        
+        if ( loading_el.style.display === '' ) {
+        } else if (loading_el.style.display === 'none') {
+            init_clanchat();
+            emoji();
+            clearInterval(interval);
+        }
+    }, 1000);
+} checkIsGameLoaded();
+
+function init_clanchat() {
+    emoji_config.nickname = document.querySelector('#nick').innerText.split('·')[0].trim();
+
+    document.querySelectorAll('.chnick').forEach(el => {
+        if ( el.innerText.includes(emoji_config.nickname) ){
+            if(el.innerText.split(`«${emoji_config.nickname}»`).length > 1 || el.innerText.split(`«${emoji_config.nickname} ->`).length > 0){
+                el.style.color ="#2090FE"
+            } else if (el.innerText.includes(`-> ${emoji_config.nickname}`)){
+                el.style.color = "#2070FE"
+            }
+        }
+    });
+}
 
 function emoji(){
     document.querySelectorAll('.chatmsg').forEach( messsage => {
