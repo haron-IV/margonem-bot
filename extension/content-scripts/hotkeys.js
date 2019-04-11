@@ -1,4 +1,4 @@
-const data = {
+const data_hotkeys = {
     friendsListActive: false,
     mapActive: false,
     questListActive: false,
@@ -12,67 +12,67 @@ const data = {
 }
 
 function friendsList(){
-    if ( data.friendsListActive === false && data.chatIsUse === false) {
+    if ( data_hotkeys.friendsListActive === false && data_hotkeys.chatIsUse === false) {
         document.querySelector('#b_friends').click();
-        data.friendsListActive = true;
-    } else if (data.friendsListActive === true && data.chatIsUse === false) {
+        data_hotkeys.friendsListActive = true;
+    } else if (data_hotkeys.friendsListActive === true && data_hotkeys.chatIsUse === false) {
         document.querySelectorAll('.closebut')[2].click();
-        data.friendsListActive = false;
+        data_hotkeys.friendsListActive = false;
     }    
 }
 
 function map(){
-    if ( data.mapActive === false && data.chatIsUse === false) {
+    if ( data_hotkeys.mapActive === false && data_hotkeys.chatIsUse === false) {
                 
         setTimeout(() => {
             document.querySelector('#mappanel').children[0].children[0].click();    
         }, 200);
         
-        data.mapActive = true;
-    } else if (data.mapActive === true && data.chatIsUse === false) {
-        data.mapActive = false;
+        data_hotkeys.mapActive = true;
+    } else if (data_hotkeys.mapActive === true && data_hotkeys.chatIsUse === false) {
+        data_hotkeys.mapActive = false;
     }  
 }
 
 function quest(){
-    if ( data.questListActive === false && data.chatIsUse === false) {
+    if ( data_hotkeys.questListActive === false && data_hotkeys.chatIsUse === false) {
         document.querySelector('#b_quests').click();
-        data.questListActive = true;
-    } else if (data.questListActive === true && data.chatIsUse === false) {
+        data_hotkeys.questListActive = true;
+    } else if (data_hotkeys.questListActive === true && data_hotkeys.chatIsUse === false) {
         document.querySelector('.closebut').click();
-        data.questListActive = false;
+        data_hotkeys.questListActive = false;
     }   
 }
 
 function switchEquipmentAndAbilities(){
     window.addEventListener('keydown', e => {
-        if (data.chatIsUse === false) {
+        if (data_hotkeys.chatIsUse === false) {
             switch (e.key){
                 case '1':
-                    data.equipmentAndAbilitySwitcher[0].click();
+                    data_hotkeys.equipmentAndAbilitySwitcher[0].click();
                 break;
     
                 case '2':
-                    data.equipmentAndAbilitySwitcher[1].click();
+                    data_hotkeys.equipmentAndAbilitySwitcher[1].click();
                 break;
     
                 case '3':
-                    data.equipmentAndAbilitySwitcher[2].click();
+                    data_hotkeys.equipmentAndAbilitySwitcher[2].click();
                 break;
             }
 
-            data.questListActive = false;
+            data_hotkeys.questListActive = false;
         }
     });
 }
 
 function init_hotkeys(){
-    data.chatEl.addEventListener('keydown', (e) => {
+    data_hotkeys.chatEl.addEventListener('keydown', (e) => {
         if (e.key == 'Enter'){
-            data.chatIsUse = false;
-            console.log(data.chatIsUse)
+            data_hotkeys.chatIsUse = false;
+            console.log(data_hotkeys.chatIsUse)
         } else {
-            data.chatIsUse = true;
+            data_hotkeys.chatIsUse = true;
         }
     });
 
