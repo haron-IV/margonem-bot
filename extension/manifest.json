@@ -38,7 +38,8 @@
                 "./content-scripts/hotkeys.js",
                 "./content-scripts/rangePositon.js",
                 "./content-scripts/checkConfiguration.js",
-                "./content-scripts/changeFightWindow.js"
+                "./content-scripts/changeFightWindow.js",
+                "./content-scripts/clanChat.js"
             ],
             "run_at": "document_end"
         }
