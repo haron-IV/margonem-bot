@@ -17,10 +17,7 @@ function checkLoading() {
             clearInterval(interval);
         }
     }, 1500);
-}
-
-checkLoading();
-
+}checkLoading();
 
 function getCoordinates(){
     const coords = document.querySelector('#botloc').innerHTML;
@@ -71,6 +68,8 @@ function dryCheckIsHeroStuck(){
     setTimeout(() => {
         data.dry_check.fresh_coordinates = getCoordinates();
         chrome.storage.sync.get(['botStatus'], (botStats) => {
+            data.botStatus = botStats.botStatus;
+
             if( data.dry_check.old_coordinates === data.dry_check.fresh_coordinates && botStats.botStatus === true){
                 data.dry_check.stuck = true;
             } else {
@@ -80,3 +79,27 @@ function dryCheckIsHeroStuck(){
         });
     }, 3715);
 }
+
+// reload after dead
+
+function checkDead(){
+    const dead_window = document.querySelector('#dazed');
+
+    if (dead_window.style.display === 'block' && data.botStatus === true){
+        console.log('Hero is dead');
+
+        chrome.storage.sync.set({'botStatus': false}, () => {});
+
+        setTimeout(() => {
+            document.querySelector('#logoutbut').click();
+        }, 1000);
+
+        setTimeout(() => {
+            document.querySelector('#a_ok').click();    
+        }, 1500);
+    }
+}
+
+setTimeout(() => {
+    checkDead();
+}, 10000);
