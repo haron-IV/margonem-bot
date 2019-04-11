@@ -1,6 +1,7 @@
 const emoji_config = {
     size: 13,
     nickname: '',
+    chat_length: 0,
     all_emojis: [
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Slightly_Smiling_Face_Emoji_Icon_60x60.png?16228697460559734940',
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Smiling_Face_Emoji_Icon.png?16228697460559734940',
@@ -53,50 +54,72 @@ function checkIsGameLoaded() {
         
         if ( loading_el.style.display === '' ) {
         } else if (loading_el.style.display === 'none') {
-            init_clanchat();
             emoji();
+            colors();
+            checkChat();
             clearInterval(interval);
         }
     }, 1000);
 } checkIsGameLoaded();
 
-function init_clanchat() {
+function checkChat(){
+    setInterval(() => {
+        emoji_config.chat_length = document.querySelector('#chattxt').childElementCount;
+    }, 2000);
+    
+    setInterval(() => {
+        if (emoji_config.chat_length != document.querySelector('#chattxt').childElementCount){
+            emoji();
+            colors();
+        }    
+    }, 417);
+}
+
+function colors() {
     emoji_config.nickname = document.querySelector('#nick').innerText.split('·')[0].trim();
 
     document.querySelectorAll('.chnick').forEach(el => {
         if ( el.innerText.includes(emoji_config.nickname) ){
             if(el.innerText.split(`«${emoji_config.nickname}»`).length > 1 || el.innerText.split(`«${emoji_config.nickname} ->`).length > 0){
-                el.style.color ="#2090FE"
-            } else if (el.innerText.includes(`-> ${emoji_config.nickname}`)){
-                el.style.color = "#2070FE"
+                el.style.color ="#b3d9ff"
+            }
+
+            if (el.innerText.includes(`-> ${emoji_config.nickname}`)){
+                el.style.color = "#2090FE";
             }
         }
     });
 }
 
 function emoji(){
-    document.querySelectorAll('.chatmsg').forEach( messsage => {
+    const all_messages = [].slice.call(document.querySelectorAll(".chatmsg"));
 
-        emoticons.forEach(emoji => {
+    const newest_messages = all_messages.slice(emoji_config.chat_length-1, all_messages.length+1);
 
-            if ( messsage.innerText.includes(emoji.text) ){
-                const splitted_message = messsage.innerHTML.split(emoji.text).filter(el => {return el != ''});
-                
-                let message_with_emoji = '';
+    if (newest_messages.length >= 1){
+        console.log(222222)
+        newest_messages.forEach( messsage => {
 
-                splitted_message.forEach(el => {
-                    message_with_emoji += `${el} ${emoji.emoji_img}`;
-                });
-
-                if (message_with_emoji.length === 0) {
-                    message_with_emoji = emoji.emoji_img;
-                    console.log('dsa')
+            emoticons.forEach(emoji => {
+    
+                if ( messsage.innerText.includes(emoji.text) ){
+                    const splitted_message = messsage.innerHTML.split(emoji.text).filter(el => {return el != ''});
+                    
+                    let message_with_emoji = '';
+    
+                    splitted_message.forEach(el => {
+                        message_with_emoji += `${el} ${emoji.emoji_img}`;
+                    });
+    
+                    if (message_with_emoji.length === 0) {
+                        message_with_emoji = emoji.emoji_img;
+                    }
+    
+                    messsage.innerHTML = message_with_emoji;
                 }
-
-                messsage.innerHTML = message_with_emoji;
-            }
-
+    
+            });
+    
         });
-
-    });
+    }
 }
