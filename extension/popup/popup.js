@@ -11,6 +11,7 @@ const $search_mob_inp = document.querySelector('#mob-search-inp');
 const $search_mob_btn = document.querySelector('#mob-search-btn');
 const $search_player_inp = document.querySelector('#search-player-inp');
 const $search_player_btn = document.querySelector('#search-player-btn');
+const $clan_rank = document.querySelector('#clan-rank');
 
 
 chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord', 'gold', 'killedElites'], (botStats) => { // pobieranie wartosci total i limit z chrome storage do obiektu budget i wyswietlanie go
@@ -81,4 +82,12 @@ $search_player_inp.addEventListener('keydown', (e) => {
         const link = `https://www.margonem.pl/?task=forum&show=found&kw=${searching_element}&playerinfo=Szukaj+gracza&cat=2`;
         window.open(link, '_blank');
     }
+});
+
+$clan_rank.addEventListener('click', () =>{
+    chrome.storage.sync.get(['server'], (data)=>{
+        const server_name = data.server.split(/[/.]/)[2];
+        const link = `https://www.margonem.pl/?task=clanrank&w=${server_name}`;
+        window.open(link, "blank");
+    });
 });

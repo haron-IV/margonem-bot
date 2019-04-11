@@ -3,8 +3,10 @@ setInterval(() => {
         'needExp': document.querySelector('#exp1').getAttribute('tip').split('>')[6],
         'lastLocalization': document.querySelector('#botloc').getAttribute('tip'),
         'lastLocalizationCoord': document.querySelector('#botloc').innerHTML,
-        'gold': document.querySelector('#gold').innerHTML
+        'gold': document.querySelector('#gold').innerHTML,
+        'server': location.href
     };
+    // 'clan_name': document.querySelector('#clanbox').children[1].innerText.split('klanu')[1].trim()
 
     chrome.storage.sync.set(stats, function (){
         console.log('stats updated')

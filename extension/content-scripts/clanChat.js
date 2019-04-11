@@ -97,7 +97,6 @@ function emoji(){
     const newest_messages = all_messages.slice(emoji_config.chat_length-1, all_messages.length+1);
 
     if (newest_messages.length >= 1){
-        console.log(222222)
         newest_messages.forEach( messsage => {
 
             emoticons.forEach(emoji => {
