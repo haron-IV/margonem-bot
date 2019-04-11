@@ -38,26 +38,28 @@ function init_config () {
         }
     }, 200);
 }
-
+function _click(element1){
+    document.querySelector(element).click();
+}
 function openConfiguration() {
-    document.querySelector('#b_config').click();
+    _click('#b_config')
 }
 
 function closeConfiguration() {
     setTimeout(() => {
-        document.querySelector('.cancel').click();
+        _click('.cancel')
     }, 200);
 }
 
 function TurnOffAutoPassingPortals() {
     setTimeout(() => {
-        document.querySelector('#opt12').click();    
+        _click('#opt12')
     }, 200);
 }
 
 function saveConfiguration() {
     setTimeout(() => {
-        document.querySelector('.save').click();
+        _click('.save')
     }, 200);
 }
 
@@ -137,8 +139,8 @@ function getMiniMapMinMobLvl(){
 }
 
 function saveMiniMapConfig(){ // This function is only for click on the save button
-    document.querySelector('.ns-save-button').click();
-    toggleMiniMapConfig('none')
+    _click('.ns-save-button');
+    toggleMiniMapConfig('none');
 }
 
 let miniMapSettings = [];
