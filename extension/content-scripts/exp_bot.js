@@ -132,17 +132,12 @@ setTimeout(() => {
         } 
       });
     }
-
   }
 
   function refreshHiddenMobsFromBotRange(){
-    setTimeout(()=>{
+    setInterval(()=>{
       hideOutsideMobsFromBotRange();
     }, 2000);
-
-    setInterval(() => {
-      hideOutsideMobsFromBotRange();
-    }, 10000);
   }
 
   function getNearestMob() {
@@ -479,7 +474,7 @@ setTimeout(() => {
 
     } else {
       console.log('bot cant see botRange so added it from last data')
-      setBotRangeFromLastPosition();
+      // setBotRangeFromLastPosition();
     }
     
     // const map_name = document.querySelector('#botloc').getAttribute('tip');

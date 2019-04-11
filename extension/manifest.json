@@ -30,7 +30,7 @@
             "css": ["./content-scripts/content.css", "./content-scripts/appearanceLifting.css"],
             "js": [
                 "./external/jQuery.js",
-                "./content-scripts/index.js",
+                "./content-scripts/exp_bot.js",
                 "./content-scripts/stats.js",
                 "./content-scripts/reloadIfStack.js",
                 "./content-scripts/addBotInterface.js",

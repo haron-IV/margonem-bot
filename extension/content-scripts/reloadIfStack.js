@@ -1,71 +1,10 @@
-// const coordinates = {
-//     old: getCoordinates(),
-//     active: getCoordinates()
-// }
+const data = {
+    dry_check: {}
+};
 
-// function getCoordinates(){
-//     return document.querySelector('#botloc').innerHTML;
-// }
-
-// function updateOldCoordinates(){
-//     coordinates.old = getCoordinates();
-// }
-
-// function updateActiveCoordinates(){
-//     coordinates.active = getCoordinates();
-// }
-
-// function updateCoordinates() {
-//     setInterval(() => {
-//         updateOldCoordinates();
-//     }, 10000);
-
-//     setInterval(() => {
-//         updateActiveCoordinates();
-//         // console.log(coordinates)
-//     }, 3731);
-// }
-
-// function reload (message) {
-//     console.log(message)
-//     window.location.reload();
-// }
-
-// function checkCoordinates(){
-//     chrome.storage.sync.get(['botStatus'], (botStats) => {
-//         if( botStats.botStatus === true && coordinates.old === coordinates.active ){
-//             reload('Reload beacuse your hero is stuck.');
-//         }
-//     });
-// }
-
-// function isDead(){
-//     if (document.querySelector('#dazed').style.display == "block"){
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-
-// function init_reloading() {
-//     updateCoordinates();
-
-
-//     setInterval(() => {
-//         checkCoordinates();
-//     }, 15000);
-
-//     setInterval(() => {
-        
-//         chrome.storage.sync.get(['botStatus'], (bot) => {
-//             if (isDead() === true && bot.botStatus === true){
-//                 document.querySelector('#logoutbut').click();
-//             }
-//         });
-        
-//     }, 45000);
-
-// }
+function init_reloading(){
+    walkAndCheckCoords();
+}
 
 function checkLoading() {
     let interval = setInterval(() => {
@@ -74,8 +13,7 @@ function checkLoading() {
         if ( loading_el.style.display === '' ) {
             console.log('loading')
         } else if (loading_el.style.display === 'none') {
-            // init_reloading();
-            tests();
+            init_reloading();
             clearInterval(interval);
         }
     }, 1500);
@@ -83,33 +21,62 @@ function checkLoading() {
 
 checkLoading();
 
-function tests(){
-    const data = {
-        coordinates_old: document.querySelector('#botloc').innerHTML,
-        coordinates_active: document.querySelector('#botloc').innerHTML,
-        distance: 0
-    }
 
-    setInterval(() => {
-        coordinates_old = document.querySelector('#botloc').innerHTML;
-    }, 1331);
-
-    setInterval(() => {
-        data.coordinates_active = document.querySelector('#botloc').innerHTML;
-    }, 888);
-
-    setInterval(() => {
-        // checkWalking(data.coordinates_old, data.coordinates_active, data.distance, data);
-        if (data.coordinates_old !== data.coordinates_active){
-            data.distance+=1;
-            console.log('Distance: ', data)
-        }
-    }, 2450);
+function getCoordinates(){
+    const coords = document.querySelector('#botloc').innerHTML;
+    return coords;
 }
 
-function checkWalking(coordinates_old, coordinates_active, distance, dataV){
-    if (coordinates_old !== coordinates_active){
-        distance+=1;
-        console.log('Distance: ', dataV)
+function goToCoord (x, y) {
+    document.querySelector('#coord-x').value = x;
+    document.querySelector('#coord-y').value = y;
+    setTimeout(() => {
+      document.querySelector('#go-to-btn').click();    
+    }, 500);
+}
+
+function getMapMaxCoord(){
+    const map = {
+      max_x: (document.querySelector('#ground').offsetWidth / 32 ) - 1,
+      max_y: (document.querySelector('#ground').offsetHeight / 32 ) - 1,
     }
+
+    return map;
+}
+
+function walkAndCheckCoords(){
+    data.old_coordinates = getCoordinates();
+    data.map = getMapMaxCoord();
+
+    dryCheckIsHeroStuck();
+    
+    if (data.dry_check.stuck === true){
+        goToCoord( Math.floor( data.map.max_x / 4 ), Math.floor( data.map.max_y / 4 ) );
+    }
+    
+    setTimeout(() => {
+        data.fresh_coordinates = getCoordinates();
+
+        if(data.fresh_coordinates === data.old_coordinates && data.dry_check.stuck === true){
+            window.location.reload();
+        } else {
+            walkAndCheckCoords();
+        }
+    }, 10000);
+}
+
+function dryCheckIsHeroStuck(){
+    data.dry_check.old_coordinates = getCoordinates();
+
+    setTimeout(() => {
+        data.dry_check.fresh_coordinates = getCoordinates();
+        chrome.storage.sync.get(['botStatus'], (botStats) => {
+            if( data.dry_check.old_coordinates === data.dry_check.fresh_coordinates && botStats.botStatus === true){
+                data.dry_check.stuck = true;
+            } else {
+                data.dry_check.stuck = false;
+                dryCheckIsHeroStuck();
+            }
+        });
+    }, 3715);
 }

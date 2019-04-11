@@ -18,7 +18,6 @@ chrome.storage.sync.get(['needExp', 'lastLocalization', 'lastLocalizationCoord',
     $actual_localization.innerHTML = botStats.lastLocalization;
     $actuallocalizationCoord.innerHTML = botStats.lastLocalizationCoord;
     $gold.innerHTML = botStats.gold;
-    // $killedElites.innerHTML = botStats.killedElites;
 });
 
 function search(input, searcher_link) {
@@ -30,7 +29,6 @@ function search(input, searcher_link) {
     } else {
         input.classList.add('input-unvalid')
     }
-    
 }
 
 function search_on_enter(input, searcher_link){
