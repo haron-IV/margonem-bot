@@ -23,6 +23,15 @@ const emoticons = [
     {text: ':D',
     emoji_img: `<img src="${emoji_config.all_emojis[1]}" width="${emoji_config.size}">`},
 
+    {text: ':d',
+    emoji_img: `<img src="${emoji_config.all_emojis[1]}" width="${emoji_config.size}">`},
+
+    {text: ';D',
+    emoji_img: `<img src="${emoji_config.all_emojis[1]}" width="${emoji_config.size}">`},
+
+    {text: ';d',
+    emoji_img: `<img src="${emoji_config.all_emojis[1]}" width="${emoji_config.size}">`},
+
     {text: 'hahaha',
     emoji_img: `<img src="${emoji_config.all_emojis[2]}" width="${emoji_config.size}">`},
 
@@ -32,7 +41,13 @@ const emoticons = [
     {text: ':p',
     emoji_img: `<img src="${emoji_config.all_emojis[4]}" width="${emoji_config.size}">`},
 
+    {text: ':P',
+    emoji_img: `<img src="${emoji_config.all_emojis[4]}" width="${emoji_config.size}">`},
+
     {text: ';p',
+    emoji_img: `<img src="${emoji_config.all_emojis[5]}" width="${emoji_config.size}">`},
+
+    {text: ';P',
     emoji_img: `<img src="${emoji_config.all_emojis[5]}" width="${emoji_config.size}">`},
 
     {text: ':B',
@@ -44,8 +59,8 @@ const emoticons = [
     {text: ';*',
     emoji_img: `<img src="${emoji_config.all_emojis[8]}" width="${emoji_config.size}">`},
 
-    {text: '<3',
-    emoji_img: `<img src="${emoji_config.all_emojis[9]}" width="${emoji_config.size}">`},
+    {text: ':*',
+    emoji_img: `<img src="${emoji_config.all_emojis[8]}" width="${emoji_config.size}">`}
 ];
 
 function checkIsGameLoaded() {
@@ -56,23 +71,31 @@ function checkIsGameLoaded() {
         } else if (loading_el.style.display === 'none') {
             emoji();
             colors();
-            checkChat();
             clearInterval(interval);
         }
     }, 1000);
 } checkIsGameLoaded();
 
-function checkChat(){
-    setInterval(() => {
-        emoji_config.chat_length = document.querySelector('#chattxt').childElementCount;
-    }, 2000);
-    
-    setInterval(() => {
-        if (emoji_config.chat_length != document.querySelector('#chattxt').childElementCount){
+var targetNode = document.querySelector("#chattxt");
+var observerOptions = {
+  childList: true,
+  attributes: true,
+  subtree: true
+}
+
+var observer = new MutationObserver(checkChatNewMaessages);
+observer.observe(targetNode, observerOptions);
+
+
+function checkChatNewMaessages(mutationList, observer) {
+    mutationList.forEach((mutation) => {
+      switch(mutation.type) {
+        case 'childList':
             emoji();
             colors();
-        }    
-    }, 417);
+        break;
+      }
+    });
 }
 
 function colors() {
