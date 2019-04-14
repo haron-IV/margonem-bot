@@ -95,14 +95,7 @@ function checkChatNewMaessages(mutationList, observer) {
         case 'childList':
             emoji();
             colors();
-            console.log(mutation)
-
-            if ( mutation.addedNodes[0].childNodes[0].innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
-                notification_sound.play();
-            }
-            // if (el.innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
-            //     notification_sound.play();
-            // }
+            playNotificationSound(mutation);
         break;
       }
     });
@@ -153,5 +146,11 @@ function emoji(){
             });
     
         });
+    }
+}
+
+function playNotificationSound(mutation){
+    if ( mutation.addedNodes[0].childNodes[0].innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
+        notification_sound.play();
     }
 }
