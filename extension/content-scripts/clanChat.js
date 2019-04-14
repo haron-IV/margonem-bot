@@ -2,7 +2,6 @@ const emoji_config = {
     size: 13,
     nickname: '',
     chat_length: 0,
-    notification_sound = new Audio('https://notificationsounds.com/soundfiles/1728efbda81692282ba642aafd57be3a/file-sounds-1101-plucky.mp3'),
     all_emojis: [
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Slightly_Smiling_Face_Emoji_Icon_60x60.png?16228697460559734940',
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Smiling_Face_Emoji_Icon.png?16228697460559734940',
@@ -16,6 +15,8 @@ const emoji_config = {
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Growing_Pink_Heart_Emoji_Icon_60x60.png?16285229369325405128'
     ]
 };
+
+const notification_sound = new Audio('https://notificationsounds.com/soundfiles/1728efbda81692282ba642aafd57be3a/file-sounds-1101-plucky.mp3');
 
 const emoticons = [
     {text: ':)',
@@ -94,6 +95,14 @@ function checkChatNewMaessages(mutationList, observer) {
         case 'childList':
             emoji();
             colors();
+            console.log(mutation)
+
+            if ( mutation.addedNodes[0].childNodes[0].innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
+                notification_sound.play();
+            }
+            // if (el.innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
+            //     notification_sound.play();
+            // }
         break;
       }
     });
@@ -106,7 +115,6 @@ function colors() {
         if ( el.innerText.includes(emoji_config.nickname) ){
             if(el.innerText.split(`«${emoji_config.nickname}»`).length > 1 || el.innerText.split(`«${emoji_config.nickname} ->`).length > 0){
                 el.style.color ="#b3d9ff";
-                settings.notification_sound.play();
             }
 
             if (el.innerText.includes(`-> ${emoji_config.nickname}`)){
