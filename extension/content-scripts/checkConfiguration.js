@@ -159,7 +159,7 @@ function checkIfMiniMapDataWasCreated(){
 
         setTimeout(() => {
             if (checkMiniMap === undefined && bot.miniMap) {
-                bot.miniMap.push({nickname: bot.nickname, miniMapSettings: []});
+                bot.miniMap.push({nickname: bot.nickname, miniMapSettings: []}); // creating new user in data
                 chrome.storage.sync.set({'miniMap': bot.miniMap});
             }
         }, 200);
@@ -219,7 +219,6 @@ function hotkey(){
                 removeClass('autoShowMiniMap');
                 toggle = true;
             } else {
-                console.log('toggle')
                 removeClass('enlargeMiniMap');
                 addClass('autoShowMiniMap');
                 toggle = false;
@@ -245,12 +244,36 @@ function addCloseButtonToMiniMap(){
             miniMapWrapper.classList.add('hidden');
             toggle = false;
             button.innerHTML = "show map";
+            
+
         } else {
             miniMapWrapper.classList.remove('hidden');
             toggle = true;
             button.innerHTML = "hide map";
         }
-        button.blur()
+
+        chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
+            let whichSettings;
+    
+            if(bot.miniMap){
+                bot.miniMap.forEach( (el, i) => {
+                    if (el.nickname === bot.nickname){
+                        miniMapSettings = el;
+                        whichSettings = i;
+                    }
+                });
+
+                if (toggle === true){
+                    bot.miniMap[whichSettings].miniMapSettings.status = true;
+                    chrome.storage.sync.set({'miniMap': bot.miniMap});
+                } else {
+                    bot.miniMap[whichSettings].miniMapSettings.status = false;
+                    chrome.storage.sync.set({'miniMap': bot.miniMap});
+                }
+            }
+        });
+        
+        button.blur(); // unfocus button, after clicking on button when user click enter button was clicked
     });
 }
 
