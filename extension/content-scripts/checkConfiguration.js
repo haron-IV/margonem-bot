@@ -240,9 +240,29 @@ function addCloseButtonToMiniMap(){
     document.querySelector('#centerbox2').appendChild(button);
     let toggle = true;
 
-    //after loading minimap status should set visibility of map and button action
+    chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
+        let whichSettings;
+    
+        if(bot.miniMap){
+            bot.miniMap.forEach( (el, i) => {
+                if (el.nickname === bot.nickname){
+                    miniMapSettings = el;
+                    whichSettings = i;
+                }
+            });
 
-
+            if(bot.miniMap[whichSettings].miniMapSettings.status === true){
+                miniMapWrapper.classList.add('hidden');
+                toggle = false;
+                button.innerHTML = "show map";
+            } else {
+                miniMapWrapper.classList.remove('hidden');
+                toggle = true;
+                button.innerHTML = "hide map";
+            }
+        }
+          
+    });
 
     button.addEventListener('click', () => {
 
@@ -266,10 +286,7 @@ function addCloseButtonToMiniMap(){
                 }
             }
 
-            console.log('KURWA!')
-            console.log('visibility status: ', bot.miniMap[whichSettings].miniMapSettings.status)
-
-            if(bot.miniMap[whichSettings].miniMapSettings.status === true){
+            if(toggle === true){
                 miniMapWrapper.classList.add('hidden');
                 toggle = false;
                 button.innerHTML = "show map";
@@ -278,16 +295,6 @@ function addCloseButtonToMiniMap(){
                 toggle = true;
                 button.innerHTML = "hide map";
             }
-
-            // if(toggle === true){
-            //     miniMapWrapper.classList.add('hidden');
-            //     toggle = false;
-            //     button.innerHTML = "show map";
-            // } else {
-            //     miniMapWrapper.classList.remove('hidden');
-            //     toggle = true;
-            //     button.innerHTML = "hide map";
-            // }
         });
         
         button.blur(); // unfocus button, after clicking on button when user click enter button was clicked
