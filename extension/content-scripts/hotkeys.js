@@ -70,7 +70,7 @@ function init_hotkeys(){
     data_hotkeys.chatEl.addEventListener('keydown', (e) => {
         if (e.key == 'Enter'){
             data_hotkeys.chatIsUse = false;
-            console.log(data_hotkeys.chatIsUse)
+            // console.log(data_hotkeys.chatIsUse)
         } else {
             data_hotkeys.chatIsUse = true;
         }

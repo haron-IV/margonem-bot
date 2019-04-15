@@ -73,7 +73,7 @@ setTimeout(() => {
             interface.stopBotButton.classList.add('active-button');
         }
 
-        console.log('interface state: ', botStats.interface_state)
+        // console.log('interface state: ', botStats.interface_state)
 
         if (botStats.interface_state === true){
             interface.wrapper.style.top = "0px";

@@ -9,7 +9,7 @@ setInterval(() => {
     // 'clan_name': document.querySelector('#clanbox').children[1].innerText.split('klanu')[1].trim()
 
     chrome.storage.sync.set(stats, function (){
-        console.log('stats updated')
+        // console.log('stats updated')
     });
 }, 20000);
 

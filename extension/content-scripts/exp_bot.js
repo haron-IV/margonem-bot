@@ -53,7 +53,7 @@ setTimeout(() => {
       range.x_start = parseInt( document.querySelector(which_range).style.left.replace(/[translate px ()]/g, '') );
       range.y_start = parseInt( document.querySelector(which_range).style.top.replace(/[translate px ()]/g, '') );
 
-      console.log('bot range: ', range);
+      // console.log('bot range: ', range);
     }
 
     const mobs = _mobs();
@@ -82,7 +82,7 @@ setTimeout(() => {
   function getCoordNearestMob(mob){
     if(mob){
       const mob_coord = mob.getAttribute('tip').split(/[()]/)[1];
-      console.log('Nearest mob coordinates: ', mob_coord);
+      // console.log('Nearest mob coordinates: ', mob_coord);
       return mob_coord;
     }
   }
@@ -98,20 +98,20 @@ setTimeout(() => {
   function checkIfBotRangeIsAvailable(){
 
     if ( document.querySelector('#botRange') ){
-      console.log('bot range is available');
+      // console.log('bot range is available');
 
       const botRange = _rangeBot('#botRange');
       const map = getMapInfo();
 
       if ( botRange.width > map.width / 14 && botRange.height > map.heigh / 14 ){
         return true;
-        console.log('bot range have correct size');
+        // console.log('bot range have correct size');
       } else {
-        console.log('bot range havent correct size');
+        // console.log('bot range havent correct size');
         return false;
       }
     } else {
-      console.log('bot range isnt available');
+      // console.log('bot range isnt available');
       return false;
     }
     
@@ -207,16 +207,16 @@ setTimeout(() => {
     }
     
     data.portals[go_to_portal_counter].click();
-    console.log('Go to portal: ', data.portals[go_to_portal_counter]);
+    // console.log('Go to portal: ', data.portals[go_to_portal_counter]);
 
     let interval = setInterval(() => {
       if ( checkIfHeroIsNearPortal() === true ){
         if ( mobsInRange('#range')[0] ){
           goToMob(0);
-          console.log('return to mob');
+          // console.log('return to mob');
         } else {
           goToPortal();
-          console.log('no more mob near you, go to next portal')
+          // console.log('no more mob near you, go to next portal')
         }
         
         clearInterval(interval);
@@ -244,7 +244,7 @@ setTimeout(() => {
     const all_mobs = _mobs();
 
     chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-      console.log('black list: ', mobs.black_list_mob.data);
+      // console.log('black list: ', mobs.black_list_mob.data);
 
       all_mobs.forEach( el => {
         let mob_coords = [];
@@ -272,7 +272,7 @@ setTimeout(() => {
       nearest.click();
       nearest_mob_coord = getCoordNearestMob(nearest);
     } else {
-      console.log('Here is not mob');
+      // console.log('Here is not mob');
       // goToPortal();
       searchMobs();
     }
@@ -330,7 +330,7 @@ setTimeout(() => {
       break;
     }
 
-    console.log('counter corners: ', expBot.search_mobs_counter)
+    // console.log('counter corners: ', expBot.search_mobs_counter)
 
     expBot.search_mobs_counter++;
   }
@@ -392,7 +392,7 @@ setTimeout(() => {
   function closeFight(){
     if ( document.querySelector('#battleclose') ) {
       document.querySelector('#battleclose').click();
-      console.log('close fight window')
+      // console.log('close fight window')
     }
   }
 
@@ -421,18 +421,18 @@ setTimeout(() => {
           el.getAttribute('tip').split('lvl').length > 1        
           
           ) {
-          console.log('attacked el classlist: ', el.getAttribute('tip'))
+          // console.log('attacked el classlist: ', el.getAttribute('tip'))
   
           if(data.battleState === "none" || data.battleState === ""){
            
 
             if (data.dialogWindow.style.display === 'block') {
               data.dialogLineExit.click();
-              console.log('-EXIT DIALOG-')
+              // console.log('-EXIT DIALOG-')
             } else {
               getAllMobsWhichCantKill(); // check black list and refresh black list
               el.click(); // attack mob
-              console.log('attack')
+              // console.log('attack')
             }
           }
             
@@ -469,11 +469,11 @@ setTimeout(() => {
     getAllMobsWhichCantKill();
   
     if (checkIfBotRangeIsAvailable() === true){
-      console.log('hide mobs which are out of bot range');
+      // console.log('hide mobs which are out of bot range');
       refreshHiddenMobsFromBotRange();
 
     } else {
-      console.log('bot cant see botRange so added it from last data')
+      // console.log('bot cant see botRange so added it from last data')
       // setBotRangeFromLastPosition();
     }
     
@@ -496,13 +496,13 @@ setTimeout(() => {
             const heroActive = getHeroCoord();
 
             if (heroLast.x === heroActive.x && heroLast.y === heroActive.y){
-              console.log('hero is stuck');
-              console.log('last nearest: ', nearest_mob_coord);
+              // console.log('hero is stuck');
+              // console.log('last nearest: ', nearest_mob_coord);
 
               chrome.storage.sync.get(['black_list_mob'], (mobs) => {
-                console.log('mobs.black_list_mob: ', mobs.black_list_mob)
+                // console.log('mobs.black_list_mob: ', mobs.black_list_mob)
 
-                console.log('----------------------------------')
+                // console.log('----------------------------------')
 
                 mobs.black_list_mob.data.push(nearest_mob_coord);
 
@@ -542,11 +542,11 @@ setTimeout(() => {
         } else if (loading_el.style.display === 'none') {
 
           chrome.storage.sync.get(['botStatus'], (botStats)=> {
-            console.log('bot status: ', botStats.botStatus);
+            // console.log('bot status: ', botStats.botStatus);
 
             if( botStats.botStatus == true ){
               bot();
-              console.log('Bot run automaticly.');
+              // console.log('Bot run automaticly.');
             }
           });
 
@@ -559,7 +559,7 @@ setTimeout(() => {
 
 
   document.querySelector('#start-bot').addEventListener('click', ()=>{
-    console.log('start bot');
+    // console.log('start bot');
 
     chrome.storage.sync.get(['botStatus'], (botStats) => {
       const data = {
@@ -573,7 +573,7 @@ setTimeout(() => {
   });
 
   document.querySelector('#stop-bot').addEventListener('click', ()=> {
-    console.log('stop bot');
+    // console.log('stop bot');
     chrome.storage.sync.get(['botStatus'], (botStats) => {
       let data = {
         'botStatus': false

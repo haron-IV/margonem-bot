@@ -11,7 +11,7 @@ function checkLoading() {
         const loading_el = document.querySelector('#loading');
         
         if ( loading_el.style.display === '' ) {
-            console.log('loading')
+            // console.log('loading')
         } else if (loading_el.style.display === 'none') {
             init_reloading();
             clearInterval(interval);
@@ -86,7 +86,7 @@ function checkDead(){
     const dead_window = document.querySelector('#dazed');
 
     if (dead_window.style.display === 'block' && data.botStatus === true){
-        console.log('Hero is dead');
+        // console.log('Hero is dead');
 
         chrome.storage.sync.set({'botStatus': false}, () => {});
 
