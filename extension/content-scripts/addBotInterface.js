@@ -22,15 +22,15 @@ setTimeout(() => {
     interface.stopBotButton.innerHTML = 'stop';
     interface.wrapper.appendChild(interface.stopBotButton)
 
-    interface.eliteBotButtonStart.id = 'elite-bot-start';
-    interface.eliteBotButtonStart.classList.add('elite-bot-start', 'bot-button');
-    interface.eliteBotButtonStart.innerHTML = 'elite bot start';
-    interface.wrapper.appendChild(interface.eliteBotButtonStart);
+    // interface.eliteBotButtonStart.id = 'elite-bot-start';
+    // interface.eliteBotButtonStart.classList.add('elite-bot-start', 'bot-button');
+    // interface.eliteBotButtonStart.innerHTML = 'elite bot start';
+    // interface.wrapper.appendChild(interface.eliteBotButtonStart);
 
-    interface.eliteBotButtonStop.id = 'elite-bot-stop';
-    interface.eliteBotButtonStop.classList.add('elite-bot-stop', 'bot-button');
-    interface.eliteBotButtonStop.innerHTML = 'elite bot stop';
-    interface.wrapper.appendChild(interface.eliteBotButtonStop);
+    // interface.eliteBotButtonStop.id = 'elite-bot-stop';
+    // interface.eliteBotButtonStop.classList.add('elite-bot-stop', 'bot-button');
+    // interface.eliteBotButtonStop.innerHTML = 'elite bot stop';
+    // interface.wrapper.appendChild(interface.eliteBotButtonStop);
 
     interface.toggleButton.classList.add('toggle-button');
 
@@ -83,4 +83,3 @@ setTimeout(() => {
     });
 
 }, 1500);
-
