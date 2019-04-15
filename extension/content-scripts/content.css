@@ -76,3 +76,7 @@
 .off-pointer-events{
     pointer-events: none;
 }
+
+.hidden{
+    visibility: hidden;
+}

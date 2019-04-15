@@ -20,6 +20,8 @@ function init_config () {
     getMiniMapMinMobLvl();
     activeMiniMap();
 
+    addCloseButtonToMiniMap();
+
     setTimeout(() => {
         if (bot_status == true){
             if (checkIfAutoPassingPortalsIsOn() === false) {
@@ -221,6 +223,31 @@ function hotkey(){
                 addClass('autoShowMiniMap');
                 toggle = false;
             }
+        }
+    });
+}
+
+function addCloseButtonToMiniMap(){
+    const miniMapWrapper = document.querySelector('.mmpWrapper');
+    const button = document.createElement('button');
+    button.innerHTML = 'hide map';
+    button.id = "close-mini-map-button";
+    button.style.position = 'absolute';
+    button.style.zIndex = '999';
+    button.style.right = '280px';
+    button.style.bottom = '35px';
+    document.querySelector('#centerbox2').appendChild(button);
+    let toggle = true;
+
+    button.addEventListener('click', () => {
+        if(toggle === true){
+            miniMapWrapper.classList.add('hidden');
+            toggle = false;
+            button.innerHTML = "show map";
+        } else {
+            miniMapWrapper.classList.remove('hidden');
+            toggle = true;
+            button.innerHTML = "hide map";
         }
     });
 }
