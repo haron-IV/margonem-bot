@@ -250,22 +250,9 @@ function addCloseButtonToMiniMap(){
             toggle = true;
             button.innerHTML = "hide map";
         }
+        button.blur()
     });
 }
-
-// let isActive = false;
-// document.querySelector('#inpchat').addEventListener('keydown', (e)=>{
-	
-// 	if (e.key==='Enter'){
-// 		isActive = false;
-// 	}
-
-// 	if (isActive === true && e.key === 'r'){
-
-// 	}
-
-// 	isActive = true;
-// });
 
 function activeMiniMap() {
     chrome.storage.sync.get(['settingsData'], (settings) => {
