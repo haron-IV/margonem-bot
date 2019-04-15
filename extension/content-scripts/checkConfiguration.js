@@ -211,8 +211,9 @@ function addOpacitySliderForMiniMap(){
 
 function hotkey(){
     let toggle = false;
+
     window.addEventListener('keydown', e => {
-        if (e.key === 'r'){
+        if (e.key === 'r' && e.target.id !== 'inpchat'){
             if(toggle === false){
                 addClass('enlargeMiniMap');
                 removeClass('autoShowMiniMap');
@@ -251,6 +252,20 @@ function addCloseButtonToMiniMap(){
         }
     });
 }
+
+// let isActive = false;
+// document.querySelector('#inpchat').addEventListener('keydown', (e)=>{
+	
+// 	if (e.key==='Enter'){
+// 		isActive = false;
+// 	}
+
+// 	if (isActive === true && e.key === 'r'){
+
+// 	}
+
+// 	isActive = true;
+// });
 
 function activeMiniMap() {
     chrome.storage.sync.get(['settingsData'], (settings) => {
