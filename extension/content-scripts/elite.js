@@ -1,3 +1,5 @@
+//mmp-elite2 classname of elite II element on the miniMap -> maybe for detecting E2
+
 setTimeout(() => { //REFACTORIZE
 
 

@@ -19,6 +19,7 @@ function init_config () {
     checkIfMiniMapDataWasCreated();
     getMiniMapMinMobLvl();
     activeMiniMap();
+    checkVisibleMiniMapStatusAndSetVisibility();
 
     addCloseButtonToMiniMap();
 
@@ -239,20 +240,20 @@ function addCloseButtonToMiniMap(){
     document.querySelector('#centerbox2').appendChild(button);
     let toggle = true;
 
-    button.addEventListener('click', () => {
-        if(toggle === true){
-            miniMapWrapper.classList.add('hidden');
-            toggle = false;
-            button.innerHTML = "show map";
-            
+    //after loading minimap status should set visibility of map and button action
 
-        } else {
-            miniMapWrapper.classList.remove('hidden');
-            toggle = true;
-            button.innerHTML = "hide map";
-        }
+    button.addEventListener('click', () => {
 
         chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
+            if(toggle === true){
+                miniMapWrapper.classList.add('hidden');
+                toggle = false;
+                button.innerHTML = "show map";
+            } else {
+                miniMapWrapper.classList.remove('hidden');
+                toggle = true;
+                button.innerHTML = "hide map";
+            }
             let whichSettings;
     
             if(bot.miniMap){
@@ -277,6 +278,26 @@ function addCloseButtonToMiniMap(){
     });
 }
 
+function checkVisibleMiniMapStatusAndSetVisibility(){
+    chrome.storage.sync.get(['miniMap', 'nickname'], (settings) => {
+        let whichSettings;
+
+        settings.miniMap.forEach((el, i) => {
+            if (el.nickname === settings.nickname) {
+                miniMapSettings = el;
+                whichSettings = i;
+            }
+        });
+
+
+        if(settings.miniMap[whichSettings].miniMapSettings.status === true){
+            document.querySelector('.mmpWrapper').classList.remove('hidden');
+        } else {
+            document.querySelector('.mmpWrapper').classList.add('hidden');
+        }
+    });
+}
+
 function activeMiniMap() {
     chrome.storage.sync.get(['settingsData'], (settings) => {
         if ( settings.settingsData.active_minimap === true) {
@@ -285,8 +306,9 @@ function activeMiniMap() {
             hotkey();
             setHorizontalPosiTionOfMiniMap();
             addOpacitySliderForMiniMap(); // for refactorize and better look
+
         } else {
-            setMiniMapSize(130)
+            setMiniMapSize(130);
         }
     });
 }
