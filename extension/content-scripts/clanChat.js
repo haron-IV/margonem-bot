@@ -89,15 +89,15 @@ var observer = new MutationObserver(checkChatNewMaessages);
 observer.observe(targetNode, observerOptions);
 
 
-function checkChatNewMaessages(mutationList, observer) {
+function checkChatNewMaessages(mutationList) {
     mutationList.forEach((mutation) => {
-      switch(mutation.type) {
-        case 'childList':
-            emoji();
-            colors();
-            playNotificationSound(mutation);
-        break;
-      }
+        switch(mutation.type) {
+            case 'childList':
+                emoji();
+                colors();
+                playNotificationSound(mutation);
+            break;
+        }
     });
 }
 
@@ -150,7 +150,9 @@ function emoji(){
 }
 
 function playNotificationSound(mutation){
-    if ( mutation.addedNodes[0].childNodes[0].innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
-        notification_sound.play();
+    if (mutation.addedNodes[0] && mutation.addedNodes[0].childNodes[0] && mutation.addedNodes[0].childNodes[0].innerText && mutation.addedNodes[0].childNodes[0].innerText.split('->')[1]){
+        if ( mutation.addedNodes[0].childNodes[0].innerText.split('->')[1].trim() === `${emoji_config.nickname}»`){
+            notification_sound.play();
+        }
     }
 }

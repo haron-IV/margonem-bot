@@ -242,18 +242,11 @@ function addCloseButtonToMiniMap(){
 
     //after loading minimap status should set visibility of map and button action
 
+
+
     button.addEventListener('click', () => {
 
         chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
-            if(toggle === true){
-                miniMapWrapper.classList.add('hidden');
-                toggle = false;
-                button.innerHTML = "show map";
-            } else {
-                miniMapWrapper.classList.remove('hidden');
-                toggle = true;
-                button.innerHTML = "hide map";
-            }
             let whichSettings;
     
             if(bot.miniMap){
@@ -272,6 +265,29 @@ function addCloseButtonToMiniMap(){
                     chrome.storage.sync.set({'miniMap': bot.miniMap});
                 }
             }
+
+            console.log('KURWA!')
+            console.log('visibility status: ', bot.miniMap[whichSettings].miniMapSettings.status)
+
+            if(bot.miniMap[whichSettings].miniMapSettings.status === true){
+                miniMapWrapper.classList.add('hidden');
+                toggle = false;
+                button.innerHTML = "show map";
+            } else {
+                miniMapWrapper.classList.remove('hidden');
+                toggle = true;
+                button.innerHTML = "hide map";
+            }
+
+            // if(toggle === true){
+            //     miniMapWrapper.classList.add('hidden');
+            //     toggle = false;
+            //     button.innerHTML = "show map";
+            // } else {
+            //     miniMapWrapper.classList.remove('hidden');
+            //     toggle = true;
+            //     button.innerHTML = "hide map";
+            // }
         });
         
         button.blur(); // unfocus button, after clicking on button when user click enter button was clicked
