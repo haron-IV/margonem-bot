@@ -11,6 +11,8 @@ const $search_mob_inp = document.querySelector('#mob-search-inp');
 const $search_mob_btn = document.querySelector('#mob-search-btn');
 const $search_player_inp = document.querySelector('#search-player-inp');
 const $search_player_btn = document.querySelector('#search-player-btn');
+const $searcher = document.querySelector('#searcher_input');
+const $searcher_button = document.querySelector('#searcher-btn');
 const $clan_rank = document.querySelector('#clan-rank');
 
 
@@ -26,10 +28,14 @@ function search(input, searcher_link) {
     const link = `${searcher_link}${searching_element}`;
 
     if (searching_element.length > 3) {
-        window.open(link, '_blank');
+        if (input === $searcher) {
+            window.open(`${searcher_link}${searching_element} margonem`)
+        } else {
+            window.open(link, '_blank');
+        }
     } else {
         input.classList.add('input-unvalid')
-    }
+    } 
 }
 
 function search_on_enter(input, searcher_link){
@@ -45,25 +51,34 @@ function search_on_enter(input, searcher_link){
         if ( e.key === "Enter" && input.value.length > 3){
             const searching_element = input.value;
             const link = `${searcher_link}${searching_element}`;
-            window.open(link, '_blank');
+
+            if ( input === $searcher ){
+                window.open(`${searcher_link}${searching_element} margonem`)
+            } else {
+                window.open(link, '_blank');
+            }
         }
     });
 }
 
-$search_npc_btn.addEventListener('click', ()=>{
-    search($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=', );
-});
-search_on_enter($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=');
+// $search_npc_btn.addEventListener('click', ()=>{
+//     search($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=', );
+// });
+// search_on_enter($search_npc_inp, 'http://emargo.pl/npc/szukaj?q=');
 
-$search_quest_btn.addEventListener('click', () => {
-    search($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
-});
-search_on_enter($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
+// $search_quest_btn.addEventListener('click', () => {
+//     search($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
+// });
+// search_on_enter($search_quest_inp, 'http://emargo.pl/questy/szukaj?q=');
 
-$search_mob_btn.addEventListener('click', () => {
-    search($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
-});
-search_on_enter($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
+// $search_mob_btn.addEventListener('click', () => {
+//     search($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
+// });
+// search_on_enter($search_mob_inp, 'http://emargo.pl/potwory/szukaj?q=');
+
+$searcher_button.addEventListener('click', () => {
+    search($searcher, 'https://www.google.com/search?q=');
+}); search_on_enter($searcher, 'https://www.google.com/search?q=');
 
 // to refactorize
 $search_player_btn.addEventListener('click', () => {
@@ -73,7 +88,6 @@ $search_player_btn.addEventListener('click', () => {
     if (searching_element.length > 3) {
         window.open(link, '_blank');
     }
-    
 });
 
 $search_player_inp.addEventListener('keydown', (e) => {
