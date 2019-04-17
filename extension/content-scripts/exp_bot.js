@@ -547,7 +547,7 @@ setTimeout(() => {
             } else {
               letHeroWalk = true;
             }
-            
+            //test
           }, 7000);
          
         }
