@@ -1,6 +1,7 @@
 function checkMapFightStatus(){
     //"PvP wyłąc"
     // "Mapka PvP"
+    //"PvP za zg"
     return document.querySelector('#pvpmode').getAttribute('tip').slice(0, 9);
 }
 
@@ -24,18 +25,15 @@ function mini_map(){
     return map;
 }
 
-function addRangeToMap(){
+function addRangeToMap(){ // 'blue' range
     const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
     rangeItem.classList.add('big-range', 'range');
-
-    if (checkMapFightStatus() === "PvP wyłąc") {
-        rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
-        rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
-    } else if (checkMapFightStatus() === "Mapka PvP"){
+    
+    if (checkMapFightStatus() === "Mapka PvP"){
         rangeItem.style.width = document.querySelector('.mmp-visibility').style.width; // range width
         rangeItem.style.height = document.querySelector('.mmp-visibility').style.height; //range height
     } 
