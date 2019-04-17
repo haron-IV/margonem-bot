@@ -1,3 +1,9 @@
+function checkMapFightStatus(){
+    //"PvP wyłąc"
+    // "Mapka PvP"
+    return document.querySelector('#pvpmode').getAttribute('tip').slice(0, 9);
+}
+
 function heroPositon(){
     const hero = document.querySelector('.mmp-hero');
     
@@ -19,16 +25,21 @@ function mini_map(){
 }
 
 function addRangeToMap(){
-    // const map = mini_map();
+    const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
     rangeItem.classList.add('big-range', 'range');
-    // rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
-    // rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
-    rangeItem.style.width = document.querySelector('.mmp-visibility').style.width; // range width
-    rangeItem.style.height = document.querySelector('.mmp-visibility').style.height; //range height
+
+    if (checkMapFightStatus() === "PvP wyłąc") {
+        rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
+        rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
+    } else if (checkMapFightStatus() === "Mapka PvP"){
+        rangeItem.style.width = document.querySelector('.mmp-visibility').style.width; // range width
+        rangeItem.style.height = document.querySelector('.mmp-visibility').style.height; //range height
+    } 
+    
     mapEl.appendChild(rangeItem);
 }
 
@@ -185,7 +196,6 @@ function addBotRangeToMiniMap() {
 }
 
 function init () {
-    console.log('RangePosition.js included.')
     addRangeToMap();
     addSmallRangeToMap();
 
