@@ -1,16 +1,19 @@
-checkIsGameLoaded();
+const config = {
+    bot_status: undefined,
+    miniMapSettings: [],
+    checkMiniMap: undefined
+}
 
 function checkIsGameLoaded() {
     let interval = setInterval(() => {
         const loading_el = document.querySelector('#loading');
         
-        if ( loading_el.style.display === '' ) {
-        } else if (loading_el.style.display === 'none') {
+        if (loading_el.style.display === 'none') {
             init_config();
             clearInterval(interval);
         }
     }, 1000);
-}
+} checkIsGameLoaded();
 
 function init_config () {
     getBotStatus();
@@ -21,10 +24,10 @@ function init_config () {
     activeMiniMap();
     checkVisibleMiniMapStatusAndSetVisibility();
 
-    addCloseButtonToMiniMap();
+    addToggleButtonToMiniMap();
 
     setTimeout(() => {
-        if (bot_status == true){
+        if (config.bot_status == true){
             if (checkIfAutoPassingPortalsIsOn() === false) {
                 TurnOffAutoPassingPortals();
                 saveConfiguration();
@@ -72,13 +75,12 @@ function checkIfAutoPassingPortalsIsOn(){
     }
 }
 
-let bot_status;
 function getBotStatus() {
     chrome.storage.sync.get(['botStatus'], (bot) => {
         if (bot.botStatus === false){
-            bot_status = false;
+            config.bot_status = false;
         } else {
-            bot_status = true;
+            config.bot_status = true;
         }
     });
 }
@@ -101,7 +103,7 @@ function setMinMobLvl(){
         if(bot.miniMap){
             bot.miniMap.forEach( (el, i) => {
                 if (el.nickname === bot.nickname){
-                    miniMapSettings = el;
+                    config.miniMapSettings = el;
                     whichSettings = i;
                 }
             });
@@ -112,7 +114,6 @@ function setMinMobLvl(){
                 lvl = 70;
             }
             
-
             document.querySelector('input[data-key="/minlvl"]').value = lvl;
             saveMiniMapConfig(); // here must be saving from gui cuz bot only set this value but not save this
         }
@@ -146,22 +147,20 @@ function saveMiniMapConfig(){ // This function is only for click on the save but
     toggleMiniMapConfig('none');
 }
 
-let miniMapSettings = [];
-let checkMiniMap;
 function checkIfMiniMapDataWasCreated(){
     chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
         if (!bot.miniMap){
-            chrome.storage.sync.set({'miniMap': miniMapSettings});
+            chrome.storage.sync.set({'miniMap': config.miniMapSettings});
         } else {
             bot.miniMap.forEach(el => {
                 if (el.nickname === bot.nickname){
-                    checkMiniMap = true;
+                    config.checkMiniMap = true;
                 }
             });
         }
 
         setTimeout(() => {
-            if (checkMiniMap === undefined && bot.miniMap) {
+            if (config.checkMiniMap === undefined && bot.miniMap) {
                 bot.miniMap.push({nickname: bot.nickname, miniMapSettings: []}); // creating new user in data
                 chrome.storage.sync.set({'miniMap': bot.miniMap});
             }
@@ -230,7 +229,8 @@ function hotkey(){
     });
 }
 
-function addCloseButtonToMiniMap(){
+function addToggleButtonToMiniMap(){
+    let toggle = true;
     const miniMapWrapper = document.querySelector('.mmpWrapper');
     const button = document.createElement('button');
     button.innerHTML = 'hide map';
@@ -239,8 +239,12 @@ function addCloseButtonToMiniMap(){
     button.style.zIndex = '999';
     button.style.right = '280px';
     button.style.bottom = '35px';
-    document.querySelector('#centerbox2').appendChild(button);
-    let toggle = true;
+    
+    chrome.storage.sync.get(['settingsData'], (minimap) => {
+        if (minimap.settingsData.active_minimap === true){
+            document.querySelector('#centerbox2').appendChild(button);
+        }
+    });
 
     chrome.storage.sync.get(['miniMap', 'nickname'], (bot) => {
         let whichSettings;
@@ -248,7 +252,7 @@ function addCloseButtonToMiniMap(){
         if(bot.miniMap){
             bot.miniMap.forEach( (el, i) => {
                 if (el.nickname === bot.nickname){
-                    miniMapSettings = el;
+                    config.miniMapSettings = el;
                     whichSettings = i;
                 }
             });
@@ -274,7 +278,7 @@ function addCloseButtonToMiniMap(){
             if(bot.miniMap){
                 bot.miniMap.forEach( (el, i) => {
                     if (el.nickname === bot.nickname){
-                        miniMapSettings = el;
+                        config.miniMapSettings = el;
                         whichSettings = i;
                     }
                 });
@@ -307,25 +311,28 @@ function checkVisibleMiniMapStatusAndSetVisibility(){
     chrome.storage.sync.get(['miniMap', 'nickname'], (settings) => {
         let whichSettings;
 
-        settings.miniMap.forEach((el, i) => {
-            if (el.nickname === settings.nickname) {
-                miniMapSettings = el;
-                whichSettings = i;
+        if (settings.miniMap){
+            settings.miniMap.forEach((el, i) => {
+                if (el.nickname === settings.nickname) {
+                    config.miniMapSettings = el;
+                    whichSettings = i;
+                }
+            });
+
+            // chrome.storage.sync.set({'miniMap': [{miniMapSettings:[]});
+
+            if(settings.miniMap[whichSettings].miniMapSettings.status === true){
+                document.querySelector('.mmpWrapper').classList.remove('hidden');
+            } else {
+                document.querySelector('.mmpWrapper').classList.add('hidden');
             }
-        });
-
-
-        if(settings.miniMap[whichSettings].miniMapSettings.status === true){
-            document.querySelector('.mmpWrapper').classList.remove('hidden');
-        } else {
-            document.querySelector('.mmpWrapper').classList.add('hidden');
-        }
+        } 
     });
 }
 
 function activeMiniMap() {
     chrome.storage.sync.get(['settingsData'], (settings) => {
-        if ( settings.settingsData.active_minimap === true) {
+        if ( settings.settingsData && settings.settingsData.active_minimap === true) {
             addClass('autoShowMiniMap');
             setMiniMapSize(60); //60 is the minimum size of the map
             hotkey();
