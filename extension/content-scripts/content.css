@@ -48,6 +48,7 @@
 .big-range{
     background-color: rgba(65, 150, 235, .5);
     border: 1px solid rgb(65, 150, 235);
+    box-sizing: border-box;
 }
 
 .hiddenFromBot{ 

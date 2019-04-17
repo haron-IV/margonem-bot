@@ -91,7 +91,6 @@ var observerOptions = {
 var observer = new MutationObserver(checkChatNewMaessages);
 observer.observe(targetNode, observerOptions);
 
-
 function checkChatNewMaessages(mutationList) {
     mutationList.forEach((mutation) => {
         switch(mutation.type) {

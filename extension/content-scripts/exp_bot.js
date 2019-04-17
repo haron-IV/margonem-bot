@@ -1,6 +1,7 @@
 const expBot = {
   search_mobs_counter: 0
 };
+// document.querySelector('.mmp-visibility')
 
 setTimeout(() => {
 

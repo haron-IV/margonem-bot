@@ -19,14 +19,16 @@ function mini_map(){
 }
 
 function addRangeToMap(){
-    const map = mini_map();
+    // const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
     rangeItem.id="range";
     rangeItem.classList.add('big-range', 'range');
-    rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
-    rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
+    // rangeItem.style.width = `${(map.width / 4 ) * 2}px`; // range width
+    // rangeItem.style.height = `${(map.heigh / 5 ) * 2}px`; //range height
+    rangeItem.style.width = document.querySelector('.mmp-visibility').style.width; // range width
+    rangeItem.style.height = document.querySelector('.mmp-visibility').style.height; //range height
     mapEl.appendChild(rangeItem);
 }
 
@@ -47,8 +49,8 @@ function updateRangePosition(){
     const hero = heroPositon();
     const range = _range('#range');
 
-    range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) );
-    range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) );
+    range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) +2 );
+    range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) +2 );
 
     document.querySelector('#range').style.transform = `translate(${range.x}px, ${range.y}px)`;
 }
