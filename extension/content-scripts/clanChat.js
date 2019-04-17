@@ -2,6 +2,7 @@ const emoji_config = {
     size: 13,
     nickname: '',
     chat_length: 0,
+    chat_counter: 0,
     all_emojis: [
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Slightly_Smiling_Face_Emoji_Icon_60x60.png?16228697460559734940',
         'https://cdn.shopify.com/s/files/1/1061/1924/files/Smiling_Face_Emoji_Icon.png?16228697460559734940',
@@ -73,6 +74,8 @@ function checkIsGameLoaded() {
         } else if (loading_el.style.display === 'none') {
             emoji();
             colors();
+
+            emoji_config.chat_counter++;
             clearInterval(interval);
         }
     }, 1000);
@@ -95,7 +98,10 @@ function checkChatNewMaessages(mutationList) {
             case 'childList':
                 emoji();
                 colors();
-                playNotificationSound(mutation);
+
+                if (emoji_config.chat_counter >= 1){ // fix problem with play sound every time after reload game
+                    playNotificationSound(mutation);
+                }
             break;
         }
     });
