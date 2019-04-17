@@ -26,7 +26,6 @@ function mini_map(){
 }
 
 function addRangeToMap(){ // 'blue' range
-    const map = mini_map();
     const mapEl = document.querySelector('.mmpMap');
 
     const rangeItem = document.createElement('div');
@@ -55,13 +54,15 @@ function _range(el) {
 }
 
 function updateRangePosition(){
-    const hero = heroPositon();
-    const range = _range('#range');
-
-    range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) +2 );
-    range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) +2 );
-
-    document.querySelector('#range').style.transform = `translate(${range.x}px, ${range.y}px)`;
+    if (checkMapFightStatus() === "Mapka PvP"){
+        const hero = heroPositon();
+        const range = _range('#range');
+    
+        range.x = hero.x - ( ( range.width / 2 ) - (hero.width / 2 ) +2 );
+        range.y = hero.y - ( ( range.height / 2 ) - (hero.height / 2 ) +2 );
+    
+        document.querySelector('#range').style.transform = `translate(${range.x}px, ${range.y}px)`;
+    }
 }
 
 function addSmallRangeToMap(){
@@ -137,7 +138,6 @@ function getMousePositionOnMiniMap () {
             saveBotRangePositionAndSize();
         } 
     });
-
 }
 
 function saveBotRangePositionAndSize(){

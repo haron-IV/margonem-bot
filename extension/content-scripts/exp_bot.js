@@ -55,6 +55,15 @@ setTimeout(() => {
       range.y_start = parseInt( document.querySelector(which_range).style.top.replace(/[translate px ()]/g, '') );
 
       // console.log('bot range: ', range);
+    } else if (which_range === '.mmpMap' ) {
+      range = _rangeBot(which_range);
+      
+      range.x = 0;
+      range.y = 0;
+      range.width = parseInt( document.querySelector(which_range).style.width.split(/[. px]/)[0] );
+      range.height = parseInt( document.querySelector(which_range).style.height.split(/[. px]/)[0] );
+      range.x_start = 0;
+      range.y_start = 0;
     }
 
     const mobs = _mobs();
@@ -141,8 +150,22 @@ setTimeout(() => {
     }, 2000);
   }
 
+  function checkMapFightStatus(){
+    //"PvP wyłąc"
+    // "Mapka PvP"
+    //"PvP za zg"
+    return document.querySelector('#pvpmode').getAttribute('tip').slice(0, 9);
+}
+
   function getNearestMob() {
-    const mobs_in_range = mobsInRange('#range');
+    let mobs_in_range;
+
+    if (checkMapFightStatus() === 'Mapka PvP') {
+      mobs_in_range = mobsInRange('#range');
+    } else {
+      mobs_in_range = mobsInRange('.mmpMap');
+    }
+
     const hero_coord = getMapHeroCoord();
     let distances = [];
     let nearest;
@@ -169,6 +192,7 @@ setTimeout(() => {
       } 
     });
     // checkIsMobInSmallRange( getCoordNearestMob(nearest) );
+    // console.log('nearest mob: ', nearest);
     return nearest;
   }
 
@@ -264,7 +288,13 @@ setTimeout(() => {
   let nearest_mob_coord;
   function goToMob(){ // here bot should check coordinates from black list.
     const data = {
-      mobs: mobsInRange('#range')
+      mobs: ''
+    }
+
+    if (checkFightStatus() === "mapka pvp") {
+      data.mobs = mobsInRange('#range');
+    } else {
+      data.mobs = mobsInRange('.mmpMap');
     }
 
     const nearest = getNearestMob();
