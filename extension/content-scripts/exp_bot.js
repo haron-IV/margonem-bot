@@ -327,6 +327,7 @@ setTimeout(() => {
   }
 
   function searchMobs(){
+    // REFACTORIZE, find better solution
     const map = getMapMaxCoord();
 
     const corners = [
