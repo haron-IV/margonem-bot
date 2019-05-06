@@ -192,6 +192,24 @@
                 }
             }
         }
+
+        &--links{
+            .list{
+                list-style-type: none;
+
+                &__item{
+                    margin: .8rem 0;
+
+                    .link{
+                        transition: text-shadow ease-in-out 250ms;
+                        
+                        &:hover{
+                            text-shadow: 2px 2px 5px rgba(0, 0, 0, 1);
+                        }
+                    }
+                }
+            }
+        }
         
     }
 }

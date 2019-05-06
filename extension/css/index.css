@@ -134,6 +134,14 @@
   100% {
     opacity: 0;
     transform: scale(0); } }
+    .body-popup .article--links .list {
+      list-style-type: none; }
+      .body-popup .article--links .list__item {
+        margin: .8rem 0; }
+        .body-popup .article--links .list__item .link {
+          transition: text-shadow ease-in-out 250ms; }
+          .body-popup .article--links .list__item .link:hover {
+            text-shadow: 2px 2px 5px black; }
 
 .footer {
   width: 100%;
