@@ -29,7 +29,6 @@
             "matches": ["http://nomada.margonem.pl/*", "http://fobos.margonem.pl/"],
             "css": ["./content-scripts/content.css", "./content-scripts/appearanceLifting.css"],
             "js": [
-                "./external/jQuery.js",
                 "./content-scripts/dist/main.bundle.js"
             ],
             "run_at": "document_end"
