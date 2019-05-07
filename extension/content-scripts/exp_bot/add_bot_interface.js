@@ -1,5 +1,5 @@
-setTimeout(() => {
-    const interface = {
+const add_bot_interface = () => {
+    const bot_interface = {
         wrapper: document.createElement('div'),
         startBotButton: document.createElement('button'),
         stopBotButton: document.createElement('button'),
@@ -9,18 +9,18 @@ setTimeout(() => {
         toggleState: false
     }
 
-    interface.wrapper.id = "bot-interface-wrapper";
-    interface.wrapper.classList.add('bot-interface-wrapper');
+    bot_interface.wrapper.id = "bot-interface-wrapper";
+    bot_interface.wrapper.classList.add('bot-interface-wrapper');
 
-    interface.startBotButton.id = 'start-bot';
-    interface.startBotButton.classList.add('start-bot', 'bot-button');
-    interface.startBotButton.innerHTML = 'start';
-    interface.wrapper.appendChild(interface.startBotButton);
+    bot_interface.startBotButton.id = 'start-bot';
+    bot_interface.startBotButton.classList.add('start-bot', 'bot-button');
+    bot_interface.startBotButton.innerHTML = 'start';
+    bot_interface.wrapper.appendChild(bot_interface.startBotButton);
 
-    interface.stopBotButton.id = 'stop-bot';
-    interface.stopBotButton.classList.add('stop-bot', 'bot-button');
-    interface.stopBotButton.innerHTML = 'stop';
-    interface.wrapper.appendChild(interface.stopBotButton)
+    bot_interface.stopBotButton.id = 'stop-bot';
+    bot_interface.stopBotButton.classList.add('stop-bot', 'bot-button');
+    bot_interface.stopBotButton.innerHTML = 'stop';
+    bot_interface.wrapper.appendChild(bot_interface.stopBotButton);
 
     // interface.eliteBotButtonStart.id = 'elite-bot-start';
     // interface.eliteBotButtonStart.classList.add('elite-bot-start', 'bot-button');
@@ -32,54 +32,51 @@ setTimeout(() => {
     // interface.eliteBotButtonStop.innerHTML = 'elite bot stop';
     // interface.wrapper.appendChild(interface.eliteBotButtonStop);
 
-    interface.toggleButton.classList.add('toggle-button');
+    bot_interface.toggleButton.classList.add('toggle-button');
 
-    
-
-    interface.toggleButton.addEventListener('click', () => {
+    bot_interface.toggleButton.addEventListener('click', () => {
 
         chrome.storage.sync.get(['interface_state'], (botStats) =>{
             if (botStats.interface_state === undefined){
                 chrome.storage.sync.set({'interface_state': false});
 
             } else if (botStats.interface_state === true){
-                interface.wrapper.style.top = "-50px";
+                bot_interface.wrapper.style.top = "-50px";
                 chrome.storage.sync.set({'interface_state': false});
 
             } else if (botStats.interface_state === false){
-                interface.wrapper.style.top = "0";
+                bot_interface.wrapper.style.top = "0";
                 chrome.storage.sync.set({'interface_state': true});
             }
 
         });
     });
 
-    document.querySelector('body').appendChild(interface.wrapper);
+    document.querySelector('body').appendChild(bot_interface.wrapper);
 
-    interface.startBotButton.addEventListener('click', () => {
-        interface.startBotButton.classList.add('active-button');
-        interface.stopBotButton.classList.remove('active-button');
+    bot_interface.startBotButton.addEventListener('click', () => {
+        bot_interface.startBotButton.classList.add('active-button');
+        bot_interface.stopBotButton.classList.remove('active-button');
     });
 
-    interface.stopBotButton.addEventListener('click', () => {
-        interface.startBotButton.classList.remove('active-button');
-        interface.stopBotButton.classList.add('active-button');
+    bot_interface.stopBotButton.addEventListener('click', () => {
+        bot_interface.startBotButton.classList.remove('active-button');
+        bot_interface.stopBotButton.classList.add('active-button');
     });
 
     chrome.storage.sync.get(['botStatus', 'interface_state'], (botStats) => {
         if ( botStats.botStatus ===  true ) {
-            interface.startBotButton.classList.add('active-button');
+            bot_interface.startBotButton.classList.add('active-button');
         } else {
-            interface.stopBotButton.classList.add('active-button');
+            bot_interface.stopBotButton.classList.add('active-button');
         }
-
-        // console.log('interface state: ', botStats.interface_state)
 
         if (botStats.interface_state === true){
-            interface.wrapper.style.top = "0px";
+            bot_interface.wrapper.style.top = "0px";
         } else if (botStats.interface_state === false){
-            interface.wrapper.style.top = "-50px";
+            bot_interface.wrapper.style.top = "-50px";
         }
     });
-
-}, 1500);
+};
+    
+export default add_bot_interface;
