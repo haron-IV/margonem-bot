@@ -30,16 +30,7 @@
             "css": ["./content-scripts/content.css", "./content-scripts/appearanceLifting.css"],
             "js": [
                 "./external/jQuery.js",
-                "./content-scripts/exp_bot.js",
-                "./content-scripts/stats.js",
-                "./content-scripts/reloadIfStack.js",
-                "./content-scripts/addBotInterface.js",
-                "./content-scripts/elite.js",
-                "./content-scripts/hotkeys.js",
-                "./content-scripts/rangePositon.js",
-                "./content-scripts/checkConfiguration.js",
-                "./content-scripts/changeFightWindow.js",
-                "./content-scripts/clanChat.js"
+                "./content-scripts/dist/main.bundle.js"
             ],
             "run_at": "document_end"
         }
