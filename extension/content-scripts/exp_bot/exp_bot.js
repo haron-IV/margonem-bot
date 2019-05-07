@@ -1,5 +1,6 @@
 import checkIsGameLoaded from '../checkIsGameLoaded';
 import add_bot_interface from './add_bot_interface';
+import change_fight_window from '../appearance_features/change_fight_window';
 
 const exp_bot = () => {
     const exp_bot_data = {
@@ -13,13 +14,12 @@ const exp_bot = () => {
             
             //here should be bot code
             add_bot_interface();
+            change_fight_window();
 
             clearInterval(interval);
         }
     }, 1000);
 };
-
-
 
 
 export default exp_bot;
